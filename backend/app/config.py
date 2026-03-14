@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     REDIS_PORT: int = int(os.getenv("REDIS_PORT", 6379))
     REDIS_PASSWORD: str = os.getenv("REDIS_PASSWORD", "")
     REDIS_DB: int = int(os.getenv("REDIS_DB", 0))
+    
+    SIMULATE_PAYMENT_FAILURE: bool = os.getenv("SIMULATE_PAYMENT_FAILURE", "false").lower() == "true"
 
     class Config:
         case_sensitive = True

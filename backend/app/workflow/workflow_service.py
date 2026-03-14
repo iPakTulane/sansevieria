@@ -7,8 +7,12 @@ from app.services.order_state_service import update_order_state
 from app.messaging.producer import publish_message
 from app.messaging.queues import EMAIL_NOTIFICATION_QUEUE
 from datetime import datetime
+from app.utils.fault_handlers import with_retries, with_timeout
+from app.utils.circuit_breaker import CircuitBreaker
+from app.config import settings
 
 logger = logging.getLogger("ORDER_PROCESSOR")
+payment_circuit_breaker = CircuitBreaker(failure_threshold=3, cooldown_seconds=15)
 
 class WorkflowWorker:
     def __init__(self, worker_id="python-worker"):
@@ -41,11 +45,20 @@ class WorkflowWorker:
                                 
                             logger.info(f"[BPMN] Executing task {topic} correlation_id={order_id}")
                             try:
-                                handler(order_id)
+                                handler(order_id, order_id) # pass correlation_id, order_id appropriately to fault handlers
                                 camunda_client.complete_task(task["id"], self.worker_id)
                                 logger.info(f"[BPMN] Completed task {topic} correlation_id={order_id}")
                             except Exception as e:
-                                logger.error(f"[BPMN] Task error {topic} correlation_id={order_id}: {str(e)}")
+                                logger.error(f"[BPMN] Fatal Task error {topic} correlation_id={order_id}: {str(e)}")
+                                # Transition to FAILED state since all retries have been exhausted
+                                db = SessionLocal()
+                                try:
+                                    update_order_state(db, order_id, "FAILED", order_id)
+                                except Exception:
+                                    pass
+                                finally:
+                                    db.close()
+                                # We deliberately do not complete_task on fatal errors to trigger Camunda incident tracking
                     except Exception:
                         pass
                 time.sleep(2)
@@ -64,44 +77,55 @@ class WorkflowWorker:
         return None
 
     # Service implementations
-    def validate_order(self, order_id: str):
+    @with_retries(max_retries=3)
+    def validate_order(self, correlation_id: str, order_id: str):
         db = SessionLocal()
         try:
-            # We enforce PENDING -> PROCESSING transition here
-            update_order_state(db, order_id, "PROCESSING", order_id)
-            logger.info(f"[BPMN] Validated order correlation_id={order_id}")
+            update_order_state(db, order_id, "PROCESSING", correlation_id)
+            logger.info(f"[BPMN] Validated order correlation_id={correlation_id}")
         finally:
             db.close()
 
-    def process_payment(self, order_id: str):
-        logger.info(f"[BPMN] Processing payment correlation_id={order_id}")
-        time.sleep(1) # simulate external payment
+    @with_retries(max_retries=3)
+    @with_timeout(seconds=5)
+    def process_payment(self, correlation_id: str, order_id: str):
+        def _mock_payment(corr_id, ord_id):
+            logger.info(f"[BPMN] Processing payment correlation_id={corr_id}")
+            if settings.SIMULATE_PAYMENT_FAILURE:
+                time.sleep(1)
+                raise Exception("Simulated Payment Gateway Timeout/Failure")
+            time.sleep(1) # simulate external payment
+            
+        return payment_circuit_breaker.call(_mock_payment, correlation_id, order_id, correlation_id, order_id)
 
-    def reserve_inventory(self, order_id: str):
-        logger.info(f"[BPMN] Reserving inventory correlation_id={order_id}")
+    @with_retries(max_retries=3)
+    @with_timeout(seconds=5)
+    def reserve_inventory(self, correlation_id: str, order_id: str):
+        logger.info(f"[BPMN] Reserving inventory correlation_id={correlation_id}")
         time.sleep(1) # simulate inventory check
 
-    def generate_shipment(self, order_id: str):
-        logger.info(f"[BPMN] Generating shipment correlation_id={order_id}")
+    @with_retries(max_retries=3)
+    def generate_shipment(self, correlation_id: str, order_id: str):
+        logger.info(f"[BPMN] Generating shipment correlation_id={correlation_id}")
         time.sleep(1)
 
-    def generate_invoice(self, order_id: str):
-        logger.info(f"[BPMN] Generating invoice correlation_id={order_id}")
+    @with_retries(max_retries=3)
+    def generate_invoice(self, correlation_id: str, order_id: str):
+        logger.info(f"[BPMN] Generating invoice correlation_id={correlation_id}")
         time.sleep(1)
 
-    def send_confirmation(self, order_id: str):
+    @with_retries(max_retries=3)
+    def send_confirmation(self, correlation_id: str, order_id: str):
         db = SessionLocal()
         try:
-            update_order_state(db, order_id, "COMPLETED", order_id)
-            logger.info(f"[BPMN] Preparing confirmation correlation_id={order_id}")
-            
-            # Since workflow handles completion entirely, emit event here
+            update_order_state(db, order_id, "COMPLETED", correlation_id)
+            logger.info(f"[BPMN] Preparing confirmation correlation_id={correlation_id}")
             publish_message(EMAIL_NOTIFICATION_QUEUE, {
                 "event": "ORDER_COMPLETED",
                 "order_id": order_id,
-                "correlation_id": order_id,
+                "correlation_id": correlation_id,
                 "timestamp": datetime.utcnow().isoformat()
-            }, correlation_id=order_id)
+            }, correlation_id=correlation_id)
         finally:
             db.close()
 

@@ -183,3 +183,34 @@ Utilizing caching achieves enormous performance boosts:
 *   **With Cache (REDIS HIT)**: Fetching `GET /api/products` simply deserializes a monolithic string immediately via Fast API routing, yielding an estimated turnaround of **~1ms to ~3ms**. 
 
 This completely removes arbitrary read locks on the PostgreSQL side ensuring database handles write-heavy processing (Order placements) while Redis serves raw Read volumes.
+
+---
+
+## 🛡️ Fault Tolerance & System Resiliency (DLQ, Retries, Circuit Breakers)
+
+In any distributed microservice architecture, eventual failure of an external system is inevitable. This backend utilizes numerous fault tolerance patterns natively inside `app/utils/fault_handlers.py` and across the message brokers.
+
+### 1. RabbitMQ Dead Letter Queues (DLQ)
+When creating core AMQP exchanges (`app/messaging/rabbitmq.py`), main queues like `order_processing_queue` are built using specific mappings: `x-dead-letter-exchange` & `x-dead-letter-routing-key`. 
+If a RabbitMQ consumer `rejects` a message (e.g., failed to reach Camunda after retries), the message is instantly routed safely into `order_processing_dlq` saving the raw payload for later triage.
+
+### 2. Exponential Backoff Retries (`@with_retries`)
+Transient errors are absorbed implicitly. Essential service functions (like `process_payment`) are decorated cleanly with `@with_retries(max_retries=3)`.
+It delays execution intelligently: `Delay = 1s -> 2s -> 4s`, shielding external APIs from blind bombardments while attempting self-recovery.
+
+### 3. Timeout Triggers (`@with_timeout`)
+Indefinite hangs lock up worker threads natively crashing throughput. Timeouts wrap slow functions enforcing maximums (default `5s`). Upon trigger, a TimeoutException is thrown which inherently engages our `@with_retries` net automatically.
+
+### 4. Circuit Breakers (`app/utils/circuit_breaker.py`)
+To protect absolutely critical nodes from cascading downstream failures resulting from localized outages, simulated network tasks execute via `payment_circuit_breaker`. 
+If specific thresholds trip consecutively (e.g. `3` failures), the Circuit flips to **OPEN**, rejecting all further calls locally, immediately raising fallback errors to spare external infrastructure while the system awaits a `15` second Cooldown.
+
+### 5. Structured Error Centralization
+A robust dictionary-style logger (`app/utils/logger.py`) overrides standard python string prints. Essential structured fields like `correlation_id` and raw JSON objects wrap every log yielding:
+`[ERROR] service=ORDER_PROCESSOR correlation_id=ORD-000123 order_id=ORD-000123 message="Max retries exceeded" error="Simulated Payment Gateway Timeout/Failure" function=process_payment`
+
+### 🛠 Simulating Failures
+You can visually trigger these deep recovery nets by exporting an environment variable flag mapping to `config.py`:
+1. Flip `SIMULATE_PAYMENT_FAILURE=true` in your `.env`.
+2. Start the API & Worker. Trigger a Checkout.
+3. Watch the Worker Terminal instantly begin spinning up Exponential Backoff retry logs, see it Trip the Circuit Breaker completely blocking execution, transition the overarching SQL `Order` Database State natively into `FAILED`, and leave the untouched original data intact!
