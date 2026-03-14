@@ -154,3 +154,32 @@ Once the Camunda Server is deployed:
 - The `order_id` is explicitly passed into the API as the `.businessKey` mapping the BPMN flow forever natively back to the Backend DB.
 - At the exact same time, inside `worker.py`, a dedicated parallel thread (`WorkflowWorker.poll_loop()`) rapidly issues Long-Polling `fetchAndLock` requests to Camunda asking "What tasks are waiting?".
 - Python code grabs available work blocks via task topics (e.g. `process_payment`), applies Python business logic, and hits `complete_task` returning state to the BPEL engine.
+
+---
+
+## ⚡ Enterprise Caching (Redis)
+
+To heavily reduce load on the PostgreSQL database instances and significantly cut down API response times, **Redis** is natively implemented as a strict Data/Output caching layer.
+
+### 1. The Caching Architecture
+- **Centralized Client**: `app/cache/redis_client.py` manages connections safely to the Redis URI.
+- **Service & Keys**: `CacheService` exposes generic `get_cache`, `set_cache` and `invalidate_cache` wrappers utilizing standardized keys tracked inside `CacheKeys` (e.g. `products:catalog`).
+
+### 2. Implementation Strategies
+The primary HTTP candidate cached in this module is the **Product Catalog API**:
+- **Output Caching**: `GET /api/products` stores a fully serialized catalog payload in Redis. When identical GET requests arrive, the database logic is *entirely bypassed* reading the pre-compiled JSON directly from Redis.
+- **Expiration (TTL)**: An Absolute Expiration strategy is utilized enforcing a standard `TTL = 300` seconds lifecycle ensuring eventual consistency. 
+- **Invalidation Strategy**: An example `POST /api/products` endpoint handles forced invalidations. If underlying master data mutates (Product added, updated, deleted), the system drops the `products:catalog` key so the *next* reader triggers a clean DB fetch and reset. 
+
+### 3. Running Redis (Docker)
+Ensure your environment `.env` points properly to `REDIS_HOST`, then spawn a native Redis node:
+```bash
+docker run -d --name cache-redis -p 6379:6379 redis:alpine
+```
+
+### 4. Performance Benchmark
+Utilizing caching achieves enormous performance boosts:
+*   **Without Cache (DB HIT)**: Fetching `GET /api/products` touches the ORM layer, constructs python object models via SQLAlchemy, then dumps/serializes via Pydantic yielding an estimated request turnaround of **~15ms to ~45ms** under load.
+*   **With Cache (REDIS HIT)**: Fetching `GET /api/products` simply deserializes a monolithic string immediately via Fast API routing, yielding an estimated turnaround of **~1ms to ~3ms**. 
+
+This completely removes arbitrary read locks on the PostgreSQL side ensuring database handles write-heavy processing (Order placements) while Redis serves raw Read volumes.
