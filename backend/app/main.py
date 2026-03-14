@@ -26,6 +26,12 @@ app.include_router(cart_router.router, prefix="/api/cart", tags=["cart"])
 app.include_router(order_router.checkout_router, prefix="/api/checkout", tags=["checkout"])
 app.include_router(order_router.order_router, prefix="/api/orders", tags=["orders"])
 
+from app.messaging.rabbitmq import setup_queues
+
+@app.on_event("startup")
+def startup_event():
+    setup_queues()
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}

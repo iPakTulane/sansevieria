@@ -74,3 +74,30 @@ FastAPI automatically generates interactive OpenAPI documentation. You can test 
 
 ## 🌐 Frontend Integration
 The existing static frontend HTML pages can now be augmented to use `fetch()` or `Axios` calls against `http://localhost:8000/api/...`. No static routing changes are required.
+
+---
+
+## 🐇 Messaging Integration (RabbitMQ)
+
+This project uses **RabbitMQ** to handle computationally heavy event tasks asynchronously via persistent durable queues (`order_processing_queue`, `email_notification_queue`).
+
+### 1. Running RabbitMQ (Docker)
+The easiest way to stand up the message broker is via Docker:
+```bash
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+*(The UI becomes available at `http://localhost:15672` with credentials `guest/guest`)*
+
+### 2. Running the Worker Process
+In a fresh terminal (with the virtual environment activated), start the decoupled consumer service:
+```bash
+cd backend
+export PYTHONPATH=.
+python app/messaging/worker.py
+```
+This worker listens continuously and handles order status updates and mock-email notifications.
+
+### 3. Demonstrating Asynchronous & Offline Processing
+1. **Live Processing**: Submit a `POST /api/checkout` request with your server and worker running. Notice the immediate HTTP response, while the terminal running the worker prints subsequent "Processing" and "Email sending" tasks asynchronously.
+2. **Offline Resilience**: Kill the python `worker.py` script. Submit another checkout request. The API remains responsive and returns immediately! 
+3. **Recovery**: Navigate to `http://localhost:15672` and see the message waiting in the `order_processing_queue`. Restart the `worker.py` script, and it will immediately pull and process the backed-up message correctly proving offline resiliency.

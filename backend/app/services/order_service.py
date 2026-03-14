@@ -3,6 +3,9 @@ from app.models.order import Order, OrderItem
 from app.models.cart import CartItem
 from app.services.cart_service import get_cart_for_user, clear_cart
 from app.utils.identifiers import generate_order_id
+from app.messaging.producer import publish_message
+from app.messaging.queues import ORDER_PROCESSING_QUEUE
+from datetime import datetime
 
 def create_order_from_cart(db: Session, user_id: int):
     cart = get_cart_for_user(db, user_id)
@@ -10,10 +13,11 @@ def create_order_from_cart(db: Session, user_id: int):
         raise ValueError("Cart is empty")
     
     total_amount = sum([item.product.price * item.quantity for item in cart.items])
+    order_id_str = generate_order_id()
     order = Order(
-        order_id=generate_order_id(),
+        order_id=order_id_str,
         user_id=user_id,
-        status="pending",
+        status="PENDING",
         total_amount=total_amount
     )
     db.add(order)
@@ -32,6 +36,15 @@ def create_order_from_cart(db: Session, user_id: int):
     db.commit()
     clear_cart(db, user_id)
     db.refresh(order)
+    
+    # Publish to order queue
+    publish_message(ORDER_PROCESSING_QUEUE, {
+        "order_id": order.order_id,
+        "user_id": order.user_id,
+        "event": "ORDER_CREATED",
+        "timestamp": datetime.utcnow().isoformat()
+    })
+    
     return order
 
 def get_user_orders(db: Session, user_id: int):
