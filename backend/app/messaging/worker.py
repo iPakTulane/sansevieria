@@ -8,9 +8,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from app.messaging.rabbitmq import get_rabbitmq_connection, setup_queues
 from app.messaging.queues import ORDER_PROCESSING_QUEUE, EMAIL_NOTIFICATION_QUEUE
 from app.messaging.consumer import process_order, process_email
+from app.workflow.workflow_service import workflow_worker
 
 def main():
     setup_queues()
+    workflow_worker.start()  # Start BPMN poller
+    
     connection = get_rabbitmq_connection()
     channel = connection.channel()
 
@@ -28,7 +31,9 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         print('Interrupted')
+        workflow_worker.stop()
         try:
             sys.exit(0)
         except SystemExit:
             os._exit(0)
+

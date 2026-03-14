@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_113s2v8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:process id="OrderFulfillmentProcess" name="Order Fulfillment Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Order Received">
+      <bpmn:outgoing>Flow_0e7x8jx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0e7x8jx" sourceRef="StartEvent_1" targetRef="Task_ValidateOrder" />
+    <bpmn:serviceTask id="Task_ValidateOrder" name="Validate Order" camunda:type="external" camunda:topic="validate_order">
+      <bpmn:incoming>Flow_0e7x8jx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a5z9xj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0a5z9xj" sourceRef="Task_ValidateOrder" targetRef="Task_ProcessPayment" />
+    <bpmn:serviceTask id="Task_ProcessPayment" name="Process Payment" camunda:type="external" camunda:topic="process_payment">
+      <bpmn:incoming>Flow_0a5z9xj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b7z9xj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1b7z9xj" sourceRef="Task_ProcessPayment" targetRef="Task_ReserveInventory" />
+    <bpmn:serviceTask id="Task_ReserveInventory" name="Reserve Inventory" camunda:type="external" camunda:topic="reserve_inventory">
+      <bpmn:incoming>Flow_1b7z9xj</bpmn:incoming>
+      <bpmn:outgoing>Flow_2c8y7zj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_2c8y7zj" sourceRef="Task_ReserveInventory" targetRef="Gateway_ParallelSplit" />
+    
+    <bpmn:parallelGateway id="Gateway_ParallelSplit">
+      <bpmn:incoming>Flow_2c8y7zj</bpmn:incoming>
+      <bpmn:outgoing>Flow_Shipment</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Invoice</bpmn:outgoing>
+    </bpmn:parallelGateway>
+
+    <bpmn:sequenceFlow id="Flow_Shipment" sourceRef="Gateway_ParallelSplit" targetRef="Task_GenerateShipment" />
+    <bpmn:serviceTask id="Task_GenerateShipment" name="Generate Shipment" camunda:type="external" camunda:topic="generate_shipment">
+      <bpmn:incoming>Flow_Shipment</bpmn:incoming>
+      <bpmn:outgoing>Flow_Merge1</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:sequenceFlow id="Flow_Invoice" sourceRef="Gateway_ParallelSplit" targetRef="Task_GenerateInvoice" />
+    <bpmn:serviceTask id="Task_GenerateInvoice" name="Generate Invoice" camunda:type="external" camunda:topic="generate_invoice">
+      <bpmn:incoming>Flow_Invoice</bpmn:incoming>
+      <bpmn:outgoing>Flow_Merge2</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:sequenceFlow id="Flow_Merge1" sourceRef="Task_GenerateShipment" targetRef="Gateway_ParallelMerge" />
+    <bpmn:sequenceFlow id="Flow_Merge2" sourceRef="Task_GenerateInvoice" targetRef="Gateway_ParallelMerge" />
+
+    <bpmn:parallelGateway id="Gateway_ParallelMerge">
+      <bpmn:incoming>Flow_Merge1</bpmn:incoming>
+      <bpmn:incoming>Flow_Merge2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3d9x8ya</bpmn:outgoing>
+    </bpmn:parallelGateway>
+
+    <bpmn:sequenceFlow id="Flow_3d9x8ya" sourceRef="Gateway_ParallelMerge" targetRef="Task_SendConfirmation" />
+    <bpmn:serviceTask id="Task_SendConfirmation" name="Send Confirmation" camunda:type="external" camunda:topic="send_confirmation">
+      <bpmn:incoming>Flow_3d9x8ya</bpmn:incoming>
+      <bpmn:outgoing>Flow_End</bpmn:outgoing>
+    </bpmn:serviceTask>
+    
+    <bpmn:sequenceFlow id="Flow_End" sourceRef="Task_SendConfirmation" targetRef="EndEvent_1" />
+    <bpmn:endEvent id="EndEvent_1" name="Order Fulfilled">
+      <bpmn:incoming>Flow_End</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="OrderFulfillmentProcess">
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

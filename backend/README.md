@@ -123,3 +123,34 @@ Orders enforce strict lifecycle states using `services/order_state_service.py`:
 ### Concurrency & Idempotency
 1. **Row-level Locking**: The state machine operates using SQLAlchemy's `with_for_update()`. This protects against multiple workers grabbing the exact same order instance simultaneously (pessimistic locking) and ensures transitions are strictly atomic.
 2. **Idempotency**: The state processor validates transitions before saving to DB. Therefore, redundant or out-of-order messages arriving at the consumer are caught and discarded cleanly instead of crashing the system.
+
+---
+
+## 🗺 Business Process Orchestration (Camunda BPMN)
+
+The Order Fulfillment Process is now managed as a formal diagrammatic orchestration flow using **Camunda Platform 7**.
+
+### 1. The BPMN Workflow (`order_fulfillment.bpmn`)
+When a user begins the checkout, the system no longer executes python code linearly. The following workflow instances are handled directly by Camunda:
+1. `validate_order` (Service Task)
+2. `process_payment` (Service Task)
+3. `reserve_inventory` (Service Task)
+4. A **Parallel Split Gateway** spanning:
+    - `generate_shipment` (Service Task)
+    - `generate_invoice` (Service Task)
+5. **Parallel Merge Gateway** merging back the flow execution.
+6. `send_confirmation` (Service Task) which fires an event payload into the `email_notification_queue`.
+
+### 2. Running Camunda Engine (Docker)
+In root or wherever docker is configured, start up standard Camunda 7 REST API server:
+```bash
+docker run -d --name camunda -p 8080:8080 camunda/camunda-bpm-platform:run-latest
+```
+*Wait ~1 minute for deployment* - The UI will spawn at `http://localhost:8080/camunda` (Demo login: `demo`/`demo`). You will need to manually upload (`POST http://localhost:8080/engine-rest/deployment/create`) or deploy `order_fulfillment.bpmn` via the Camunda Modeler desktop client.
+
+### 3. Orchestration Mechanics & Correlation
+Once the Camunda Server is deployed:
+- When the RabbitMQ python Consumer sees an `ORDER_CREATED` event on its queue, instead of firing python logic, it issues an HTTP `start_process_instance` REST call to `http://localhost:8080/engine-rest/process-definition/key/OrderFulfillmentProcess/start`.
+- The `order_id` is explicitly passed into the API as the `.businessKey` mapping the BPMN flow forever natively back to the Backend DB.
+- At the exact same time, inside `worker.py`, a dedicated parallel thread (`WorkflowWorker.poll_loop()`) rapidly issues Long-Polling `fetchAndLock` requests to Camunda asking "What tasks are waiting?".
+- Python code grabs available work blocks via task topics (e.g. `process_payment`), applies Python business logic, and hits `complete_task` returning state to the BPEL engine.
