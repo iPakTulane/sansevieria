@@ -45,3 +45,55 @@ To automatically link up new placeholder buttons or correct routing changes acro
 ```bash
 python3 frontend/update_links.py
 ```
+
+---
+
+## 🐳 Running the System with Docker Compose (Recommended)
+
+The entire Sansevieria distributed system has been containerized and can be launched locally using Docker Compose. This single command boots up:
+- The Static **Frontend**
+- The FastAPI **Backend**
+- The **RabbitMQ** Message Broker & Workers
+- The **Redis** Caching Layer
+- The **Camunda** BPMN Orchestrator
+- The **PostgreSQL** Database
+
+### 1. Build and Start the System
+From the root of the project repository (where `docker-compose.yml` is located), simply run:
+```bash
+docker compose up --build -d
+```
+All images will be built and downloaded. The services will communicate natively across an internal bridge network (`sansevieria-net`).
+
+### 2. Available Services URL Map
+Once the services are booted, they are mapped securely to your localhost:
+- **Frontend App**: [http://localhost:8081](http://localhost:8081)
+- **FastAPI Backend Swagger**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **RabbitMQ Management UI**: [http://localhost:15672](http://localhost:15672) *(guest / guest)*
+- **Camunda BPMN Cockpit**: [http://localhost:8080/camunda](http://localhost:8080/camunda) *(demo / demo)*
+
+### 3. Inspecting Logs
+To cleanly monitor the distributed traces and error fault handling inside the workers:
+```bash
+# View all container aggregation logs
+docker compose logs -f
+
+# View specifically the worker node output
+docker compose logs -f worker
+
+# View the API backend
+docker compose logs -f backend
+```
+
+### 4. Simulating Distributed Network Failures
+You can natively test Circuit Breakers, Exponential Backoffs, and DLQs natively through Docker. 
+1. The `.env` file at the root handles shared environment variables.
+2. Edit `.env` to map `SIMULATE_PAYMENT_FAILURE=true`.
+3. Restart the specific container: `docker compose up -d`
+4. Use Swagger or the app to place an order and watch the `docker compose logs -f worker` explicitly trip!
+
+### 5. Stopping the Environment
+To gracefully shred memory, orchestrator overlays, and exit containers:
+```bash
+docker compose down
+```

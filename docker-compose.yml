@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-sansevieria}
+    ports:
+      - "5432:5432"
+    networks:
+      - sansevieria-net
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - sansevieria-net
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sansevieria-net
+
+  camunda:
+    image: camunda/camunda-bpm-platform:run-latest
+    container_name: camunda
+    ports:
+      - "8080:8080"
+    networks:
+      - sansevieria-net
+
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-sansevieria}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - CAMUNDA_REST_URL=http://camunda:8080/engine-rest
+      - SIMULATE_PAYMENT_FAILURE=${SIMULATE_PAYMENT_FAILURE:-false}
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+      - camunda
+    networks:
+      - sansevieria-net
+
+  worker:
+    build:
+      context: ./backend
+    container_name: worker
+    command: [ "python", "app/messaging/worker.py" ]
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-sansevieria}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - CAMUNDA_REST_URL=http://camunda:8080/engine-rest
+      - SIMULATE_PAYMENT_FAILURE=${SIMULATE_PAYMENT_FAILURE:-false}
+    depends_on:
+      - backend
+      - rabbitmq
+      - postgres
+    networks:
+      - sansevieria-net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "8081:8081"
+    networks:
+      - sansevieria-net
+
+networks:
+  sansevieria-net:
+    driver: bridge
