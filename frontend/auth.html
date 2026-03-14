@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sansevieria - Login &amp; Register</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden h-screen flex flex-col">
+    <!-- Top Navigation Bar -->
+    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+    <!-- Main Content: Centered Card Layout -->
+    <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+        <!-- Subtle Background Decoration -->
+        <div class="absolute -bottom-20 -right-20 opacity-10 pointer-events-none select-none">
+            <span class="material-symbols-outlined text-[300px] text-primary">potted_plant</span>
+        </div>
+        <div class="absolute -top-20 -left-20 opacity-5 pointer-events-none select-none">
+            <span class="material-symbols-outlined text-[200px] text-primary">eco</span>
+        </div>
+        <div
+            class="w-full max-w-md bg-white dark:bg-slate-900/50 backdrop-blur-sm rounded-xl shadow-xl shadow-primary/5 border border-primary/5 flex flex-col overflow-hidden relative z-10">
+            <!-- Tab Switcher -->
+
+            <!-- Card Body -->
+            <div class="p-8">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Welcome Back</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access your collection and
+                        manage your plants with ease.</p>
+                </div>
+                <!-- Login Form -->
+                <form class="space-y-5" onsubmit="window.location.href='index.html'; return false;">
+                    <div class="space-y-2">
+                        <label
+                            class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 ml-1">Email
+                            Address</label>
+                        <div class="relative group">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">mail</span>
+                            <input
+                                class="w-full pl-12 pr-4 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all"
+                                placeholder="name@sansevieria.com" type="email" required />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center px-1">
+                            <label
+                                class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Password</label>
+                            <a class="text-xs font-semibold text-primary hover:underline"
+                                href="contact.html">Forgot?</a>
+                        </div>
+                        <div class="relative group">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">lock</span>
+                            <input
+                                class="w-full pl-12 pr-12 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all"
+                                placeholder="••••••••" type="password" required />
+                            <button
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                type="button">
+                                <span class="material-symbols-outlined text-lg">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] mt-4">
+                        Sign In to Account
+                    </button>
+                </form>
+                <!-- Divider -->
+
+                <!-- Social Login -->
+
+            </div>
+            <!-- Card Footer -->
+            <div class="p-6 bg-primary/5 text-center border-t border-primary/10">
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    Don't have an account yet?
+                    <a class="text-primary font-bold hover:underline ml-1" href="auth.html">Create Account</a>
+                </p>
+            </div>
+        </div>
+    </main>
+    <!-- Simple Footer -->
+    <footer class="p-6 text-center text-xs text-slate-400 dark:text-slate-500 shrink-0">
+        © 2026 Sansevieria. Minimalist botanical workspace.
+    </footer>
+</body>
+
+</html>

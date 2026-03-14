@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Checkout - Sansevieria</title>
+    <!-- Google Fonts: Inter -->
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            /* Single-viewport layout, no scrolling */
+        }
+
+        @media (max-height: 800px) {
+            body {
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navigation Bar -->
+    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+    <!-- Main Checkout Content -->
+    <main class="flex-grow flex items-center justify-center p-4 lg:p-8">
+        <div
+            class="max-w-6xl w-full h-full max-h-[800px] grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-slate-900/50 rounded-xl shadow-xl shadow-primary/5 overflow-hidden border border-primary/5">
+            <!-- Left Side: Shipping & Payment -->
+            <div class="p-8 lg:p-12 overflow-y-auto custom-scrollbar">
+                <h2 class="text-2xl font-bold mb-6">Checkout Details</h2>
+                <!-- Shipping Section -->
+                <section class="mb-8">
+                    <div class="flex items-center gap-2 mb-4 text-primary">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <h3 class="font-semibold uppercase tracking-wider text-xs">Shipping Information</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Full Name</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="John Doe" type="text" />
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Shipping Address</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="123 Greenway Blvd" type="text" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">City</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="San Francisco" type="text" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Postal Code</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="94103" type="text" />
+                        </div>
+                    </div>
+                </section>
+                <!-- Payment Section -->
+                <section class="mb-8">
+                    <div class="flex items-center gap-2 mb-4 text-primary">
+                        <span class="material-symbols-outlined">payments</span>
+                        <h3 class="font-semibold uppercase tracking-wider text-xs">Payment Method</h3>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="col-span-4">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Card Number</label>
+                            <div class="relative">
+                                <input
+                                    class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700 pl-10"
+                                    placeholder="0000 0000 0000 0000" type="text" />
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">credit_card</span>
+                            </div>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Expiry Date</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="MM/YY" type="text" />
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">CVV</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-primary text-sm py-2.5 bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                placeholder="123" type="text" />
+                        </div>
+                    </div>
+                </section>
+                <div class="flex items-center gap-2 text-xs text-slate-400 mt-4">
+                    <span class="material-symbols-outlined text-sm">lock</span>
+                    Your transaction is secured with 256-bit SSL encryption.
+                </div>
+            </div>
+            <!-- Right Side: Order Summary -->
+            <div class="bg-primary/5 dark:bg-primary/10 p-8 lg:p-12 flex flex-col h-full border-l border-primary/10">
+                <h2 class="text-xl font-bold mb-8">Order Summary</h2>
+                <div class="flex-grow space-y-6">
+                    <!-- Item 1 -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-20 bg-white dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0 border border-primary/10">
+                            <img alt="Sansevieria Plant" class="w-full h-full object-cover"
+                                data-alt="Sansevieria Trifasciata Laurentii in white ceramic pot"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnmmZ2x6RZcyrt3vyKdZ49Tnqt93PfFjbpVYCMYHLj7Yfe11Obbz_DfI2TMklFimdXa9PpygQ3-HpCM5LTEq9re8u1oAbaimxXt2WaTiOpqgq5ck5aWrnZA7ZePmnfjbJvwIz_GwvcazB3CnsOuSjRYzRo9fHMM-npuQu9wWTOdFV1ST470KpbiYzclFFYccXN-qFK9wjiqw8XfmK9YZ5WLLPrfAmxW0dBXGsZhQm2ObdCRPJ4_7a10sLt8iP_KcSlt1rTBarVdDTt" />
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-100">Sansevieria Laurentii</h4>
+                            <p class="text-sm text-slate-500">Large • White Ceramic Pot</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-slate-900 dark:text-slate-100">$45.00</span>
+                        </div>
+                    </div>
+                    <!-- Item 2 (Optional/Extra) -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-20 bg-white dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0 border border-primary/10">
+                            <img alt="Terracotta Saucer" class="w-full h-full object-cover"
+                                data-alt="Premium clay saucer for plant pots"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxC4t78ZvPW3vlxTqEHeQNbSEmK9C7vdMqSTyOomkGX77kGYPZmCJVF72f6xe7syqiQTPhelvIzBt_lNGap15qlueSnusCF14Z_Zg23-J5aHhRjn9eRd2tdgc3WNyKwq8cmSxf-v219CYV4dh4Owbwv7RcIlHt623ee8-eGkghXA1e3xfB7e4z5srqtTWBVcZn0Iz8RHUbNIpTSNIjT9bOVeNNvg7G41iq3PovF3b2tWnLwbwVKKj76rkORDOUg_vwRPPsYz6rU6KS" />
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-100">Premium Clay Saucer</h4>
+                            <p class="text-sm text-slate-500">Medium • Natural</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-slate-900 dark:text-slate-100">$12.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Price Totals -->
+                <div class="border-t border-primary/20 pt-6 mt-6 space-y-3">
+                    <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
+                        <span>Subtotal</span>
+                        <span>$57.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
+                        <span>Shipping</span>
+                        <span class="text-primary font-medium uppercase text-xs">Free</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
+                        <span>Tax</span>
+                        <span>$4.56</span>
+                    </div>
+                    <div class="flex justify-between text-xl font-bold text-slate-900 dark:text-slate-100 pt-2">
+                        <span>Total</span>
+                        <span>$61.56</span>
+                    </div>
+                </div>
+                <button
+                    class="w-full bg-primary hover:bg-primary/90 text-slate-900 font-bold py-4 rounded-xl mt-8 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+                    onclick="window.location.href='confirmation.html'">
+                    Complete Purchase
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                <p class="text-center text-[10px] text-slate-400 mt-4 px-6 leading-relaxed">
+                    By clicking "Complete Purchase", you agree to our Terms of Service and Privacy Policy.
+                </p>
+            </div>
+        </div>
+    </main>
+    <!-- Footer Security Banner -->
+    <footer class="h-12 flex items-center justify-center gap-8 text-slate-400 text-xs px-6 border-t border-primary/5">
+        <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            Norton Secured
+        </div>
+        <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">shield</span>
+            Safe Checkout
+        </div>
+        <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">published_with_changes</span>
+            30-Day Returns
+        </div>
+    </footer>
+</body>
+
+</html>

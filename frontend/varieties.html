@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sansevieria Collection - Varieties</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#a3cb2a",
+              "background-light": "#f7f8f6",
+              "background-dark": "#1c2012",
+            },
+            fontFamily: {
+              "display": ["Arial", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Single-viewport layout, no scrolling as requested */
+        }
+        .single-viewport {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="single-viewport">
+<!-- Persistent Top Navigation Bar -->
+<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- Main Gallery Content -->
+<main class="flex-1 flex flex-col px-8 py-6 max-w-7xl mx-auto w-full overflow-hidden">
+<div class="mb-6">
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">The Collection</h2>
+<p class="text-slate-600 dark:text-slate-400 mt-1">Discover the architectural beauty of our curated snake plant varieties.</p>
+</div>
+<!-- Grid Layout: Responsive, constrained to viewport -->
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-4 items-stretch">
+<!-- Card: Laurentii -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Laurentii snake plant with yellow edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXR1U26N4pLW_aCCMrWRzU7wAuxr2uc0Gzr4LW786pSNsazlx6Wr4tBqAW6m-gWjcq1b8xqokpdYgqJbtd_ZmVQkVOrU0wnt-MaDErmPux_q6CyFBPpcFRN1Fv5Xs91MoB7mVk60dBDam0Wddqj3Q2_XMV5KMTR40JOHp6mKMJmG5sij6laatk1My3xWtqS-pbCfRO3yFj4gMj3oH6bknAhatFxiG9WgBWGU8Vt3FLLVXqxodAf_CCMKtu83XMQMtZqNQ-mAouvyr1"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Laurentii</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">Elegant green leaves framed by distinct <span class="text-primary font-medium">yellow-edged</span> borders.</p>
+</div>
+</div>
+<!-- Card: Moonshine -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Moonshine snake plant with silvery leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG7pIhgK6Owh-vNl4a1-y6hAijlHFRdDqCvtcdc0dylWLgdeIc8wsgvbZ-1DH0jUupUL2C6D8IeqICnGF227_PZG1vBOeE5yWQV3ZTPYcEcZL-_EBEQvjb32KWGfI2mwOLXMTZ9ZgUrXd3r_WivkbXhe17W6mM82I3hKT8BdAvFLGePnHl6XiDZ5UJfAkzoKMotqo2LcHGXAJayNwEPJ57GRHrJRIL-sMZMSmN20Vb_5A7b4mQyeScjN2BvxofwNzQEcfcy8b4IOgX"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Moonshine</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">Unique <span class="text-primary font-medium">silvery-green</span> pale foliage with a metallic luster.</p>
+</div>
+</div>
+<!-- Card: Cylindrica -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Cylindrica snake plant with round spear stems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvqEq-yDYepDV5Sb6PP7h-tmN4_o3LP5lkd2IKE3i3Zy98z2S1B73gS8tFV1iy9tIhYIEoHI5M1jKGbtZOkEjzwLVmhPQYHiB0IGEmjiqa4KBXMUB78wNlOlgv7rUhP-1BBJZFEqLidc4CUUAbjEMrJN05OkHVyQp0Avxhq7Bm0sD_PTARc7KfXfsMT2X4US9-B4kO04oQbDuR91a0x2GqItS5AqyqcCDMO65n2KwlmHelHuCX0l500HpzretZJ8KMOEeXZvRnu5xc"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Cylindrica</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">Fascinating <span class="text-primary font-medium">round, spear-like</span> upright stems that grow vertically.</p>
+</div>
+</div>
+<!-- Card: Zeylanica -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Zeylanica snake plant with wavy stripes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMpF5DxfRYhGgqUZC8FEUiOChcFAUCW1pmXWHZGJ681XBKrOgnibREWIwCeJ1rgO5rOtG5JnlwQtZXrW3qXiSYHvlKghJo_DXNiE1NO0yTFnGO81h0Qo9L9BspOGrXMwWrHpSD6IUBVJboKhXF1nLvI312mQ8dP2eA6OZow23chjK6AvQGsq5yzZfbMlf4o0FYebVbFWY3MduZ_Z7TqzxV_PeUCaWJK2-LAHIGjHYyGACUEwjf93FzngZpo41CXKbVw3VPC_JfFNuZ"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Zeylanica</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">Classic dark green with beautiful <span class="text-primary font-medium">wavy horizontal</span> stripes.</p>
+</div>
+</div>
+<!-- Card: Whale Fin -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Whale Fin snake plant with massive leaf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcnljapauHQ-mY8KZdhyMjbh-MYChjarEYigUSLw0SoDcXtzbgivj_s2DTFFSM7Xj10S5xW7wyyeoxiBKYNirtlDM0W1DBsTq5ORa8GTFDnCR9tOCZnqAaUj7m5d3EIu0secT0h0D5JlHkPWlK8b6T2mUzMAM6So4PuK3dAx6roGGZH46nw1FmgviI6hWtqj8yP7VvmezqKcovctEs1q_H37fJE0LVsH4y9uSy-iVGV61jcSepiE09B8_Vowc7O9nla9Ed41Noy5Cy"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Whale Fin</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">A striking <span class="text-primary font-medium">single, massive</span> broad leaf resembling a fin.</p>
+</div>
+</div>
+<!-- Card: Black Coral -->
+<div class="group bg-white dark:bg-slate-800/40 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="relative flex-1 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900/50 mb-4 group-hover:scale-[1.02] transition-transform">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Black Coral snake plant with dark banding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCFDF4FTwK3n-pns56r5jUYoMuTDQum2G58yAeciiUbT3bMR0ZyFoGh7Bfn9Kj-prC1seClAPSm06kYDGdsQWha7COycmSRzqMqbOtPTmMPmgNPOWCUbu06duY-AOLERKX2TpxqawBT8iJTqJq5G4dCtkZckl3BsHanUXdpBXHBDyStCQXmM-SGDiIutvKIWryVlSKgWIabHh1KJQYwXFf50y6gvdsnb0JJCvsjZheaq08DX7Yl7YHMlqeT8h1Q-w91aI9mAARhZt_"/>
+<button class="absolute top-2 right-2 size-8 bg-primary text-background-dark rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+<span class="material-symbols-outlined text-sm">info</span>
+</button>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-50">Black Coral</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">Deep, <span class="text-primary font-medium">near-black vertical</span> banding on high-contrast leaves.</p>
+</div>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="mt-auto pt-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">Showing 6 of 12 varieties</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-xl leading-none">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-xl leading-none">chevron_right</span>
+</button>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care Guide - Sansevieria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen flex flex-col">
+<!-- Persistent Top Navigation -->
+<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- Main Content Area: Single Viewport Layout -->
+<main class="flex-1 flex flex-col p-8 gap-8 max-w-6xl mx-auto w-full">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col gap-1">
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-widest">
+<a class="hover:text-primary" href="catalog.html">Plants</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary">Sansevieria</span>
+</nav>
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-4xl font-bold text-slate-900 dark:text-slate-100">Sansevieria trifasciata</h2>
+<p class="text-lg text-slate-500 font-medium">Snake Plant</p>
+</div>
+<div class="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-bold uppercase tracking-tighter">
+                    Easy Maintenance
+                </div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="flex-1 grid grid-cols-12 gap-8 min-h-0">
+<!-- Hero Illustration/Image Section -->
+<div class="col-span-12 lg:col-span-5 flex items-center justify-center bg-white dark:bg-slate-800/50 rounded-xl border border-primary/5 overflow-hidden relative group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
+<img alt="Sansevieria Plant" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Modern indoor sansevieria plant in a ceramic pot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCErBIR4qTDiuCCs1qLXrXwfH2hG8xzY5swkZRpA6YAR0OvYJfV8TwBUZCoaOL1iQU5raOS_9xYNzgRRljQxz8M1e-0RXac0Td-sm1SINlznyXmlebiY2AGNDi9136ty-EsdasxTl7aiarchjCoT6-8GICPg8S5EUZKryl2zWpYqxZ4teTT8mgjX29YU2OTGGpmx8S3zsdyuc5Sngmq11UyV7f4PIVYoKwBJiT6htP-tQDQuf18uz_VutjA4f3vwfEk25nAT5-IpSnq"/>
+</div>
+<!-- Care Grid (2x2) -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-6">
+<div class="grid grid-cols-2 gap-6 flex-1">
+<!-- Water Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-primary/10 flex flex-col gap-4 hover:border-primary/30 transition-all shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">opacity</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Watering</h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Every 2-3 weeks. Allow soil to dry out completely between waterings.</p>
+</div>
+</div>
+<!-- Light Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-primary/10 flex flex-col gap-4 hover:border-primary/30 transition-all shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">wb_sunny</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Light</h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Thrives in indirect sunlight. Tolerates low light levels very well.</p>
+</div>
+</div>
+<!-- Soil Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-primary/10 flex flex-col gap-4 hover:border-primary/30 transition-all shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">grid_view</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Soil</h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Use a well-draining cactus or succulent potting mix for best growth.</p>
+</div>
+</div>
+<!-- Temperature Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl border border-primary/10 flex flex-col gap-4 hover:border-primary/30 transition-all shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">thermostat</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Temperature</h3>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Ideal range: 65°F–85°F (18°C–29°C). Protect from cold winter drafts.</p>
+</div>
+</div>
+</div>
+<!-- Summary/Pro Tip Footer -->
+<div class="bg-primary p-6 rounded-xl flex items-center gap-6 text-white">
+<div class="bg-white/20 p-3 rounded-full">
+<span class="material-symbols-outlined text-2xl">lightbulb</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold uppercase tracking-wider text-xs opacity-80 mb-1">Expert Pro Tip</h4>
+<p class="text-sm font-medium leading-snug">Snake plants are excellent air purifiers and can tolerate neglect, making them perfect for bedrooms and office spaces.</p>
+</div>
+<button class="px-4 py-2 bg-white text-primary font-bold text-sm rounded-lg hover:bg-slate-100 transition-colors whitespace-nowrap">
+                        Read Full Guide
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Stats (Slim) -->
+<footer class="px-8 py-4 border-t border-primary/5 bg-white dark:bg-background-dark/50 flex items-center justify-between">
+<div class="flex gap-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">air</span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-tight">Air Quality: High</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">pets</span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-tight">Pet Safe: Caution</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">expand</span>
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-tight">Growth Rate: Slow</span>
+</div>
+</div>
+<div class="text-[10px] text-slate-400 font-mono">
+            REF: SANS_TRI_0012
+        </div>
+</footer>
+</body></html>

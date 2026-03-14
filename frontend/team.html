@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meet the Team | Sansevieria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+</script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+
+<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-1 flex flex-col justify-center items-center px-4 max-w-7xl mx-auto w-full">
+<div class="text-center mb-12">
+<h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4">Meet the Team</h2>
+<p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-lg leading-relaxed">
+The innovators behind the Sansevieria project, building robust architectures and modern user experiences.
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+
+<div class="group bg-white dark:bg-slate-800 p-6 rounded-xl border border-primary/10 shadow-sm hover:shadow-xl transition-all flex flex-col items-center text-center">
+<div class="relative mb-6">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-all"></div>
+<img alt="Professional portrait of Igor Pak" class="relative w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg"
+src="https://media.licdn.com/dms/image/v2/D4E03AQGRyobMCmoMhQ/profile-displayphoto-scale_400_400/B4EZslg6xCHEAg-/0/1765860945667?e=1773273600&v=beta&t=Qd1DtEAyWWyKLaAIe2XO10DAn_OzzTpLGWZLl4PD5zM"/>
+</div>
+<h3 class="text-2xl font-bold mb-1">Igor Pak</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-full mb-4">Professional Developer</span>
+<p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+Focusing on robust architecture and scalable solutions to power high-performance applications.
+</p>
+</div>
+
+<div class="group bg-white dark:bg-slate-800 p-6 rounded-xl border border-primary/10 shadow-sm hover:shadow-xl transition-all flex flex-col items-center text-center">
+<div class="relative mb-6">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-all"></div>
+<img alt="Professional portrait of Edem Veliev" class="relative w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg"
+src="https://media.licdn.com/dms/image/v2/D4E03AQEQhXWsfcUyug/profile-displayphoto-scale_400_400/B4EZszJkHWKUAg-/0/1766089706566?e=1773273600&v=beta&t=tyB2tZ3kBGDIqanKVPichADxn8fyzqTeu4KK0Emqg2A"/>
+</div>
+<h3 class="text-2xl font-bold mb-1">Edem Veliev</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-full mb-4">Professional Developer</span>
+<p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+Specializing in modern UI/UX design and seamless frontend-to-backend integration workflows.
+</p>
+</div>
+
+</div>
+</main>
+
+<footer class="p-8 text-center">
+<div class="flex justify-center gap-8 mb-4">
+<a class="text-xs text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold" href="contact.html">Privacy Policy</a>
+<a class="text-xs text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold" href="contact.html">Terms of Service</a>
+</div>
+<p class="text-sm text-slate-400">© 2024 Sansevieria Project. Built for the future of web architecture.</p>
+</footer>
+
+</body>
+</html>

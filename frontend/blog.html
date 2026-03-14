@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sansevieria Blog - Expert Care &amp; Green Inspiration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent body scroll for single-viewport layout */
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #a3cb2a40;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a3cb2a;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased h-screen flex flex-col">
+<!-- Persistent Top Navigation Bar -->
+<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- Main Content Area: Single Viewport -->
+<main class="flex-1 flex flex-col max-w-7xl mx-auto w-full px-8 overflow-hidden">
+<!-- Header Section -->
+<div class="py-12 shrink-0">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-5xl font-black text-slate-900 dark:text-slate-100 tracking-tight mb-2">The Snake Plant Journal</h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Expert Care &amp; Green Inspiration for indoor garden enthusiasts.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full cursor-pointer">All Posts</span>
+<span class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors cursor-pointer">Care Tips</span>
+<span class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full hover:bg-primary/10 transition-colors cursor-pointer">Propagation</span>
+</div>
+</div>
+</div>
+<!-- Article Feed Grid (Scrollable internally if items exceed height) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar pb-12">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Article Card 1 -->
+<div class="group flex flex-col bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 bg-cover bg-center overflow-hidden" data-alt="Close up of vibrant green snake plant leaves with yellow edges" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8Kzcl5OPgBCwe_j6U0qbazv0z7obdiBhUOmHuApZ3g6xclA_i706rbHr893fvBIlKXduEG98jwCt7w3eV6cQKVsoeb06rfxXcqb4_9LgJhMhqmYpWC8dDip98qGB4VraCVdrYcETW86g2mZyWaas-NrzDjEtPiKSfFvd-mnq9CGkbZ_yfe_3GEBUfHZ9mqk7WHBfXkpD3KEq4CLP5qgxQAwmHGs3TqnX-59dk0GNHJUSqhH2WiW0mz6R-camMeT6C6EZ0tQpLrM8t')"></div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Care Tips</span>
+<span class="text-slate-300 dark:text-slate-600">•</span>
+<span class="text-xs text-slate-500 font-medium">Oct 24, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-primary transition-colors">Watering 101: How to avoid root rot.</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                            Discover the golden rules of watering your Sansevieria. Learn how to read the soil and recognize the early signs of overwatering before it's too late for your green companion.
+                        </p>
+<div class="mt-auto">
+<a class="inline-flex items-center gap-1 text-primary text-sm font-bold group-hover:gap-2 transition-all" href="#">
+                                Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Article Card 2 -->
+<div class="group flex flex-col bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 bg-cover bg-center overflow-hidden" data-alt="Snake plant sitting in a modern minimal living room corner" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAidqhyyvlZLzoRlutOXLmQo79o1JoXDxjDh-me7STrT4sZ1FCErnCGZqjyDyUE_ag3RDq_jJ9_j_MCoGp7c3Ly8w0qa0ZLJyHQG3QStKgSjfJe1TrYOZHCkdd_fwxbiV2oOGEP4kNWLAQOr_I_pjV-xgvhlElRYH2TJhAEvTcLKKxpSc9aeMparX-nOVyJvH6R88fk93qiEHnH_e5d5MVkXn2ptIVyJi6soox03zOEm1VPfaHqMF_TjBvJrnu2wEE1C88qs-WrS6nl')"></div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Lighting</span>
+<span class="text-slate-300 dark:text-slate-600">•</span>
+<span class="text-xs text-slate-500 font-medium">Oct 20, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-primary transition-colors">Lighting Requirements: From low light to sun.</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                            While they are known as low-light champions, snake plants have specific preferences. We break down the ideal light conditions for maximum growth and variegation.
+                        </p>
+<div class="mt-auto">
+<a class="inline-flex items-center gap-1 text-primary text-sm font-bold group-hover:gap-2 transition-all" href="#">
+                                Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Article Card 3 -->
+<div class="group flex flex-col bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 bg-cover bg-center overflow-hidden" data-alt="Small snake plant pups being propagated in a terracotta pot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8opXbnislqlXrWpWzHQTgnE4Dq962r2ePWwLRxgmjSp0hCiizVRdEN6Fpe2K-_3hWvf__Vmkvm_JQHDS5txfUr2ZcexIA8b9aFXEohk_gTjW2thQEOYpB8R6RaAsEGW0sEqQ7JjCyoTQPdtjvE2-SkLgF8msp8jdceeOef_8ru7VXMI7OeRp3B92NKWaqxiY8vwZr7ORFiflJkGkN5BtMXIH-IuvU962nsvjM8yT05I1TekRu3M-sqWgqbZsR1D9fsaQ3FNdrdpSO')"></div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Propagation</span>
+<span class="text-slate-300 dark:text-slate-600">•</span>
+<span class="text-xs text-slate-500 font-medium">Oct 15, 2023</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-primary transition-colors">Propagating Your Sansevieria: A guide.</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                            Multiply your collection for free. From leaf cuttings to division, we show you the most effective ways to propagate your favorite snake plants at home.
+                        </p>
+<div class="mt-auto">
+<a class="inline-flex items-center gap-1 text-primary text-sm font-bold group-hover:gap-2 transition-all" href="#">
+                                Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Persistent Bottom Action (Optional, for Sidebar-like utility in footer) -->
+<footer class="shrink-0 border-t border-primary/5 bg-white dark:bg-background-dark py-6 flex items-center justify-between">
+<div class="flex items-center gap-4 text-sm font-medium text-slate-400">
+<span>Popular Tags:</span>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="blog.html">#IndoorGardening</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="blog.html">#SlowGrowth</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="blog.html">#AirPurifier</a>
+</div>
+<div class="flex items-center gap-6">
+<p class="text-xs text-slate-400">Showing 3 of 42 articles</p>
+<div class="flex gap-2">
+<button class="p-1 rounded bg-slate-100 dark:bg-white/5 text-slate-400 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

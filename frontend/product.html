@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sansevieria Zeylanica - PlantShop</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+    <!-- Main Layout: Single Viewport -->
+    <div class="flex flex-col h-screen w-full overflow-hidden">
+        <!-- Persistent Top Navigation Bar -->
+        <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+        <!-- Product Hero Section (Split Screen) -->
+        <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <!-- Left Side: Large Product Image -->
+            <div class="w-full md:w-1/2 h-full bg-white relative group overflow-hidden">
+                <img alt="Sansevieria Zeylanica"
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    data-alt="Vibrant green Sansevieria Zeylanica plant in a modern ceramic pot"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBca6tMjrGUlr6lfGUQ7eHtCbQ7fJjXed0jNgVeXkXNLBBiGS7a9Vl2CGvjou3KcfLhUJcM-lbqDjT_dBj3-6YFuF3v4YU7XOySryWFG4wiXFpN14Jt11q-KhmQen2v_QPGhJ_HhCFpBjEaSE2xme013uV3B808XDn_j6lBN4SeZkdvxK9WlwLoJuU9q6zuYe4cw866MGaCo96nINkhzY5w7BUsCma2g16j9I1BBHscVm443Aoq1_iUppGIKf8B_jtNeidEBd7UC4Ey" />
+                <div class="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent pointer-events-none"></div>
+            </div>
+            <!-- Right Side: Product Details -->
+            <div
+                class="w-full md:w-1/2 h-full flex items-center justify-center p-8 lg:p-16 bg-white dark:bg-background-dark overflow-y-auto no-scrollbar">
+                <div class="max-w-md w-full space-y-8">
+                    <!-- Breadcrumbs -->
+                    <nav class="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-slate-400">
+                        <a class="hover:text-primary transition-colors" href="index.html">Home</a>
+                        <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                        <a class="hover:text-primary transition-colors" href="catalog.html">Indoor Plants</a>
+                        <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                        <span class="text-slate-900 dark:text-slate-100">Sansevieria</span>
+                    </nav>
+                    <!-- Title and Price -->
+                    <div class="space-y-2">
+                        <h1
+                            class="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                            Sansevieria Zeylanica
+                        </h1>
+                        <p class="text-lg font-medium text-primary">Snake Plant</p>
+                        <div class="pt-4 flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-slate-900 dark:text-slate-100">$35.00</span>
+                            <span class="text-sm text-slate-400 line-through">$42.00</span>
+                        </div>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        A hardy, air-purifying indoor plant known for its stiff, sword-like leaves with wavy
+                        cross-stripes. Perfect for beginners and low-light spaces.
+                    </p>
+                    <!-- Specifications Grid -->
+                    <div class="grid grid-cols-3 gap-4 py-6 border-y border-slate-100 dark:border-slate-800">
+                        <div class="flex flex-col items-center text-center gap-2">
+                            <span class="material-symbols-outlined text-primary">water_drop</span>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Care Level
+                                </p>
+                                <p class="text-xs font-semibold">Beginner</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center text-center gap-2 border-x border-slate-100 dark:border-slate-800 px-4">
+                            <span class="material-symbols-outlined text-primary">straighten</span>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Size</p>
+                                <p class="text-xs font-semibold">12-14" Tall</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center text-center gap-2">
+                            <span class="material-symbols-outlined text-primary">light_mode</span>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Light</p>
+                                <p class="text-xs font-semibold">Low-Indirect</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Action Area -->
+                    <div class="flex flex-col gap-4 pt-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
+                                <button
+                                    class="px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">-</button>
+                                <span class="px-4 py-2 font-medium text-sm">1</span>
+                                <button
+                                    class="px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">+</button>
+                            </div>
+                            <button
+                                class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+                                onclick="window.location.href='cart.html'">
+                                <span class="material-symbols-outlined text-sm">shopping_bag</span>
+                                Add to Cart
+                            </button>
+                        </div>
+                        <!-- Mini Footer -->
+                        <div class="flex items-center justify-between pt-8">
+                            <div class="flex gap-4">
+                                <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                                    <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                                    <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+                                        <path
+                                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <span class="text-[10px] uppercase font-bold text-slate-300 tracking-widest">© 2024
+                                PlantShop Studio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

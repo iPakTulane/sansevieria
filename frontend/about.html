@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Sansevieria - Architectural Elegance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen">
+<div class="relative flex h-full w-full flex-col">
+<!-- Top Navigation Bar -->
+<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- Main Content (Single Viewport Layout) -->
+<main class="flex-1 flex flex-col md:flex-row h-full overflow-hidden">
+<!-- Left Side: Image Showcase -->
+<div class="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A tall architectural Sansevieria plant in a modern ceramic pot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDsOnfu_AyOwftJQ5xqavaobWECQz8kTmJGTX2Wa4mr3-fkDnMbqGy-p5MYee6_TEqD2bsZIvlq2wth7Tl8L-Y09s0ucFy55V9IYTrfmH_DQx-vsX0hoeC72Ue5soHHIcEtJOHNbtd3FKvqRTmEyHeGRT3xSlqbIKIvhRG11nalyj9A4lI9aCRN_1yBJnltJtDVWTAp7v0OqBFL3JZO62B78RibCBKW3VZ9iKX_myP7bhlrl3HUX4sAgY7TGfXnQxcPhksUGUmCtt_j");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light/40 to-transparent dark:from-background-dark/40"></div>
+<!-- Decorative Accent -->
+<div class="absolute bottom-10 left-10 hidden lg:block">
+<div class="p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur rounded-xl border border-primary/20 shadow-xl">
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">Botanical Profile</p>
+<p class="text-xs font-medium italic">Dracaena trifasciata</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Content Panel -->
+<div class="w-full md:w-1/2 h-1/2 md:h-full flex flex-col justify-center px-6 lg:px-20 py-10 bg-background-light dark:bg-background-dark relative">
+<div class="max-w-xl">
+<span class="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Origins: West Africa</span>
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl lg:text-6xl font-black leading-[1.1] tracking-[-0.04em] mb-6">
+                        Sansevieria <br/>
+<span class="text-primary/80">(Snake Plant)</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
+                        The Architect of Air Purification. Renowned for its architectural beauty and nearly indestructible nature, this resilient flora is a symbol of protection.
+                    </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+<!-- Benefit 1 -->
+<div class="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-2xl">air</span>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100">Pure Oxygen</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Converts CO2 to oxygen at night, improving sleep quality.</p>
+</div>
+</div>
+<!-- Benefit 2 -->
+<div class="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-2xl">shield</span>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100">High Resilience</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Thrives in low light and requires minimal watering.</p>
+</div>
+</div>
+<!-- Benefit 3 -->
+<div class="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-2xl">filter_alt</span>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100">Toxin Filter</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Removes benzene and formaldehyde from the air.</p>
+</div>
+</div>
+<!-- Benefit 4 -->
+<div class="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-2xl">energy_savings_leaf</span>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100">Low Maintenance</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Perfect for modern spaces and busy lifestyles.</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a href="varieties.html" class="bg-primary text-slate-900 px-8 py-3 rounded-lg font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-all">
+                            View Varieties
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a href="care.html" class="border border-primary/20 text-slate-900 dark:text-slate-100 px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary/5 transition-all">
+                            Care Guide
+                        </a>
+</div>
+</div>
+<!-- Subtle Decorative Background Text -->
+<div class="absolute -bottom-10 -right-10 opacity-5 select-none pointer-events-none">
+<span class="text-[12rem] font-black uppercase tracking-tighter">Purity</span>
+</div>
+</div>
+</main>
+</div>
+</body></html>
