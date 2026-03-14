@@ -8,9 +8,10 @@ class Order(Base):
     id = Column(Integer, primary_key=True, index=True)
     order_id = Column(String, unique=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
-    status = Column(String, default="pending")
+    status = Column(String, default="PENDING")
     total_amount = Column(Float, default=0.0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     items = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
 

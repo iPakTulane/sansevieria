@@ -101,3 +101,25 @@ This worker listens continuously and handles order status updates and mock-email
 1. **Live Processing**: Submit a `POST /api/checkout` request with your server and worker running. Notice the immediate HTTP response, while the terminal running the worker prints subsequent "Processing" and "Email sending" tasks asynchronously.
 2. **Offline Resilience**: Kill the python `worker.py` script. Submit another checkout request. The API remains responsive and returns immediately! 
 3. **Recovery**: Navigate to `http://localhost:15672` and see the message waiting in the `order_processing_queue`. Restart the `worker.py` script, and it will immediately pull and process the backed-up message correctly proving offline resiliency.
+
+---
+
+## 🔗 Stateful Processing & Correlation Mechanism
+
+To support reliable distributed architectures and concurrent processes, this backend employs **Correlation Identifiers**:
+
+### Correlation ID (`order_id`)
+The business identifier format (e.g., `ORD-000123`) is strictly utilized as the primary correlation key across:
+- **API Requests**: Generated at checkout and bundled into HTTP responses.
+- **Queue Messages**: Bundled in JSON payloads *and* explicitly as RabbitMQ Message Headers (`correlation_id`).
+- **Database Records**: Serves as the primary unique key reference (`Order.order_id`).
+- **Logging Traceability**: Required structure inside all worker prints: `[ORDER_PROCESSOR] correlation_id=ORD-000123 status=PROCESSING`.
+
+### Order State Machine
+Orders enforce strict lifecycle states using `services/order_state_service.py`:
+- `PENDING` -> `PROCESSING` -> `COMPLETED`
+- `[ANY]` -> `FAILED`
+
+### Concurrency & Idempotency
+1. **Row-level Locking**: The state machine operates using SQLAlchemy's `with_for_update()`. This protects against multiple workers grabbing the exact same order instance simultaneously (pessimistic locking) and ensures transitions are strictly atomic.
+2. **Idempotency**: The state processor validates transitions before saving to DB. Therefore, redundant or out-of-order messages arriving at the consumer are caught and discarded cleanly instead of crashing the system.

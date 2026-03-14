@@ -6,6 +6,9 @@ from app.utils.identifiers import generate_order_id
 from app.messaging.producer import publish_message
 from app.messaging.queues import ORDER_PROCESSING_QUEUE
 from datetime import datetime
+import logging
+
+logger = logging.getLogger("ORDER_PROCESSOR")
 
 def create_order_from_cart(db: Session, user_id: int):
     cart = get_cart_for_user(db, user_id)
@@ -14,6 +17,9 @@ def create_order_from_cart(db: Session, user_id: int):
     
     total_amount = sum([item.product.price * item.quantity for item in cart.items])
     order_id_str = generate_order_id()
+    
+    logger.info(f"[ORDER_PROCESSOR] correlation_id={order_id_str} status=PENDING msg='Creating order'")
+    
     order = Order(
         order_id=order_id_str,
         user_id=user_id,
@@ -42,8 +48,9 @@ def create_order_from_cart(db: Session, user_id: int):
         "order_id": order.order_id,
         "user_id": order.user_id,
         "event": "ORDER_CREATED",
+        "correlation_id": order.order_id,
         "timestamp": datetime.utcnow().isoformat()
-    })
+    }, correlation_id=order.order_id)
     
     return order
 
