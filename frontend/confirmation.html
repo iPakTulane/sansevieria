@@ -125,11 +125,13 @@
                     </div>
                     <h1 class="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-2">Thank you for
                         your order!</h1>
-                    <div class="flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full border border-primary/10">
-                        <span class="text-primary font-medium text-sm tracking-wide">Order ID: #SV-82910</span>
-                        <button class="text-primary hover:text-primary/70 flex items-center">
-                            <span class="material-symbols-outlined text-base">content_copy</span>
-                        </button>
+                    <div class="flex flex-col items-center gap-2 mb-4">
+                        <h2 class="text-xl font-medium text-primary tracking-wide">
+                            Order ID: <span id="orderId"
+                                class="font-bold text-slate-800 dark:text-white">Loading...</span>
+                        </h2>
+                        <p class="text-sm text-slate-500 italic">Your order is being processed asynchronously via
+                            RabbitMQ & Camunda.</p>
                     </div>
                 </div>
                 <!-- Order Summary Card -->
@@ -166,7 +168,7 @@
                                 <h4 class="font-semibold text-slate-900 dark:text-slate-100">Order Confirmation</h4>
                                 <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">We've sent a
                                     detailed receipt to your email address. Please check your inbox (and spam folder)
-                                    for #SV-82910.</p>
+                                    for <span id="orderIdRef">your order</span>.</p>
                             </div>
                         </div>
                         <div class="flex gap-4">
@@ -214,6 +216,19 @@
             © 2024 Sansevieria Studio
         </footer>
     </div>
+    <!-- API Integration Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const orderId = localStorage.getItem("last_order_id");
+
+            if (!orderId) {
+                document.getElementById("orderId").textContent = "UNKNOWN";
+                return;
+            }
+
+            document.getElementById("orderId").textContent = orderId;
+        });
+    </script>
 </body>
 
 </html>

@@ -70,51 +70,71 @@
 <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 h-screen overflow-hidden flex flex-col">
     <!-- Top Navigation Bar -->
-    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-    <!-- Logo / Brand -->
-    <div class="flex items-center gap-3">
-        <div class="size-6 text-primary flex items-center justify-center">
-            <span class="material-symbols-outlined">eco</span>
-        </div>
-        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
-    </div>
-    
-    <!-- Navigation Area -->
-    <div class="flex flex-1 justify-end gap-6 items-center">
-        <!-- Main Links -->
-        <nav class="hidden lg:flex items-center gap-6">
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
-            
-            <div class="relative group cursor-pointer inline-block z-[100]">
-                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                    <div class="h-px w-full bg-primary/10 my-1"></div>
-                </div>
-            </div>
-        </nav>
-        
-        <!-- Action Buttons -->
+    <header
+        class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+        <!-- Logo / Brand -->
         <div class="flex items-center gap-3">
-             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-            </a>
-            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-            </a>
-            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-            </a>
+            <div class="size-6 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined">eco</span>
+            </div>
+            <a href="index.html"
+                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
         </div>
-    </div>
-</header>
+
+        <!-- Navigation Area -->
+        <div class="flex flex-1 justify-end gap-6 items-center">
+            <!-- Main Links -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="index.html">Home</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="catalog.html">Catalog</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="about.html">About</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="team.html">Team</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="contact.html">Contact</a>
+
+                <div class="relative group cursor-pointer inline-block z-[100]">
+                    <span
+                        class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
+                        <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                    <div
+                        class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                        <a href="varieties.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                        <a href="care.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                        <a href="problems.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                        <a href="blog.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                        <div class="h-px w-full bg-primary/10 my-1"></div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="cart.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Cart">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+                </a>
+                <a href="auth.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Auth/Login">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                </a>
+                <a href="dashboard.html"
+                    class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Dashboard">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+                </a>
+            </div>
+        </div>
+    </header>
     <main class="flex flex-1 overflow-hidden">
         <!-- Sidebar Filters -->
         <aside
@@ -227,171 +247,69 @@
                     </div>
                 </div>
                 <!-- Responsive Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                    <!-- Product 1 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Sansevieria Laurentii snake plant in a ceramic pot"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBfmPVfBZ_frvaBuQchu95KFuuqbc-O98u2RoHebRyhOC3dq4WdY83hxpf67UIAieODh8O5clWdeKC3wcFMG1f-KJJef0Jm96YJHbQwpBSk6dCQrq6Yo4fkhXoDNHu2iuYgyfi1L2c-Wt_8FyI70kjIdpq7IFvIMXHZSwyMPvzrUFEetubksWjaASaefsJwjzyk-eu7eib3CwVJ_dyccGHSL7H6b5hccsLm6WsvUl6XmEal25YrbSCcbbMdI22B9_S_51Yr2zMpFA6a');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Laurentii</h3>
-                        <p class="text-slate-500 text-sm font-medium">$25.00</p>
-                    </div>
-                    <!-- Product 2 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Sansevieria Zeylanica with dark green striped leaves"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU65OQyLo2dWS4Nn-4hHl3UvKsrvY7ztFaLdl9YeYy6cHqNTXg4TVYyitV9Pbqx16Lhmd3ToP7WTA_Msj7QqJMFiD__wNxjXrgrVzljVXaRAwN6QQAR8emtBSyhvMahubNuvKQAqOEWbeL6RVFSVJ7i_uF4hdY9YXK_R29Ibf8RE4StTRZmbeLxrTjC3c7yY_J1fJCCJg3ZNNIcyokHD2P2TybOXyNnbRL0p0Lp7wh0C3L69AWEf5zx3Mpo8iRp2AXwoNjNtPi0jmp');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Zeylanica</h3>
-                        <p class="text-slate-500 text-sm font-medium">$22.00</p>
-                    </div>
-                    <!-- Product 3 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Moonshine snake plant with silvery pale green leaves"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAciW2BpTt2UEaWj6TaiZT1CNcq8403_mwcV1KRDKmE4RXLck7zPtrRYgBKzdr7ACna5olLgRamqOmfdxyvtH52CJf9MP8hvSeN7V47pEXbarX6cKkCg3jr8Z3QqTeJmVPkEC4BPwxmnLDIgxssXEIlsS2m43KV-c2BkBjc2uPy6yl5TLCMRMpEzFFB5byiBvtaGDYxOtsHzriCASY5uwEybSFfLcK-wTmksuD38vwAFM1G9-yMBWuj1KmOD9FXBtgMiTOPVsdl3c5K');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Moonshine</h3>
-                        <p class="text-slate-500 text-sm font-medium">$30.00</p>
-                    </div>
-                    <!-- Product 4 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Whale Fin Sansevieria masoniana single large leaf"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDg0gYYwfT4KItbzPs3zDFKp0DSyay74cb29IrvfidfDHRH46QsrTJ1SVoh7zfBO1nWlDv7p_FYoyqGGlxP_WxMyQG2yMotdLrX_5mfbyOFTo9YYgKcVD7PMtir9Sy4YchJFQV7RI-E4tj35-vbB0Qkn3JV3wlUrwbkvS_N1ZQ5GZBAnK5jRjKALvH8gTCbbf-cM4nGnOs4tE42iD6Zpii6JrvxlZ7LoFBEmhJgucZGx8s-I83Q68-FLSMaGMNCUMBJubWJ1gzdaUVd');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Whale Fin</h3>
-                        <p class="text-slate-500 text-sm font-medium">$45.00</p>
-                    </div>
-                    <!-- Product 5 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Sansevieria Black Coral with deep dark green leaves"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZUom5xYi7duHf7RLCmyE4fJzaCoOAUeA5XJJf7htv075BY_cY_Wup66LUdxt1T9xw81N2bmaCWoz69Ld5Vmlpa-q2iUeAi18UQn9MKyX3Mp4CUefTadV2-XrtPCBRbJWps_pVLG0k98-hcYbSHN_rtqBuWCO9dfGKtBo2YL1vLsvw3XIajrH8wMC1YcYNJdUi42aN_6Avts5WjCzF9lO9pMyoq--FRswYh1DqhkRo5Jn9-2ROP-om7IH5AvjH0Z8Vc5JOFdYsYrV1');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Black Coral</h3>
-                        <p class="text-slate-500 text-sm font-medium">$28.00</p>
-                    </div>
-                    <!-- Product 6 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Compact Golden Hahnii dwarf snake plant variety"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAL_R9j3JjPie3-v_o6j1bF-g_vpu31BNiFELLoGkPRA7J2gSSxt6Kk-Vqz3SHBcf-rBKnV7X2Ms7rqcqZ2hOMF64zQK5OV_5d_8C6kspFQpdbx9MTHZojDiSisHrDsvoyPgTMeU31USE8uOAQ_ghl52ZqGnahTCLqeCjYO2iSCo5YPOpGnM901nhBTbotdjYV2_QbtnktPIAS_DKeQ6C7mxrjxHrhXMAm3Ah3UDLFXkkZeUS7S_myFq63-VL35IjzJMSyOKqaTQce2');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Golden Hahnii</h3>
-                        <p class="text-slate-500 text-sm font-medium">$18.00</p>
-                    </div>
-                    <!-- Product 7 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Sansevieria Cylindrica with upright spear shaped leaves"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChoMEvLOwGdIDE5ZfyAW8FX-YOdUJZEJhjIw1XbOYHioSsK1EWSSKaWvkM_xulM_lrrDHl1JvKSBdV2yF80RSNPNX2qDN_Jzqvj6FuMiWIkUfkSU0qCVDE2_gAun5xVJ-uJhmb1lOYNZkeYJRCMLgmcHDDh3aJC1zTXwGbgWoy4om_m1rzWizfZCHxsb04sywmE2xSXpge9t06PmC-kbFVbi3rgGYW4UtySg9a-IDE_TuBs5R1K1qDWpAlDLCFOR0UcbbBksotCz51');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Cylindrica</h3>
-                        <p class="text-slate-500 text-sm font-medium">$35.00</p>
-                    </div>
-                    <!-- Product 8 -->
-                    <div class="group cursor-pointer" onclick="window.location.href='product.html'">
-                        <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                data-alt="Variegated Sansevieria Futura Robusta in minimal setting"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFycc7Y7dYWciLlPkhf8vzfowDLVPNOpNcq1DoZMmvNlXtHy4wieuyQFZc-mbgOOHDDEzFMiBu1hOhzhhrmnaaDBUY9IJD6EayK2kbaiLlTfLqvmHItSgpCgQHfvm_FFx48BKrwoch0Oy0_SsoL_J7X-0ZnZisEAlXYI_ASMgt8R8MKoYR3X8EJrUaASHBtuM22APLRX3By_99-XGcfC3GI2WYvFyA_Rhypp96AFyH5rVi0NWF74RPB-7wzw42dNY_ZQajHHeB_uKP');">
-                            </div>
-                            <div
-                                class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                                <button
-                                    class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-xl">add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <h3
-                            class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                            Futura Robusta</h3>
-                        <p class="text-slate-500 text-sm font-medium">$26.00</p>
+                <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+                    <!-- Products will be injected here dynamically -->
+                    <div class="col-span-full flex justify-center py-20 text-slate-400">
+                        <span class="material-symbols-outlined animate-spin text-4xl">progress_activity</span>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    <!-- API Integration Script -->
+    <script src="js/api.js"></script>
+    <script>
+        function viewProduct(productId) {
+            window.location.href = `product.html?id=${productId}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const products = await apiRequest("/api/products/", "GET");
+
+                const container = document.getElementById("productList");
+                container.innerHTML = "";
+
+                if (!products || products.length === 0) {
+                    container.innerHTML = '<div class="col-span-full text-center text-slate-500">No products available.</div>';
+                    return;
+                }
+
+                products.forEach(product => {
+                    const card = document.createElement("div");
+                    card.className = "group cursor-pointer";
+                    card.onclick = () => viewProduct(product.id);
+
+                    // Fallback image if backend doesn't provide one
+                    const imageUrl = product.image_url || 'https://images.unsplash.com/photo-1599598425947-33002629eb8f?auto=format&fit=crop&q=80&w=800';
+
+                    card.innerHTML = `
+                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                            style="background-image: url('${imageUrl}');">
+                        </div>
+                        <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                            <button class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-xl">add</span>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                        ${product.name}
+                    </h3>
+                    <p class="text-slate-500 text-sm font-medium">$${Number(product.price).toFixed(2)}</p>
+                `;
+
+                    container.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error("Failed to load products", err);
+                const container = document.getElementById("productList");
+                container.innerHTML = '<div class="col-span-full text-center text-red-500">Failed to load catalog. Please try again later.</div>';
+            }
+        });
+    </script>
 </body>
 
 </html>

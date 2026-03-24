@@ -51,59 +51,77 @@
     <!-- Main Layout: Single Viewport -->
     <div class="flex flex-col h-screen w-full overflow-hidden">
         <!-- Persistent Top Navigation Bar -->
-        <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-    <!-- Logo / Brand -->
-    <div class="flex items-center gap-3">
-        <div class="size-6 text-primary flex items-center justify-center">
-            <span class="material-symbols-outlined">eco</span>
-        </div>
-        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
-    </div>
-    
-    <!-- Navigation Area -->
-    <div class="flex flex-1 justify-end gap-6 items-center">
-        <!-- Main Links -->
-        <nav class="hidden lg:flex items-center gap-6">
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
-            
-            <div class="relative group cursor-pointer inline-block z-[100]">
-                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                    <div class="h-px w-full bg-primary/10 my-1"></div>
+        <header
+            class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+            <!-- Logo / Brand -->
+            <div class="flex items-center gap-3">
+                <div class="size-6 text-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined">eco</span>
+                </div>
+                <a href="index.html"
+                    class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+            </div>
+
+            <!-- Navigation Area -->
+            <div class="flex flex-1 justify-end gap-6 items-center">
+                <!-- Main Links -->
+                <nav class="hidden lg:flex items-center gap-6">
+                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="index.html">Home</a>
+                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="catalog.html">Catalog</a>
+                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="about.html">About</a>
+                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="team.html">Team</a>
+                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                        href="contact.html">Contact</a>
+
+                    <div class="relative group cursor-pointer inline-block z-[100]">
+                        <span
+                            class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
+                            <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                        <div
+                            class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                            <a href="varieties.html"
+                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                            <a href="care.html"
+                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                            <a href="problems.html"
+                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                            <a href="blog.html"
+                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                            <div class="h-px w-full bg-primary/10 my-1"></div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-3">
+                    <a href="cart.html"
+                        class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                        title="Cart">
+                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+                    </a>
+                    <a href="auth.html"
+                        class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                        title="Auth/Login">
+                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                    </a>
+                    <a href="dashboard.html"
+                        class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                        title="Dashboard">
+                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+                    </a>
                 </div>
             </div>
-        </nav>
-        
-        <!-- Action Buttons -->
-        <div class="flex items-center gap-3">
-             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-            </a>
-            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-            </a>
-            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-            </a>
-        </div>
-    </div>
-</header>
+        </header>
         <!-- Product Hero Section (Split Screen) -->
         <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
             <!-- Left Side: Large Product Image -->
             <div class="w-full md:w-1/2 h-full bg-white relative group overflow-hidden">
-                <img alt="Sansevieria Zeylanica"
-                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    data-alt="Vibrant green Sansevieria Zeylanica plant in a modern ceramic pot"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBca6tMjrGUlr6lfGUQ7eHtCbQ7fJjXed0jNgVeXkXNLBBiGS7a9Vl2CGvjou3KcfLhUJcM-lbqDjT_dBj3-6YFuF3v4YU7XOySryWFG4wiXFpN14Jt11q-KhmQen2v_QPGhJ_HhCFpBjEaSE2xme013uV3B808XDn_j6lBN4SeZkdvxK9WlwLoJuU9q6zuYe4cw866MGaCo96nINkhzY5w7BUsCma2g16j9I1BBHscVm443Aoq1_iUppGIKf8B_jtNeidEBd7UC4Ey" />
+                <img id="productImage" alt="Product Image"
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" src="" />
                 <div class="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent pointer-events-none"></div>
             </div>
             <!-- Right Side: Product Details -->
@@ -120,20 +138,19 @@
                     </nav>
                     <!-- Title and Price -->
                     <div class="space-y-2">
-                        <h1
+                        <h1 id="productName"
                             class="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-                            Sansevieria Zeylanica
+                            Loading...
                         </h1>
-                        <p class="text-lg font-medium text-primary">Snake Plant</p>
+                        <p class="text-lg font-medium text-primary">Indoor Plant</p>
                         <div class="pt-4 flex items-baseline gap-2">
-                            <span class="text-3xl font-bold text-slate-900 dark:text-slate-100">$35.00</span>
-                            <span class="text-sm text-slate-400 line-through">$42.00</span>
+                            <span id="productPrice"
+                                class="text-3xl font-bold text-slate-900 dark:text-slate-100">$0.00</span>
                         </div>
                     </div>
                     <!-- Description -->
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        A hardy, air-purifying indoor plant known for its stiff, sword-like leaves with wavy
-                        cross-stripes. Perfect for beginners and low-light spaces.
+                    <p id="productDescription" class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Loading product details...
                     </p>
                     <!-- Specifications Grid -->
                     <div class="grid grid-cols-3 gap-4 py-6 border-y border-slate-100 dark:border-slate-800">
@@ -164,17 +181,10 @@
                     <!-- Action Area -->
                     <div class="flex flex-col gap-4 pt-4">
                         <div class="flex items-center gap-4">
-                            <div
-                                class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
-                                <button
-                                    class="px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">-</button>
-                                <span class="px-4 py-2 font-medium text-sm">1</span>
-                                <button
-                                    class="px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">+</button>
-                            </div>
-                            <button
-                                class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
-                                onclick="window.location.href='cart.html'">
+                            <input id="quantity" type="number" min="1" max="10" value="1"
+                                class="w-20 px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-lg bg-transparent text-center font-medium focus:ring-primary focus:border-primary" />
+                            <button id="addToCartBtn" disabled
+                                class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:bg-slate-300 disabled:cursor-not-allowed">
                                 <span class="material-symbols-outlined text-sm">shopping_bag</span>
                                 Add to Cart
                             </button>
@@ -206,5 +216,68 @@
         </main>
     </div>
 </body>
+<!-- API Integration Script -->
+<script src="js/api.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        if (!productId) {
+            alert("No product ID specified.");
+            window.location.href = "catalog.html";
+            return;
+        }
+
+        try {
+            // Fetch all products, then find the one matching the ID
+            const products = await apiRequest("/api/products/", "GET");
+            const product = products.find(p => p.id == productId);
+
+            if (!product) {
+                alert("Product not found.");
+                window.location.href = "catalog.html";
+                return;
+            }
+
+            // Render details
+            document.getElementById("productName").textContent = product.name;
+            document.getElementById("productPrice").textContent = `$${Number(product.price).toFixed(2)}`;
+            if (product.description) {
+                document.getElementById("productDescription").textContent = product.description;
+            }
+            if (product.image_url) {
+                document.getElementById("productImage").src = product.image_url;
+            }
+
+            // Enable Add to Cart button now that data is loaded
+            document.getElementById("addToCartBtn").disabled = false;
+
+        } catch (err) {
+            console.error("Failed to load product", err);
+            alert("Could not load product details.");
+        }
+    });
+
+    document.getElementById("addToCartBtn").addEventListener("click", async () => {
+        const quantity = Number(document.getElementById("quantity").value) || 1;
+
+        const payload = {
+            product_id: Number(productId),
+            quantity: quantity
+        };
+
+        try {
+            // The true flag auto-redirects to auth.html if the token is invalid/missing
+            await apiRequest("/api/cart/", "POST", payload, true);
+
+            alert("Added to cart!");
+            window.location.href = "cart.html";
+
+        } catch (err) {
+            console.error("Add to cart failed", err);
+        }
+    });
+</script>
 
 </html>

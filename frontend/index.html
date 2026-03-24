@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sansevieria | AI Plant Assistant</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sansevieria | AI Plant Assistant</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -30,142 +35,188 @@
             },
         }
     </script>
-<style>
+    <style>
         body {
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrolling as per requirements */
+            overflow: hidden;
+            /* Prevent scrolling as per requirements */
         }
+
         .chat-container-height {
-            height: calc(100vh - 80px); /* 80px is header height approx */
+            height: calc(100vh - 80px);
+            /* 80px is header height approx */
         }
+
         .message-area-height {
-            height: calc(100% - 80px); /* Adjusting for input field */
+            height: calc(100% - 80px);
+            /* Adjusting for input field */
         }
+
         /* Hide scrollbar but keep functionality */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
     </style>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
-<!-- Persistent Top Navigation Bar -->
-<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-    <!-- Logo / Brand -->
-    <div class="flex items-center gap-3">
-        <div class="size-6 text-primary flex items-center justify-center">
-            <span class="material-symbols-outlined">eco</span>
-        </div>
-        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
-    </div>
-    
-    <!-- Navigation Area -->
-    <div class="flex flex-1 justify-end gap-6 items-center">
-        <!-- Main Links -->
-        <nav class="hidden lg:flex items-center gap-6">
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
-            
-            <div class="relative group cursor-pointer inline-block z-[100]">
-                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                    <div class="h-px w-full bg-primary/10 my-1"></div>
-                </div>
-            </div>
-        </nav>
-        
-        <!-- Action Buttons -->
+    <!-- Persistent Top Navigation Bar -->
+    <header
+        class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+        <!-- Logo / Brand -->
         <div class="flex items-center gap-3">
-             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-            </a>
-            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-            </a>
-            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-            </a>
+            <div class="size-6 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined">eco</span>
+            </div>
+            <a href="index.html"
+                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
         </div>
-    </div>
-</header>
-<!-- Main Chat Viewport -->
-<main class="chat-container-height flex flex-col items-center justify-center p-4 md:p-8">
-<div class="w-full max-w-4xl h-full flex flex-col bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
-<!-- Message Area -->
-<div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
-<!-- Empty State Greeting / Introduction -->
-<div class="flex flex-col items-center justify-center py-12 text-center space-y-4">
-<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-2">
-<span class="material-symbols-outlined text-primary text-4xl">smart_toy</span>
-</div>
-<h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hello, I'm your Sansevieria Assistant</h3>
-<p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Ask me anything about snake plant varieties, watering schedules, lighting, or common issues.</p>
-</div>
-<!-- Example AI Message -->
-<div class="flex items-start gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-white text-xl">psychology</span>
-</div>
-<div class="flex flex-col gap-1.5 max-w-[80%]">
-<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sansevieria AI</p>
-<div class="bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10">
-                            Sansevierias are extremely hardy! To get started, would you like to know about the **Mother-in-Law's Tongue** or the **Cylindrica** variety?
+
+        <!-- Navigation Area -->
+        <div class="flex flex-1 justify-end gap-6 items-center">
+            <!-- Main Links -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="index.html">Home</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="catalog.html">Catalog</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="about.html">About</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="team.html">Team</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="contact.html">Contact</a>
+
+                <div class="relative group cursor-pointer inline-block z-[100]">
+                    <span
+                        class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
+                        <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                    <div
+                        class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                        <a href="varieties.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                        <a href="care.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                        <a href="problems.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                        <a href="blog.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                        <div class="h-px w-full bg-primary/10 my-1"></div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="cart.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Cart">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+                </a>
+                <a href="auth.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Auth/Login">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                </a>
+                <a href="dashboard.html"
+                    class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Dashboard">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Chat Viewport -->
+    <main class="chat-container-height flex flex-col items-center justify-center p-4 md:p-8">
+        <div
+            class="w-full max-w-4xl h-full flex flex-col bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+            <!-- Message Area -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
+                <!-- Empty State Greeting / Introduction -->
+                <div class="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                    <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined text-primary text-4xl">smart_toy</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hello, I'm your Sansevieria
+                        Assistant</h3>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Ask me anything about snake plant
+                        varieties, watering schedules, lighting, or common issues.</p>
+                </div>
+                <!-- Example AI Message -->
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-white text-xl">psychology</span>
+                    </div>
+                    <div class="flex flex-col gap-1.5 max-w-[80%]">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sansevieria AI</p>
+                        <div
+                            class="bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10">
+                            Hello! How may I help you today?
                         </div>
-</div>
-</div>
-<!-- Example User Message -->
-<div class="flex flex-row-reverse items-start gap-4">
-<div class="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-700 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-xl">person</span>
-</div>
-<div class="flex flex-col gap-1.5 max-w-[80%] items-end">
-<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">You</p>
-<div class="bg-primary text-slate-900 p-4 rounded-xl rounded-tr-none font-medium">
+                    </div>
+                </div>
+                <!-- Example User Message -->
+                <div class="flex flex-row-reverse items-start gap-4">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-700 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-xl">person</span>
+                    </div>
+                    <div class="flex flex-col gap-1.5 max-w-[80%] items-end">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">You</p>
+                        <div class="bg-primary text-slate-900 p-4 rounded-xl rounded-tr-none font-medium">
                             How often should I water my Sansevieria during winter?
                         </div>
-</div>
-</div>
-<!-- AI Response -->
-<div class="flex items-start gap-4">
-<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-white text-xl">psychology</span>
-</div>
-<div class="flex flex-col gap-1.5 max-w-[80%]">
-<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sansevieria AI</p>
-<div class="bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10">
-                            During winter, Sansevierias go into a semi-dormant state. You should reduce watering significantly—once every 4-6 weeks is usually sufficient. Always ensure the soil is bone-dry all the way through before adding water.
+                    </div>
+                </div>
+                <!-- AI Response -->
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-white text-xl">psychology</span>
+                    </div>
+                    <div class="flex flex-col gap-1.5 max-w-[80%]">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sansevieria AI</p>
+                        <div
+                            class="bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10">
+                            During winter, Sansevierias go into a semi-dormant state. You should reduce watering
+                            significantly—once every 4-6 weeks is usually sufficient. Always ensure the soil is bone-dry
+                            all the way through before adding water.
                         </div>
-</div>
-</div>
-</div>
-<!-- Integrated Input Bar -->
-<div class="p-4 md:p-6 border-t border-primary/10 bg-white/50 dark:bg-background-dark/30 backdrop-blur-sm">
-<div class="flex items-center gap-3 bg-background-light dark:bg-background-dark border border-primary/20 rounded-xl px-4 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-all">
-<span class="material-symbols-outlined text-slate-400">eco</span>
-<input class="flex-1 bg-transparent border-none focus:ring-0 text-slate-800 dark:text-slate-200 placeholder-slate-400 py-3" placeholder="Type your plant question here..." type="text"/>
-<button class="bg-primary text-slate-900 font-bold px-6 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 transition-opacity">
-<span>Send</span>
-<span class="material-symbols-outlined text-xl">send</span>
-</button>
-</div>
-<div class="mt-3 flex justify-center gap-4">
-<button class="text-[10px] text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold">Clear Chat</button>
-<button class="text-[10px] text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold">Export Logs</button>
-</div>
-</div>
-</div>
-</main>
-<!-- Background Decoration (Subtle Soft Green Accents) -->
-<div class="fixed top-1/4 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-<div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10"></div>
-</body></html>
+                    </div>
+                </div>
+            </div>
+            <!-- Integrated Input Bar -->
+            <div class="p-4 md:p-6 border-t border-primary/10 bg-white/50 dark:bg-background-dark/30 backdrop-blur-sm">
+                <div
+                    class="flex items-center gap-3 bg-background-light dark:bg-background-dark border border-primary/20 rounded-xl px-4 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-all">
+                    <span class="material-symbols-outlined text-slate-400">eco</span>
+                    <input
+                        class="flex-1 bg-transparent border-none focus:ring-0 text-slate-800 dark:text-slate-200 placeholder-slate-400 py-3"
+                        placeholder="Type your plant question here..." type="text" />
+                    <button
+                        class="bg-primary text-slate-900 font-bold px-6 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 transition-opacity">
+                        <span>Send</span>
+                        <span class="material-symbols-outlined text-xl">send</span>
+                    </button>
+                </div>
+                <div class="mt-3 flex justify-center gap-4">
+                    <button
+                        class="text-[10px] text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold">Clear
+                        Chat</button>
+                    <button
+                        class="text-[10px] text-slate-400 hover:text-primary transition-colors uppercase tracking-widest font-bold">Export
+                        Logs</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Background Decoration (Subtle Soft Green Accents) -->
+    <div class="fixed top-1/4 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+    <div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+</body>
+
+</html>

@@ -55,51 +55,71 @@
 <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden h-screen flex flex-col">
     <!-- Top Navigation Bar -->
-    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-    <!-- Logo / Brand -->
-    <div class="flex items-center gap-3">
-        <div class="size-6 text-primary flex items-center justify-center">
-            <span class="material-symbols-outlined">eco</span>
-        </div>
-        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
-    </div>
-    
-    <!-- Navigation Area -->
-    <div class="flex flex-1 justify-end gap-6 items-center">
-        <!-- Main Links -->
-        <nav class="hidden lg:flex items-center gap-6">
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
-            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
-            
-            <div class="relative group cursor-pointer inline-block z-[100]">
-                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                    <div class="h-px w-full bg-primary/10 my-1"></div>
-                </div>
-            </div>
-        </nav>
-        
-        <!-- Action Buttons -->
+    <header
+        class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+        <!-- Logo / Brand -->
         <div class="flex items-center gap-3">
-             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-            </a>
-            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-            </a>
-            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
-                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-            </a>
+            <div class="size-6 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined">eco</span>
+            </div>
+            <a href="index.html"
+                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
         </div>
-    </div>
-</header>
+
+        <!-- Navigation Area -->
+        <div class="flex flex-1 justify-end gap-6 items-center">
+            <!-- Main Links -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="index.html">Home</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="catalog.html">Catalog</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="about.html">About</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="team.html">Team</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
+                    href="contact.html">Contact</a>
+
+                <div class="relative group cursor-pointer inline-block z-[100]">
+                    <span
+                        class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
+                        <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                    <div
+                        class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                        <a href="varieties.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                        <a href="care.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                        <a href="problems.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                        <a href="blog.html"
+                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                        <div class="h-px w-full bg-primary/10 my-1"></div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <a href="cart.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Cart">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+                </a>
+                <a href="auth.html"
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Auth/Login">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                </a>
+                <a href="dashboard.html"
+                    class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
+                    title="Dashboard">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+                </a>
+            </div>
+        </div>
+    </header>
     <!-- Main Content: Centered Card Layout -->
     <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
         <!-- Subtle Background Decoration -->
@@ -121,7 +141,7 @@
                         manage your plants with ease.</p>
                 </div>
                 <!-- Login Form -->
-                <form class="space-y-5" onsubmit="window.location.href='index.html'; return false;">
+                <form id="loginForm" class="space-y-5">
                     <div class="space-y-2">
                         <label
                             class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 ml-1">Email
@@ -129,7 +149,7 @@
                         <div class="relative group">
                             <span
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">mail</span>
-                            <input
+                            <input id="email"
                                 class="w-full pl-12 pr-4 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all"
                                 placeholder="name@sansevieria.com" type="email" required />
                         </div>
@@ -144,7 +164,7 @@
                         <div class="relative group">
                             <span
                                 class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">lock</span>
-                            <input
+                            <input id="password"
                                 class="w-full pl-12 pr-12 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all"
                                 placeholder="••••••••" type="password" required />
                             <button
@@ -154,7 +174,9 @@
                             </button>
                         </div>
                     </div>
-                    <button
+                    <!-- Status message -->
+                    <div id="loginStatus" class="hidden text-sm text-center py-2 px-4 rounded-lg"></div>
+                    <button id="loginBtn" type="submit"
                         class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] mt-4">
                         Sign In to Account
                     </button>
@@ -177,6 +199,42 @@
     <footer class="p-6 text-center text-xs text-slate-400 dark:text-slate-500 shrink-0">
         © 2026 Sansevieria. Minimalist botanical workspace.
     </footer>
+    <!-- API Integration Script -->
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Use urlencoded since FastAPI's OAuth2PasswordRequestForm requires it
+            const formData = new URLSearchParams();
+            formData.append("username", email);
+            formData.append("password", password);
+
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setToken(data.access_token);  // Using the helper from api.js
+                    window.location.href = "catalog.html";
+                } else {
+                    alert("Invalid credentials");
+                }
+            } catch (err) {
+                console.error("Login request failed:", err);
+                alert("Could not connect to the backend server.");
+            }
+        });
+    </script>
 </body>
 
 </html>

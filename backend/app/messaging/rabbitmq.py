@@ -2,13 +2,21 @@ import pika
 from app.config import settings
 from app.messaging.queues import ORDER_PROCESSING_QUEUE, EMAIL_NOTIFICATION_QUEUE, ORDER_PROCESSING_DLQ, EMAIL_NOTIFICATION_DLQ
 
-def get_rabbitmq_connection():
+import time
+
+def get_rabbitmq_connection(retries=5, delay=5):
     credentials = pika.PlainCredentials(settings.RABBITMQ_USER, settings.RABBITMQ_PASSWORD)
     parameters = pika.ConnectionParameters(
         host=settings.RABBITMQ_HOST,
         port=settings.RABBITMQ_PORT,
         credentials=credentials
     )
+    for i in range(retries):
+        try:
+            return pika.BlockingConnection(parameters)
+        except pika.exceptions.AMQPConnectionError:
+            print(f"RabbitMQ connection failed (attempt {i+1}/{retries}). Retrying in {delay}s...")
+            time.sleep(delay)
     return pika.BlockingConnection(parameters)
 
 def setup_queues():
