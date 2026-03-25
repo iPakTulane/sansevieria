@@ -55,71 +55,77 @@
 <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden h-screen flex flex-col">
     <!-- Top Navigation Bar -->
-    <header
-        class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-        <!-- Logo / Brand -->
-        <div class="flex items-center gap-3">
-            <div class="size-6 text-primary flex items-center justify-center">
-                <span class="material-symbols-outlined">eco</span>
-            </div>
-            <a href="index.html"
-                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
         </div>
-
-        <!-- Navigation Area -->
-        <div class="flex flex-1 justify-end gap-6 items-center">
-            <!-- Main Links -->
-            <nav class="hidden lg:flex items-center gap-6">
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="index.html">Home</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="catalog.html">Catalog</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="about.html">About</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="team.html">Team</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="contact.html">Contact</a>
-
-                <div class="relative group cursor-pointer inline-block z-[100]">
-                    <span
-                        class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
-                        <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                    <div
-                        class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                        <a href="varieties.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                        <a href="care.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                        <a href="problems.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                        <a href="blog.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                        <div class="h-px w-full bg-primary/10 my-1"></div>
-                    </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
                 </div>
-            </nav>
-
-            <!-- Action Buttons -->
-            <div class="flex items-center gap-3">
-                <a href="cart.html"
-                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Cart">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-                </a>
-                <a href="auth.html"
-                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Auth/Login">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-                </a>
-                <a href="dashboard.html"
-                    class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Dashboard">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-                </a>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+            <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
             </div>
         </div>
-    </header>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const healthBadge = document.getElementById('healthBadge');
+            const healthIcon = document.getElementById('healthIcon');
+            try {
+                const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                if (response.ok) {
+                    healthIcon.textContent = 'cloud_done';
+                    healthIcon.className = 'material-symbols-outlined text-green-500';
+                    healthBadge.title = 'System Online: All Services Operational';
+                } else {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                    healthBadge.title = 'System Degraded';
+                }
+            } catch (err) {
+                healthIcon.textContent = 'cloud_off';
+                healthIcon.className = 'material-symbols-outlined text-red-500';
+                healthBadge.title = 'System Offline: Backend API Unreachable';
+            }
+        });
+    </script>
+</header>
     <!-- Main Content: Centered Card Layout -->
     <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
         <!-- Subtle Background Decoration -->
@@ -136,10 +142,41 @@
             <!-- Card Body -->
             <div class="p-8">
                 <div class="mb-8">
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Welcome Back</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access your collection and
+                    <h3 id="formTitle" class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Welcome Back</h3>
+                    <p id="formSubtitle" class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Access your collection and
                         manage your plants with ease.</p>
                 </div>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="space-y-5 hidden">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 ml-1">Full Name</label>
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">person</span>
+                            <input id="regName" class="w-full pl-12 pr-4 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all" placeholder="John Doe" type="text" required />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 ml-1">Email Address</label>
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">mail</span>
+                            <input id="regEmail" class="w-full pl-12 pr-4 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all" placeholder="name@sansevieria.com" type="email" required />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">Password</label>
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">lock</span>
+                            <input id="regPassword" class="w-full pl-12 pr-12 py-3.5 bg-background-light dark:bg-slate-800 border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-slate-900 dark:text-slate-100 placeholder:text-slate-400 transition-all" placeholder="••••••••" type="password" required />
+                        </div>
+                    </div>
+                    <!-- Status message -->
+                    <div id="registerStatus" class="hidden text-sm text-center py-2 px-4 rounded-lg"></div>
+                    <button id="registerBtn" type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] mt-4">
+                        Create Account
+                    </button>
+                </form>
+
                 <!-- Login Form -->
                 <form id="loginForm" class="space-y-5">
                     <div class="space-y-2">
@@ -187,10 +224,14 @@
 
             </div>
             <!-- Card Footer -->
-            <div class="p-6 bg-primary/5 text-center border-t border-primary/10">
-                <p class="text-sm text-slate-500 dark:text-slate-400">
+            <div class="p-6 bg-primary/5 text-center border-t border-primary/10" id="formFooter">
+                <p id="footerLoginText" class="text-sm text-slate-500 dark:text-slate-400">
                     Don't have an account yet?
-                    <a class="text-primary font-bold hover:underline ml-1" href="auth.html">Create Account</a>
+                    <a id="btnShowRegister" href="javascript:void(0)" class="text-primary font-bold hover:underline ml-1">Create Account</a>
+                </p>
+                <p id="footerRegisterText" class="text-sm text-slate-500 dark:text-slate-400 hidden">
+                    Already have an account? 
+                    <a id="btnShowLogin" href="javascript:void(0)" class="text-primary font-bold hover:underline ml-1">Sign In</a>
                 </p>
             </div>
         </div>
@@ -202,37 +243,145 @@
     <!-- API Integration Script -->
     <script src="js/api.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        function toggleForm(type) {
+            console.log('[DEBUG] toggleForm triggered for state:', type);
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const formTitle = document.getElementById('formTitle');
+            const formSubtitle = document.getElementById('formSubtitle');
+            const footerLoginText = document.getElementById('footerLoginText');
+            const footerRegisterText = document.getElementById('footerRegisterText');
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Use urlencoded since FastAPI's OAuth2PasswordRequestForm requires it
-            const formData = new URLSearchParams();
-            formData.append("username", email);
-            formData.append("password", password);
-
-            try {
-                const response = await fetch(`${API_BASE}/api/auth/login`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    setToken(data.access_token);  // Using the helper from api.js
-                    window.location.href = "catalog.html";
-                } else {
-                    alert("Invalid credentials");
-                }
-            } catch (err) {
-                console.error("Login request failed:", err);
-                alert("Could not connect to the backend server.");
+            if (type === 'register') {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                formTitle.textContent = 'Create Account';
+                formSubtitle.textContent = 'Join the Sansevieria community to manage your beautiful plants.';
+                footerLoginText.classList.add('hidden');
+                footerRegisterText.classList.remove('hidden');
+                console.log('[DEBUG] Form UI successfully switched to: REGISTER (registerForm hidden:', registerForm.classList.contains('hidden'), ')');
+            } else {
+                registerForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                formTitle.textContent = 'Welcome Back';
+                formSubtitle.textContent = 'Access your collection and manage your plants with ease.';
+                footerRegisterText.classList.add('hidden');
+                footerLoginText.classList.remove('hidden');
+                console.log('[DEBUG] Form UI successfully switched to: LOGIN (loginForm hidden:', loginForm.classList.contains('hidden'), ')');
             }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('[DEBUG] DOM Content Loaded. Initializing event listeners...');
+            
+            // Attach toggle switchers securely
+            document.getElementById('btnShowRegister').addEventListener('click', () => toggleForm('register'));
+            document.getElementById('btnShowLogin').addEventListener('click', () => toggleForm('login'));
+            console.log('[DEBUG] Toggle listeners successfully attached.');
+
+            // Abstract Submits
+            document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('[DEBUG] Register form submitted');
+
+                const name = document.getElementById('regName').value;
+                const email = document.getElementById('regEmail').value;
+                const password = document.getElementById('regPassword').value;
+                
+                const statusBox = document.getElementById('registerStatus');
+                statusBox.classList.remove('hidden');
+                statusBox.className = "text-sm text-center py-2 px-4 rounded-lg text-slate-500 block";
+                statusBox.textContent = "Processing...";
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/auth/register`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-green-100 text-green-700 block";
+                        statusBox.textContent = "Account created successfully! Switching to login layer...";
+                        console.log('[DEBUG] Registration successful, automatically flipping back to login...');
+                        
+                        setTimeout(() => {
+                            document.getElementById('regName').value = "";
+                            document.getElementById('regEmail').value = "";
+                            document.getElementById('regPassword').value = "";
+                            statusBox.classList.add('hidden');
+                            toggleForm('login');
+                            document.getElementById('email').value = email;
+                        }, 2000);
+                        
+                    } else {
+                        const errorData = await response.json();
+                        statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-red-100 text-red-700 block";
+                        statusBox.textContent = "Error: " + (errorData.detail || "Registration failed");
+                    }
+                } catch (err) {
+                    console.error("Registration request failed:", err);
+                    statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-red-100 text-red-700 block";
+                    statusBox.textContent = "Network error. Could not connect to backend.";
+                }
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('[DEBUG] Login form submitted');
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                const statusBox = document.getElementById('loginStatus');
+                statusBox.classList.remove('hidden');
+                statusBox.className = "text-sm text-center py-2 px-4 rounded-lg text-slate-500 block";
+                statusBox.textContent = "Authenticating...";
+
+                const formData = new URLSearchParams();
+                formData.append("username", email);
+                formData.append("password", password);
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/auth/login`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        // 1. Store the token properly in localStorage via api.js
+                        setToken(data.access_token);
+                        
+                        statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-green-100 text-green-700 block";
+                        statusBox.textContent = "Welcome back! Redirecting to your dashboard...";
+                        console.log('[DEBUG] Login successful, token stored! Redirecting...');
+                        
+                        // 2. Transition gracefully to authenticated area
+                        setTimeout(() => {
+                            window.location.href = "catalog.html";
+                        }, 1000);
+                    } else {
+                        const errorData = await response.json();
+                        statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-red-100 text-red-700 block";
+                        statusBox.textContent = "Error: " + (errorData.detail || "Invalid credentials");
+                    }
+                } catch (err) {
+                    console.error("Login request failed:", err);
+                    statusBox.className = "text-sm text-center py-2 px-4 rounded-lg bg-red-100 text-red-700 block";
+                    statusBox.textContent = "Network error. Could not connect to backend.";
+                }
+            });
         });
     </script>
 </body>

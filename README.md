@@ -29,9 +29,9 @@ You can open any `.html` file directly in your browser, or spin up a local devel
 
 ```bash
 cd frontend
-python3 -m http.server 8000
+python3 -m http.server 8081
 ```
-Then visit `http://localhost:8000/index.html` or just `http://localhost:8000/`.
+Then visit `http://localhost:8081/index.html` or just `http://localhost:8081/`.
 
 ### Running Updates
 If you decide to change the global header structure, edit the raw HTML block located inside `frontend/update_headers.py` and execute the script:

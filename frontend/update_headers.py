@@ -3,7 +3,7 @@ import re
 import sys
 
 # Directory containing the html files
-frontend_dir = "/Users/ipaktulane/Downloads/PROJECT/frontend"
+frontend_dir = os.path.dirname(os.path.abspath(__file__))
 
 header_html = """<header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
     <!-- Logo / Brand -->
@@ -47,8 +47,34 @@ header_html = """<header class="w-full shrink-0 border-b border-solid border-pri
             <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
                 <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
             </a>
+            <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const healthBadge = document.getElementById('healthBadge');
+            const healthIcon = document.getElementById('healthIcon');
+            try {
+                const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                if (response.ok) {
+                    healthIcon.textContent = 'cloud_done';
+                    healthIcon.className = 'material-symbols-outlined text-green-500';
+                    healthBadge.title = 'System Online: All Services Operational';
+                } else {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                    healthBadge.title = 'System Degraded';
+                }
+            } catch (err) {
+                healthIcon.textContent = 'cloud_off';
+                healthIcon.className = 'material-symbols-outlined text-red-500';
+                healthBadge.title = 'System Offline: Backend API Unreachable';
+            }
+        });
+    </script>
 </header>"""
 
 for filename in os.listdir(frontend_dir):

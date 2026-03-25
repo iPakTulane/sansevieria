@@ -112,8 +112,36 @@
                     title="Dashboard">
                     <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
                 </a>
+                <div id="healthBadge"
+                    class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800"
+                    title="Checking Backend Connection...">
+                    <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+                </div>
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const healthBadge = document.getElementById('healthBadge');
+                const healthIcon = document.getElementById('healthIcon');
+                try {
+                    const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                    const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                    if (response.ok) {
+                        healthIcon.textContent = 'cloud_done';
+                        healthIcon.className = 'material-symbols-outlined text-green-500';
+                        healthBadge.title = 'System Online: All Services Operational';
+                    } else {
+                        healthIcon.textContent = 'cloud_off';
+                        healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                        healthBadge.title = 'System Degraded';
+                    }
+                } catch (err) {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-red-500';
+                    healthBadge.title = 'System Offline: Backend API Unreachable';
+                }
+            });
+        </script>
     </header>
     <!-- Main Content: Split Pane -->
     <main
@@ -150,16 +178,12 @@
                 <h3 class="text-xl font-bold">Order Summary</h3>
                 <div class="space-y-4">
                     <div class="flex justify-between text-sm">
-                        <span class="text-slate-500 dark:text-slate-400">Subtotal</span>
-                        <span class="font-medium">$100.00</span>
-                    </div>
-                    <div class="flex justify-between text-sm">
-                        <span class="text-slate-500 dark:text-slate-400">Shipping</span>
-                        <span class="font-medium text-primary">Free</span>
+                        <span class="text-slate-500 dark:text-slate-400">VAT</span>
+                        <span class="font-medium">$0.00</span>
                     </div>
                     <div class="flex justify-between text-sm pb-4 border-b border-primary/10">
-                        <span class="text-slate-500 dark:text-slate-400">Estimated Tax</span>
-                        <span class="font-medium">$8.00</span>
+                        <span class="text-slate-500 dark:text-slate-400">Shipping</span>
+                        <span class="font-medium text-primary">Free</span>
                     </div>
                     <div class="flex justify-between items-center pt-2">
                         <span class="text-lg font-bold">Total</span>
@@ -193,11 +217,13 @@
             </div>
         </aside>
     </main>
-    <!-- API Integration Script -->
+    <script src="js/api.js"></script>
     <script>
-        const API_BASE = 'http://localhost:8000';
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+        });
 
-        document.addEventListener('DOMContentLoaded', async () => {
+        async function renderCart() {
             try {
                 const cart = await apiRequest("/api/cart/", "GET", null, true);
 
@@ -206,13 +232,13 @@
 
                 container.innerHTML = "";
 
-                if (!cart.items || cart.items.length === 0) {
+                if (!cart || !cart.items || cart.items.length === 0) {
                     emptyMessage.style.display = "flex";
+                    updateSummary(0);
                     return;
                 }
 
                 emptyMessage.style.display = "none";
-
                 let subtotal = 0;
 
                 cart.items.forEach(item => {
@@ -222,55 +248,79 @@
                     const el = document.createElement("div");
                     el.className = "flex items-center gap-4 p-4 bg-white dark:bg-white/5 border border-primary/10 rounded-xl hover:border-primary/30 transition-all group";
 
-                    // Fallback image if product doesn't have one
                     const imageUrl = item.product.image_url || 'https://images.unsplash.com/photo-1599598425947-33002629eb8f?auto=format&fit=crop&q=80&w=800';
 
                     el.innerHTML = `
-                    <div class="size-24 rounded-lg overflow-hidden bg-background-light flex-shrink-0">
+                    <div class="size-24 rounded-lg overflow-hidden bg-background-light flex-shrink-0 relative">
                         <img class="w-full h-full object-cover" src="${imageUrl}" />
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 flex flex-col justify-between py-1">
                         <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-semibold text-lg">${item.product.name}</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">Qty: ${item.quantity}</p>
+                            <div class="flex flex-col gap-1">
+                                <h3 class="font-semibold text-lg leading-none">${item.product.title || "Sansevieria Plant"}</h3>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <button onclick="updateQuantity(${item.product_id}, ${item.id}, ${item.quantity}, -1)" class="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 disabled:opacity-50">
+                                        <span class="material-symbols-outlined text-[16px]">remove</span>
+                                    </button>
+                                    <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.product_id}, ${item.id}, ${item.quantity}, 1)" class="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-100 text-primary transition-colors dark:border-slate-700 dark:hover:bg-slate-800">
+                                        <span class="material-symbols-outlined text-[16px]">add</span>
+                                    </button>
+                                </div>
                             </div>
-                            <button onclick="removeItem(${item.id})" class="text-slate-400 hover:text-red-500 transition-colors" title="Remove Item">
-                                <span class="material-symbols-outlined text-xl">delete</span>
+                            <button onclick="removeItem(${item.id})" class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Remove Item">
+                                <span class="material-symbols-outlined text-[22px]">delete</span>
                             </button>
                         </div>
-                        <div class="flex justify-between items-end mt-4">
+                        <div class="flex justify-between items-end mt-2">
                             <p class="font-bold text-lg text-primary">$${Number(itemTotal).toFixed(2)}</p>
                         </div>
                     </div>
-                `;
-
+                    `;
                     container.appendChild(el);
                 });
 
-                // Optionally update the static summary UI 
-                const summaryDiv = document.querySelector('.space-y-4');
-                if (summaryDiv) {
-                    const spans = summaryDiv.querySelectorAll('.font-medium');
-                    if (spans[0]) spans[0].textContent = `$${subtotal.toFixed(2)}`;
-                    const tax = subtotal * 0.08;
-                    if (spans[2]) spans[2].textContent = `$${tax.toFixed(2)}`;
-                    const totalSpan = document.querySelector('.text-2xl.font-bold');
-                    if (totalSpan) totalSpan.textContent = `$${(subtotal + tax).toFixed(2)}`;
-                }
+                const total = subtotal; // Shipping is Free
+                updateSummary(subtotal, total);
 
             } catch (err) {
                 console.error("Failed to load cart", err);
                 const emptyMessage = document.getElementById("emptyCartMessage");
-                emptyMessage.innerHTML = "<p class='text-red-500'>Failed to load cart data.</p>";
+                emptyMessage.innerHTML = "<p class='text-red-500 font-bold'>Failed to securely load cart data.</p>";
                 emptyMessage.style.display = "flex";
             }
-        });
+        }
+
+        function updateSummary(subtotal, total = subtotal) {
+            const summaryDiv = document.querySelector('.space-y-4');
+            if (summaryDiv) {
+                const spans = summaryDiv.querySelectorAll('.font-medium');
+                if (spans[0]) spans[0].textContent = `$${subtotal.toFixed(2)}`;
+                const totalSpan = document.querySelector('.text-2xl.font-bold');
+                if (totalSpan) totalSpan.textContent = `$${total.toFixed(2)}`;
+            }
+        }
+
+        async function updateQuantity(productId, itemId, currentQty, delta) {
+            try {
+                if (currentQty + delta <= 0) {
+                    await removeItem(itemId);
+                    return;
+                }
+
+                await apiRequest("/api/cart/", "POST", { product_id: productId, quantity: delta }, true);
+
+                // Dynamically re-hydrate DOM
+                renderCart();
+            } catch (err) {
+                console.error("Quantity update failed", err);
+            }
+        }
 
         async function removeItem(itemId) {
             try {
                 await apiRequest(`/api/cart/${itemId}`, "DELETE", null, true);
-                location.reload();
+                renderCart();
             } catch (err) {
                 console.error("Failed to remove item", err);
             }

@@ -51,71 +51,77 @@
     <!-- Main Layout: Single Viewport -->
     <div class="flex flex-col h-screen w-full overflow-hidden">
         <!-- Persistent Top Navigation Bar -->
-        <header
-            class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-            <!-- Logo / Brand -->
-            <div class="flex items-center gap-3">
-                <div class="size-6 text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined">eco</span>
-                </div>
-                <a href="index.html"
-                    class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
-            </div>
-
-            <!-- Navigation Area -->
-            <div class="flex flex-1 justify-end gap-6 items-center">
-                <!-- Main Links -->
-                <nav class="hidden lg:flex items-center gap-6">
-                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                        href="index.html">Home</a>
-                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                        href="catalog.html">Catalog</a>
-                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                        href="about.html">About</a>
-                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                        href="team.html">Team</a>
-                    <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                        href="contact.html">Contact</a>
-
-                    <div class="relative group cursor-pointer inline-block z-[100]">
-                        <span
-                            class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
-                            <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                        <div
-                            class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                            <a href="varieties.html"
-                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                            <a href="care.html"
-                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                            <a href="problems.html"
-                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                            <a href="blog.html"
-                                class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                            <div class="h-px w-full bg-primary/10 my-1"></div>
-                        </div>
-                    </div>
-                </nav>
-
-                <!-- Action Buttons -->
-                <div class="flex items-center gap-3">
-                    <a href="cart.html"
-                        class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                        title="Cart">
-                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-                    </a>
-                    <a href="auth.html"
-                        class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                        title="Auth/Login">
-                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-                    </a>
-                    <a href="dashboard.html"
-                        class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                        title="Dashboard">
-                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-                    </a>
+        <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
                 </div>
             </div>
-        </header>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+            <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const healthBadge = document.getElementById('healthBadge');
+            const healthIcon = document.getElementById('healthIcon');
+            try {
+                const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                if (response.ok) {
+                    healthIcon.textContent = 'cloud_done';
+                    healthIcon.className = 'material-symbols-outlined text-green-500';
+                    healthBadge.title = 'System Online: All Services Operational';
+                } else {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                    healthBadge.title = 'System Degraded';
+                }
+            } catch (err) {
+                healthIcon.textContent = 'cloud_off';
+                healthIcon.className = 'material-symbols-outlined text-red-500';
+                healthBadge.title = 'System Offline: Backend API Unreachable';
+            }
+        });
+    </script>
+</header>
         <!-- Product Hero Section (Split Screen) -->
         <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
             <!-- Left Side: Large Product Image -->
@@ -134,7 +140,7 @@
                         <span class="material-symbols-outlined text-[10px]">chevron_right</span>
                         <a class="hover:text-primary transition-colors" href="catalog.html">Indoor Plants</a>
                         <span class="material-symbols-outlined text-[10px]">chevron_right</span>
-                        <span class="text-slate-900 dark:text-slate-100">Sansevieria</span>
+                        <span id="productBreadcrumb" class="text-slate-900 dark:text-slate-100">Loading...</span>
                     </nav>
                     <!-- Title and Price -->
                     <div class="space-y-2">
@@ -155,26 +161,24 @@
                     <!-- Specifications Grid -->
                     <div class="grid grid-cols-3 gap-4 py-6 border-y border-slate-100 dark:border-slate-800">
                         <div class="flex flex-col items-center text-center gap-2">
-                            <span class="material-symbols-outlined text-primary">water_drop</span>
+                            <span class="material-symbols-outlined text-primary">psychiatry</span>
                             <div>
-                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Care Level
-                                </p>
-                                <p class="text-xs font-semibold">Beginner</p>
+                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Category</p>
+                                <p id="productCategory" class="text-xs font-semibold">Loading</p>
                             </div>
                         </div>
-                        <div
-                            class="flex flex-col items-center text-center gap-2 border-x border-slate-100 dark:border-slate-800 px-4">
+                        <div class="flex flex-col items-center text-center gap-2 border-x border-slate-100 dark:border-slate-800 px-4">
                             <span class="material-symbols-outlined text-primary">straighten</span>
                             <div>
                                 <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Size</p>
-                                <p class="text-xs font-semibold">12-14" Tall</p>
+                                <p id="productSize" class="text-xs font-semibold">Loading</p>
                             </div>
                         </div>
                         <div class="flex flex-col items-center text-center gap-2">
                             <span class="material-symbols-outlined text-primary">light_mode</span>
                             <div>
-                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Light</p>
-                                <p class="text-xs font-semibold">Low-Indirect</p>
+                                <p class="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Light Needs</p>
+                                <p id="productLight" class="text-xs font-semibold">Loading</p>
                             </div>
                         </div>
                     </div>
@@ -224,43 +228,61 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
         if (!productId) {
-            alert("No product ID specified.");
+            alert("No product ID specified. Returning to catalog.");
             window.location.href = "catalog.html";
             return;
         }
 
         try {
-            // Fetch all products, then find the one matching the ID
-            const products = await apiRequest("/api/products/", "GET");
-            const product = products.find(p => p.id == productId);
+            // STEP 5: Call GET /api/products/{id} directly to exclusively hydrate details
+            const product = await apiRequest(`/api/products/${productId}`, "GET");
 
             if (!product) {
-                alert("Product not found.");
+                alert("Product not found. Returning to catalog.");
                 window.location.href = "catalog.html";
                 return;
             }
 
-            // Render details
-            document.getElementById("productName").textContent = product.name;
+            // Sync visual titles
+            document.title = `${product.title} - PlantShop`;
+            document.getElementById("productBreadcrumb").textContent = product.title;
+            
+            // Hydrate primary text models
+            document.getElementById("productName").textContent = product.title; // Fixed reference mapping natively resolving correctly
             document.getElementById("productPrice").textContent = `$${Number(product.price).toFixed(2)}`;
+            
+            // Map text details
             if (product.description) {
                 document.getElementById("productDescription").textContent = product.description;
             }
-            if (product.image_url) {
-                document.getElementById("productImage").src = product.image_url;
-            }
+            if (product.category) { document.getElementById("productCategory").textContent = product.category; }
+            if (product.size) { document.getElementById("productSize").textContent = product.size; }
+            if (product.light_level) { document.getElementById("productLight").textContent = product.light_level; }
 
-            // Enable Add to Cart button now that data is loaded
+            // Extremely robust fallback image handling explicitly synced with the grid catalog UI paradigm
+            const imageUrl = (product.image_url && product.image_url.trim() !== '') 
+                             ? product.image_url 
+                             : 'https://images.unsplash.com/photo-1547516508-e910d368d995?auto=format&fit=crop&q=80&w=800';
+            document.getElementById("productImage").src = imageUrl;
+
+            // Unlock interactions exclusively after the asynchronous network operation finishes 
             document.getElementById("addToCartBtn").disabled = false;
 
         } catch (err) {
             console.error("Failed to load product", err);
-            alert("Could not load product details.");
+            document.getElementById("productName").textContent = "Item Unavailable";
+            document.getElementById("productDescription").innerHTML = `<span class="text-red-500 font-medium">Could not load product details. ${err.message || 'Please check your connection.'}</span>`;
+            document.getElementById("productPrice").textContent = "N/A";
         }
     });
 
     document.getElementById("addToCartBtn").addEventListener("click", async () => {
+        const btn = document.getElementById("addToCartBtn");
         const quantity = Number(document.getElementById("quantity").value) || 1;
+        const originalHTML = btn.innerHTML;
+
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span> Processing...';
+        btn.disabled = true;
 
         const payload = {
             product_id: Number(productId),
@@ -269,13 +291,31 @@
 
         try {
             // The true flag auto-redirects to auth.html if the token is invalid/missing
-            await apiRequest("/api/cart/", "POST", payload, true);
+            const responseData = await apiRequest("/api/cart/", "POST", payload, true);
 
-            alert("Added to cart!");
-            window.location.href = "cart.html";
+            // Halt immediately if apiRequest caught a 401 and returned null to handle auth routing
+            if (!responseData) return;
+
+            btn.classList.add('bg-green-500', 'hover:bg-green-600');
+            btn.classList.remove('bg-primary', 'hover:bg-primary/90');
+            btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span> Added to Cart';
+
+            setTimeout(() => {
+                window.location.href = "cart.html";
+            }, 600);
 
         } catch (err) {
             console.error("Add to cart failed", err);
+            btn.classList.add('bg-red-500', 'hover:bg-red-600');
+            btn.classList.remove('bg-primary', 'hover:bg-primary/90');
+            btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">close</span> Failed';
+            
+            setTimeout(() => {
+                btn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                btn.classList.add('bg-primary', 'hover:bg-primary/90');
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 2000);
         }
     });
 </script>

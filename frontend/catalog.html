@@ -70,71 +70,77 @@
 <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 h-screen overflow-hidden flex flex-col">
     <!-- Top Navigation Bar -->
-    <header
-        class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
-        <!-- Logo / Brand -->
-        <div class="flex items-center gap-3">
-            <div class="size-6 text-primary flex items-center justify-center">
-                <span class="material-symbols-outlined">eco</span>
-            </div>
-            <a href="index.html"
-                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
         </div>
-
-        <!-- Navigation Area -->
-        <div class="flex flex-1 justify-end gap-6 items-center">
-            <!-- Main Links -->
-            <nav class="hidden lg:flex items-center gap-6">
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="index.html">Home</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="catalog.html">Catalog</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="about.html">About</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="team.html">Team</a>
-                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors"
-                    href="contact.html">Contact</a>
-
-                <div class="relative group cursor-pointer inline-block z-[100]">
-                    <span
-                        class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More
-                        <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
-                    <div
-                        class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
-                        <a href="varieties.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
-                        <a href="care.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
-                        <a href="problems.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
-                        <a href="blog.html"
-                            class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
-                        <div class="h-px w-full bg-primary/10 my-1"></div>
-                    </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
                 </div>
-            </nav>
-
-            <!-- Action Buttons -->
-            <div class="flex items-center gap-3">
-                <a href="cart.html"
-                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Cart">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
-                </a>
-                <a href="auth.html"
-                    class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Auth/Login">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
-                </a>
-                <a href="dashboard.html"
-                    class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors"
-                    title="Dashboard">
-                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
-                </a>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+            <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
             </div>
         </div>
-    </header>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const healthBadge = document.getElementById('healthBadge');
+            const healthIcon = document.getElementById('healthIcon');
+            try {
+                const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                if (response.ok) {
+                    healthIcon.textContent = 'cloud_done';
+                    healthIcon.className = 'material-symbols-outlined text-green-500';
+                    healthBadge.title = 'System Online: All Services Operational';
+                } else {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                    healthBadge.title = 'System Degraded';
+                }
+            } catch (err) {
+                healthIcon.textContent = 'cloud_off';
+                healthIcon.className = 'material-symbols-outlined text-red-500';
+                healthBadge.title = 'System Offline: Backend API Unreachable';
+            }
+        });
+    </script>
+</header>
     <main class="flex flex-1 overflow-hidden">
         <!-- Sidebar Filters -->
         <aside
@@ -263,41 +269,108 @@
             window.location.href = `product.html?id=${productId}`;
         }
 
+        async function addToCart(event, productId) {
+            event.stopPropagation(); // Prevent opening product details
+            const btn = event.currentTarget || document.getElementById(`cartBtn-${productId}`);
+            const originalHTML = btn.innerHTML;
+            
+            // Visual feedback - Loading
+            btn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin font-medium">refresh</span>';
+            btn.disabled = true;
+
+            try {
+                // True ensures JWT is enforced, redirecting seamlessly if not logged in
+                const res = await apiRequest("/api/cart/", "POST", { product_id: Number(productId), quantity: 1 }, true);
+                if (!res) return;
+                
+                // Visual feedback - Success
+                btn.classList.add('bg-green-500');
+                btn.innerHTML = '<span class="material-symbols-outlined text-[20px] font-medium">check</span>';
+                
+                // Show floating notification pill
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-bold shadow-2xl flex items-center gap-2 z-[100] animate-bounce';
+                toast.innerHTML = '<span class="material-symbols-outlined text-primary text-[18px]">shopping_cart</span> Added to Cart';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                    btn.classList.remove('bg-green-500');
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                }, 2000);
+
+            } catch (err) {
+                console.error("Cart Failure", err);
+                btn.classList.add('bg-red-500');
+                btn.innerHTML = '<span class="material-symbols-outlined text-[20px] font-medium">close</span>';
+                setTimeout(() => {
+                    btn.classList.remove('bg-red-500');
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                }, 2000);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", async () => {
             try {
                 const products = await apiRequest("/api/products/", "GET");
 
                 const container = document.getElementById("productList");
                 container.innerHTML = "";
+                
+                // Update the static "Showing 8 premium..." text dynamically
+                const subtitle = document.querySelector("p.text-slate-500.text-sm");
+                if (subtitle && products) {
+                    subtitle.textContent = `Showing ${products.length} premium snake plant varieties`;
+                }
 
                 if (!products || products.length === 0) {
-                    container.innerHTML = '<div class="col-span-full text-center text-slate-500">No products available.</div>';
+                    container.innerHTML = '<div class="col-span-full text-center py-20 text-slate-500">No products available at the moment. Please check back later!</div>';
                     return;
                 }
 
                 products.forEach(product => {
                     const card = document.createElement("div");
-                    card.className = "group cursor-pointer";
+                    card.className = "group cursor-pointer relative flex flex-col";
                     card.onclick = () => viewProduct(product.id);
 
-                    // Fallback image if backend doesn't provide one
-                    const imageUrl = product.image_url || 'https://images.unsplash.com/photo-1599598425947-33002629eb8f?auto=format&fit=crop&q=80&w=800';
+                    // Robust fallback image handling for missing or intentionally null fields
+                    const imageUrl = (product.image_url && product.image_url.trim() !== '') 
+                                     ? product.image_url 
+                                     : 'https://images.unsplash.com/photo-1547516508-e910d368d995?auto=format&fit=crop&q=80&w=800';
 
                     card.innerHTML = `
-                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-200 mb-4">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 mb-4 shadow-sm border border-slate-100 dark:border-slate-800">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
                             style="background-image: url('${imageUrl}');">
                         </div>
-                        <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
-                            <button class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                                <span class="material-symbols-outlined text-xl">add</span>
+                        
+                        <!-- Fallback visual mask if image fails to load via CSS -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                        <!-- Tag Badges -->
+                        ${product.category ? `<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm dark:bg-slate-900/90 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200">
+                            ${product.category}
+                        </div>` : ''}
+
+                        <!-- Quick Add Hover Button -->
+                        <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-3 group-hover:translate-y-0 duration-300 z-10">
+                            <button id="cartBtn-${product.id}" class="w-12 h-12 bg-primary hover:bg-[#8eb81e] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all" aria-label="Add to cart" onclick="addToCart(event, ${product.id})">
+                                <span class="material-symbols-outlined text-[20px] font-medium pointer-events-none">add_shopping_cart</span>
                             </button>
                         </div>
                     </div>
-                    <h3 class="font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
-                        ${product.name}
-                    </h3>
-                    <p class="text-slate-500 text-sm font-medium">$${Number(product.price).toFixed(2)}</p>
+                    
+                    <div class="flex flex-col gap-1 mt-auto">
+                        <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors text-[1em]">
+                            ${product.title || "Unknown Variety"}
+                        </h3>
+                        <div class="flex items-center justify-between">
+                            <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">$${Number(product.price).toFixed(2)}</p>
+                            ${product.size ? `<span class="text-xs text-slate-400 dark:text-slate-500 font-medium">${product.size}</span>` : ''}
+                        </div>
+                    </div>
                 `;
 
                     container.appendChild(card);
@@ -306,7 +379,7 @@
             } catch (err) {
                 console.error("Failed to load products", err);
                 const container = document.getElementById("productList");
-                container.innerHTML = '<div class="col-span-full text-center text-red-500">Failed to load catalog. Please try again later.</div>';
+                container.innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-20 text-red-500/80"><span class="material-symbols-outlined text-4xl mb-4">cloud_off</span><p>Failed to load the plant catalog.</p><p class="text-sm opacity-80 mt-1">Please ensure the backend is reachable.</p></div>';
             }
         });
     </script>

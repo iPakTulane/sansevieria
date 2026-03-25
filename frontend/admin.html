@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard - Product Configuration</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        html.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 h-screen flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header class="w-full shrink-0 border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+    <!-- Logo / Brand -->
+    <div class="flex items-center gap-3">
+        <div class="size-6 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">eco</span>
+        </div>
+        <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+    </div>
+    
+    <!-- Navigation Area -->
+    <div class="flex flex-1 justify-end gap-6 items-center">
+        <!-- Main Links -->
+        <nav class="hidden lg:flex items-center gap-6">
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
+            
+            <div class="relative group cursor-pointer inline-block z-[100]">
+                <span class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 py-4">More <span class="material-symbols-outlined text-[1rem]">expand_more</span></span>
+                <div class="absolute right-0 top-full -mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-2 z-[100]">
+                    <a href="varieties.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Varieties</a>
+                    <a href="care.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Care</a>
+                    <a href="problems.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Problems</a>
+                    <a href="blog.html" class="px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/5 hover:text-primary rounded-md transition-colors">Blog</a>
+                    <div class="h-px w-full bg-primary/10 my-1"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3">
+             <a href="cart.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Cart">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">shopping_cart</span>
+            </a>
+            <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+            </a>
+            <a href="dashboard.html" class="flex flex-shrink-0 items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Dashboard">
+                <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">account_circle</span>
+            </a>
+            <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const healthBadge = document.getElementById('healthBadge');
+            const healthIcon = document.getElementById('healthIcon');
+            try {
+                const apiHost = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://localhost:8000';
+                const response = await fetch(`${apiHost}/health`, { method: "GET" });
+                if (response.ok) {
+                    healthIcon.textContent = 'cloud_done';
+                    healthIcon.className = 'material-symbols-outlined text-green-500';
+                    healthBadge.title = 'System Online: All Services Operational';
+                } else {
+                    healthIcon.textContent = 'cloud_off';
+                    healthIcon.className = 'material-symbols-outlined text-yellow-500';
+                    healthBadge.title = 'System Degraded';
+                }
+            } catch (err) {
+                healthIcon.textContent = 'cloud_off';
+                healthIcon.className = 'material-symbols-outlined text-red-500';
+                healthBadge.title = 'System Offline: Backend API Unreachable';
+            }
+        });
+    </script>
+</header>
+
+    <main class="flex-1 w-full mx-auto flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Left Pane: Data Table showing All Products -->
+        <section class="flex-1 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 flex flex-col overflow-hidden relative">
+            <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900 absolute top-0 w-full z-10 h-16">
+                <div>
+                    <h2 class="text-lg font-bold">Catalog Registry</h2>
+                    <p class="text-xs text-slate-500">Live remote SQL index.</p>
+                </div>
+                <!-- Controls -->
+                <button onclick="changeMode('create')" class="bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-1 transition-all shadow shadow-slate-900/20">
+                    <span class="material-symbols-outlined text-[16px]">add</span> New Entry
+                </button>
+            </div>
+
+            <!-- Virtual Table -->
+            <div class="flex-1 overflow-auto custom-scrollbar pt-16 p-4">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            <th class="font-medium px-4 py-3">ID</th>
+                            <th class="font-medium px-4 py-3">Product Name / Cultivar</th>
+                            <th class="font-medium px-4 py-3">Format</th>
+                            <th class="font-medium px-4 py-3">Value</th>
+                            <th class="font-medium px-4 py-3 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <tr><td colspan="5" class="py-10 text-center text-slate-400">Loading catalog pipeline...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Right Pane: The Form Panel -->
+        <aside class="w-full lg:w-[450px] bg-slate-50 dark:bg-slate-800 overflow-y-auto custom-scrollbar flex flex-col border-l border-slate-200 dark:border-slate-700">
+            <div class="p-8 pb-4 flex items-center gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
+                    <span id="formIcon" class="material-symbols-outlined text-[18px]">build</span>
+                </div>
+                <div>
+                    <h2 id="formTitle" class="text-lg font-bold">Add Configuration</h2>
+                    <p id="formSubtitle" class="text-xs text-slate-500">Instantiate a brand new database model.</p>
+                </div>
+            </div>
+
+            <form id="productForm" class="px-8 pb-8 flex flex-col gap-5">
+                <!-- Status Message -->
+                <div id="statusMessage" class="hidden p-3 rounded-md text-xs font-bold transition-all shadow-sm"></div>
+
+                <!-- Hidden Field tracking Context ID for PUT Operations -->
+                <input type="hidden" id="editContextId" value="" />
+
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Formal Title *</label>
+                    <input id="title" type="text" required placeholder="Sansevieria XYZ" class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Classification</label>
+                        <select id="category" class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white">
+                            <option value="Classic">Classic</option>
+                            <option value="Modern">Modern</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Market Price *</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">$</span>
+                            <input id="price" type="number" step="0.01" min="0" required placeholder="25.00" class="w-full pl-6 pr-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Format Standard</label>
+                        <select id="size" class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white">
+                            <option value="Mini">Miniature</option>
+                            <option value="Small">Small Frame</option>
+                            <option value="Medium" selected>Standard Medium</option>
+                            <option value="Large">Large Specimen</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Lighting Bounds</label>
+                        <select id="light_level" class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white">
+                            <option value="Low to Bright Indirect">Adaptive (Low-High)</option>
+                            <option value="Medium Indirect">Medium Constraint</option>
+                            <option value="Bright Indirect">Bright Minimum</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Asset URI Structure</label>
+                    <input id="image_url" type="url" placeholder="CDN https:// path or static /images/ pointer..." class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white" />
+                </div>
+
+                <div class="space-y-1.5 flex-1">
+                    <label class="text-xs font-bold text-slate-700 dark:text-slate-400">Botanical Description</label>
+                    <textarea id="description" rows="5" placeholder="Define cultivar characteristics..." class="w-full px-3 py-2 text-sm rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all dark:text-white resize-y"></textarea>
+                </div>
+
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-5 mt-auto flex flex-col gap-2">
+                    <button id="submitBtn" type="submit" class="w-full bg-primary hover:bg-[#8eb81e] text-white font-bold py-3 px-4 rounded transition-all shadow-md flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">publish</span> Write Record
+                    </button>
+                    <button type="button" onclick="changeMode('create')" class="w-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 font-bold py-2 px-4 rounded text-xs transition-all">
+                        Reset Builder
+                    </button>
+                </div>
+            </form>
+        </aside>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script>
+        let GLOBAL_CATALOG = [];
+        let CONTEXT_MODE = 'create'; // 'create' or 'edit'
+
+        function showStatus(msg, isSuccess) {
+            const el = document.getElementById('statusMessage');
+            el.textContent = msg;
+            el.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-200', 'bg-red-100', 'text-red-800', 'border-red-200');
+            
+            if (isSuccess) {
+                el.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-200', 'block');
+            } else {
+                el.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-200', 'block');
+            }
+            setTimeout(() => el.classList.add('hidden'), 5000);
+        }
+
+        async function flushCatalog() {
+            const tableBody = document.getElementById('inventoryTableBody');
+            try {
+                GLOBAL_CATALOG = await apiRequest('/api/products/', 'GET');
+                
+                tableBody.innerHTML = '';
+                if(GLOBAL_CATALOG.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-slate-400">Database is empty.</td></tr>';
+                    return;
+                }
+
+                GLOBAL_CATALOG.forEach(p => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-slate-100 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group';
+                    
+                    row.innerHTML = `
+                        <td class="px-4 py-3 font-mono text-xs text-slate-400">#${p.id}</td>
+                        <td class="px-4 py-3 font-semibold text-slate-900 dark:text-white flex items-center gap-3">
+                            <img src="${p.image_url || 'https://images.unsplash.com/photo-1547516508-e910d368d995?auto=format&fit=crop&q=80&w=80'}" class="size-8 object-cover rounded shadow-sm opacity-80" />
+                            ${p.title}
+                        </td>
+                        <td class="px-4 py-3 text-xs text-slate-500">
+                            <span class="bg-primary/10 text-primary px-2 py-1 rounded-sm uppercase tracking-wide font-bold">${p.category || 'N/A'}</span>
+                        </td>
+                        <td class="px-4 py-3 font-mono text-sm text-slate-600 dark:text-slate-300">$${Number(p.price).toFixed(2)}</td>
+                        <td class="px-4 py-3 text-right space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="editProduct(${p.id})" class="p-1.5 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded transition-colors" title="Edit Properties">
+                                <span class="material-symbols-outlined text-[18px]">edit_note</span>
+                            </button>
+                            <button onclick="deleteProduct(${p.id})" class="p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition-colors" title="Purge Record">
+                                <span class="material-symbols-outlined text-[18px]">delete_forever</span>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+            } catch(e) {
+                console.error("Failed fetching table:", e);
+                tableBody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-red-500">Error connecting to SQL cluster.</td></tr>';
+            }
+        }
+
+        // Transforms Form Layout based on Interaction State
+        function changeMode(mode, targetProduct = null) {
+            CONTEXT_MODE = mode;
+            const form = document.getElementById('productForm');
+            const editIdTracking = document.getElementById('editContextId');
+            
+            const btn = document.getElementById('submitBtn');
+            const title = document.getElementById('formTitle');
+            const subtitle = document.getElementById('formSubtitle');
+            const icon = document.getElementById('formIcon');
+
+            if (mode === 'create') {
+                form.reset();
+                editIdTracking.value = "";
+                
+                title.textContent = "Add Configuration";
+                subtitle.textContent = "Instantiate a brand new database model.";
+                icon.textContent = "build";
+                btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">publish</span> Write Record`;
+                btn.className = "w-full bg-primary hover:bg-[#8eb81e] text-white font-bold py-3 px-4 rounded transition-all shadow-md flex items-center justify-center gap-2";
+            } 
+            else if (mode === 'edit' && targetProduct) {
+                editIdTracking.value = targetProduct.id;
+                document.getElementById('title').value = targetProduct.title;
+                document.getElementById('price').value = targetProduct.price;
+                document.getElementById('size').value = targetProduct.size;
+                
+                // Mappings need parsing fallback depending on standard or custom keys
+                Array.from(document.getElementById('category').options).forEach(o => { if(o.value === targetProduct.category) o.selected = true });
+                Array.from(document.getElementById('light_level').options).forEach(o => { if(o.value === targetProduct.light_level) o.selected = true });
+                
+                document.getElementById('image_url').value = targetProduct.image_url || "";
+                document.getElementById('description').value = targetProduct.description || "";
+
+                title.textContent = "Edit Properties";
+                subtitle.textContent = `Modifying exact schema structure for ID #${targetProduct.id}`;
+                icon.textContent = "edit";
+                btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">sync</span> Commit Update`;
+                btn.className = "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition-all shadow-md flex items-center justify-center gap-2";
+            }
+        }
+
+        window.editProduct = (id) => {
+            const p = GLOBAL_CATALOG.find(i => i.id === id);
+            if(p) changeMode('edit', p);
+        };
+
+        window.deleteProduct = async (id) => {
+            if(!confirm(`WARNING: Are you absolutely sure you want to purge Product ID #${id} from the live index? This cascades globally.`)) return;
+
+            try {
+                await apiRequest(`/api/products/${id}`, 'DELETE', null, true);
+                showStatus(`Item #${id} perfectly annihilated from architecture.`, true);
+                if(CONTEXT_MODE === 'edit' && document.getElementById('editContextId').value == id) {
+                    changeMode('create'); // Fallback active view visually
+                }
+                flushCatalog(); // Dynamically rewrite local rendering Table visually
+            } catch(e) {
+                showStatus(`Destruction failed: ${e.message}`, false);
+            }
+        };
+
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalHTML = btn.innerHTML;
+            
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">refresh</span> Translating...';
+            btn.disabled = true;
+
+            const payload = {
+                title: document.getElementById('title').value.trim(),
+                price: parseFloat(document.getElementById('price').value),
+                category: document.getElementById('category').value,
+                size: document.getElementById('size').value,
+                light_level: document.getElementById('light_level').value,
+                image_url: document.getElementById('image_url').value.trim() || null,
+                description: document.getElementById('description').value.trim() || null
+            };
+
+            try {
+                if (CONTEXT_MODE === 'create') {
+                    await apiRequest('/api/products/', 'POST', payload, true);
+                    showStatus('Registry accepted payload. Successfully added.', true);
+                    changeMode('create');
+                } else if (CONTEXT_MODE === 'edit') {
+                    const trackingId = document.getElementById('editContextId').value;
+                    await apiRequest(`/api/products/${trackingId}`, 'PATCH', payload, true);
+                    showStatus(`Schema modifications permanently synchronized on ID #${trackingId}.`, true);
+                }
+                
+                // Immediately rebuild the local layout dynamically showing effect
+                flushCatalog();
+
+            } catch (err) {
+                showStatus(err.message || 'Fatal synchronization failure.', false);
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        });
+
+        // Initialize Native Lifecycle
+        document.addEventListener('DOMContentLoaded', flushCatalog);
+    </script>
+</body>
+</html>
