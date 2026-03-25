@@ -207,45 +207,13 @@
             <!-- Right Side: Order Summary -->
             <div class="bg-primary/5 dark:bg-primary/10 p-8 lg:p-12 flex flex-col h-full border-l border-primary/10">
                 <h2 class="text-xl font-bold mb-8">Order Summary</h2>
-                <div class="flex-grow space-y-6">
-                    <!-- Item 1 -->
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="size-20 bg-white dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0 border border-primary/10">
-                            <img alt="Sansevieria Plant" class="w-full h-full object-cover"
-                                data-alt="Sansevieria Trifasciata Laurentii in white ceramic pot"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnmmZ2x6RZcyrt3vyKdZ49Tnqt93PfFjbpVYCMYHLj7Yfe11Obbz_DfI2TMklFimdXa9PpygQ3-HpCM5LTEq9re8u1oAbaimxXt2WaTiOpqgq5ck5aWrnZA7ZePmnfjbJvwIz_GwvcazB3CnsOuSjRYzRo9fHMM-npuQu9wWTOdFV1ST470KpbiYzclFFYccXN-qFK9wjiqw8XfmK9YZ5WLLPrfAmxW0dBXGsZhQm2ObdCRPJ4_7a10sLt8iP_KcSlt1rTBarVdDTt" />
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="font-semibold text-slate-800 dark:text-slate-100">Sansevieria Laurentii</h4>
-                            <p class="text-sm text-slate-500">Large • White Ceramic Pot</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="font-bold text-slate-900 dark:text-slate-100">$45.00</span>
-                        </div>
-                    </div>
-                    <!-- Item 2 (Optional/Extra) -->
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="size-20 bg-white dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0 border border-primary/10">
-                            <img alt="Terracotta Saucer" class="w-full h-full object-cover"
-                                data-alt="Premium clay saucer for plant pots"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxC4t78ZvPW3vlxTqEHeQNbSEmK9C7vdMqSTyOomkGX77kGYPZmCJVF72f6xe7syqiQTPhelvIzBt_lNGap15qlueSnusCF14Z_Zg23-J5aHhRjn9eRd2tdgc3WNyKwq8cmSxf-v219CYV4dh4Owbwv7RcIlHt623ee8-eGkghXA1e3xfB7e4z5srqtTWBVcZn0Iz8RHUbNIpTSNIjT9bOVeNNvg7G41iq3PovF3b2tWnLwbwVKKj76rkORDOUg_vwRPPsYz6rU6KS" />
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="font-semibold text-slate-800 dark:text-slate-100">Premium Clay Saucer</h4>
-                            <p class="text-sm text-slate-500">Medium • Natural</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="font-bold text-slate-900 dark:text-slate-100">$12.00</span>
-                        </div>
-                    </div>
-                </div>
+                <div id="orderItems" class="flex-grow space-y-6"></div>
+                <div id="orderEmpty" class="hidden text-sm text-slate-500 text-center py-6">Your cart is empty.</div>
                 <!-- Price Totals -->
                 <div class="border-t border-primary/20 pt-6 mt-6 space-y-3">
                     <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
                         <span>Subtotal</span>
-                        <span>$57.00</span>
+                        <span id="summarySubtotal">$0.00</span>
                     </div>
                     <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
                         <span>Shipping</span>
@@ -253,11 +221,11 @@
                     </div>
                     <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
                         <span>Tax</span>
-                        <span>$4.56</span>
+                        <span id="summaryTax">$0.00</span>
                     </div>
                     <div class="flex justify-between text-xl font-bold text-slate-900 dark:text-slate-100 pt-2">
                         <span>Total</span>
-                        <span>$61.56</span>
+                        <span id="summaryTotal">$0.00</span>
                     </div>
                 </div>
                 <button id="completePurchaseBtn"
@@ -265,6 +233,7 @@
                     Complete Purchase
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
+                <div id="checkoutStatus" class="mt-4 text-sm text-center text-slate-500" aria-live="polite"></div>
                 <p class="text-center text-[10px] text-slate-400 mt-4 px-6 leading-relaxed">
                     By clicking "Complete Purchase", you agree to our Terms of Service and Privacy Policy.
                 </p>
@@ -289,8 +258,77 @@
     <!-- API Integration Script -->
     <script src="js/api.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadCheckoutSummary();
+        });
+
+        async function loadCheckoutSummary() {
+            const itemsEl = document.getElementById("orderItems");
+            const emptyEl = document.getElementById("orderEmpty");
+            const subtotalEl = document.getElementById("summarySubtotal");
+            const taxEl = document.getElementById("summaryTax");
+            const totalEl = document.getElementById("summaryTotal");
+            const statusEl = document.getElementById("checkoutStatus");
+
+            itemsEl.innerHTML = "";
+            emptyEl.classList.add("hidden");
+            subtotalEl.textContent = "$0.00";
+            taxEl.textContent = "$0.00";
+            totalEl.textContent = "$0.00";
+
+            try {
+                const cart = await apiRequest("/api/cart/", "GET", null, true);
+
+                if (!cart || !cart.items || cart.items.length === 0) {
+                    emptyEl.classList.remove("hidden");
+                    return;
+                }
+
+                let subtotal = 0;
+                cart.items.forEach(item => {
+                    const title = item.product?.title || "Sansevieria Plant";
+                    const price = Number(item.product?.price || 0);
+                    const quantity = Number(item.quantity || 0);
+                    const imageUrl = item.product?.image_url || "https://images.unsplash.com/photo-1599598425947-33002629eb8f?auto=format&fit=crop&q=80&w=800";
+                    const lineTotal = price * quantity;
+                    subtotal += lineTotal;
+
+                    const row = document.createElement("div");
+                    row.className = "flex items-center gap-4";
+                    row.innerHTML = `
+                        <div class="size-20 bg-white dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0 border border-primary/10">
+                            <img alt="${title}" class="w-full h-full object-cover" src="${imageUrl}" />
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-slate-800 dark:text-slate-100">${title}</h4>
+                            <p class="text-sm text-slate-500">Qty: ${quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-slate-900 dark:text-slate-100">$${lineTotal.toFixed(2)}</span>
+                        </div>
+                    `;
+                    itemsEl.appendChild(row);
+                });
+
+                const tax = 0;
+                const total = subtotal + tax;
+                subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+                taxEl.textContent = `$${tax.toFixed(2)}`;
+                totalEl.textContent = `$${total.toFixed(2)}`;
+            } catch (err) {
+                console.error("Failed to load checkout summary", err);
+                if (statusEl) {
+                    statusEl.textContent = "Could not load order summary. Please refresh the page.";
+                    statusEl.className = "mt-4 text-sm text-center text-red-500 font-medium";
+                }
+            }
+        }
+
         document.getElementById("completePurchaseBtn").addEventListener("click", async (e) => {
             e.preventDefault();
+            const statusEl = document.getElementById("checkoutStatus");
+            statusEl.textContent = "";
+            statusEl.className = "mt-4 text-sm text-center text-slate-500";
 
             // Part 3: Basic empty field validation
             const requiredFields = ["fullName", "shippingAddress", "city", "postalCode", "cardNumber", "expiryDate", "cvv"];
@@ -306,7 +344,8 @@
             });
 
             if (!isValid) {
-                alert("Please fill in all required fields to complete checkout.");
+                statusEl.textContent = "Please fill in all required fields to complete checkout.";
+                statusEl.className = "mt-4 text-sm text-center text-red-500 font-medium";
                 return;
             }
 
@@ -314,7 +353,9 @@
             const btn = document.getElementById("completePurchaseBtn");
             const originalText = btn.innerHTML;
             btn.disabled = true;
+            btn.classList.add("opacity-70", "cursor-not-allowed");
             btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Processing...';
+            statusEl.textContent = "Submitting your order securely...";
 
             const payload = {
                 full_name: document.getElementById("fullName").value,
@@ -331,21 +372,29 @@
                 const result = await apiRequest("/api/checkout/", "POST", payload, true);
 
                 // Save order_id for confirmation page
-                localStorage.setItem("last_order_id", result.order_id);
+                if (result && result.order_id) {
+                    localStorage.setItem("last_order_id", result.order_id);
+                }
 
                 // Success!
                 btn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span> Order Placed!';
                 btn.classList.add("bg-green-500", "text-white");
                 btn.classList.remove("bg-primary");
+                statusEl.textContent = "Order placed successfully. Redirecting...";
 
                 setTimeout(() => {
-                    window.location.href = "confirmation.html";
+                    const orderId = result && result.order_id ? encodeURIComponent(result.order_id) : "";
+                    const nextUrl = orderId ? `confirmation.html?order_id=${orderId}` : "confirmation.html";
+                    window.location.href = nextUrl;
                 }, 800);
 
             } catch (err) {
                 console.error("Checkout failed", err);
                 btn.disabled = false;
                 btn.innerHTML = originalText;
+                btn.classList.remove("opacity-70", "cursor-not-allowed");
+                statusEl.textContent = "Checkout failed. Please verify your details and try again.";
+                statusEl.className = "mt-4 text-sm text-center text-red-500 font-medium";
                 // An alert will natively trigger via apiRequest so we just revert UI state here
             }
         });

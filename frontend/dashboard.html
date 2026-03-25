@@ -225,50 +225,10 @@
 <th class="pb-4 font-semibold text-right">Action</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-slate-50 dark:divide-slate-800">
-<tr class="group hover:bg-background-light dark:hover:bg-slate-800/50 transition-colors">
-<td class="py-4 text-sm font-medium">#ORD-7721</td>
-<td class="py-4 text-sm text-slate-500">Oct 24, 2023</td>
-<td class="py-4 text-sm">Snake Plant (M)</td>
-<td class="py-4">
-<span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
-                                                Shipped
-                                            </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-xs font-bold text-slate-400 hover:text-primary">Details</button>
-</td>
-</tr>
-<tr class="group hover:bg-background-light dark:hover:bg-slate-800/50 transition-colors">
-<td class="py-4 text-sm font-medium">#ORD-7604</td>
-<td class="py-4 text-sm text-slate-500">Oct 20, 2023</td>
-<td class="py-4 text-sm">Pothos x2</td>
-<td class="py-4">
-<span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500 dark:bg-slate-800">
-                                                Delivered
-                                            </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-xs font-bold text-slate-400 hover:text-primary">Details</button>
-</td>
-</tr>
-<tr class="group hover:bg-background-light dark:hover:bg-slate-800/50 transition-colors">
-<td class="py-4 text-sm font-medium">#ORD-7432</td>
-<td class="py-4 text-sm text-slate-500">Oct 12, 2023</td>
-<td class="py-4 text-sm">Ceramic Pots</td>
-<td class="py-4">
-<span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500 dark:bg-slate-800">
-                                                Delivered
-                                            </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-xs font-bold text-slate-400 hover:text-primary">Details</button>
-</td>
-</tr>
-</tbody>
+<tbody id="ordersTableBody" class="divide-y divide-slate-50 dark:divide-slate-800"></tbody>
 </table>
 <!-- Empty State Example (hidden) -->
-<div class="hidden h-full flex-col items-center justify-center py-10">
+<div id="ordersEmptyState" class="hidden h-full flex-col items-center justify-center py-10">
 <div class="mb-4 flex size-20 items-center justify-center rounded-full bg-primary/10 text-primary">
 <span class="material-symbols-outlined text-4xl">shopping_basket</span>
 </div>
@@ -282,4 +242,65 @@
 </main>
 </div>
 </div>
+</div>
+<script src="js/api.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        loadOrders();
+    });
+
+    function formatDate(value) {
+        if (!value) return "—";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "—";
+        return date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+    }
+
+    function badgeClass(status) {
+        const normalized = String(status || "").toUpperCase();
+        if (normalized === "COMPLETED" || normalized === "DELIVERED" || normalized === "SHIPPED") {
+            return "inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary";
+        }
+        if (normalized === "FAILED") {
+            return "inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-bold text-red-600 dark:bg-red-950/40";
+        }
+        return "inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500 dark:bg-slate-800";
+    }
+
+    async function loadOrders() {
+        const tableBody = document.getElementById("ordersTableBody");
+        const emptyState = document.getElementById("ordersEmptyState");
+        tableBody.innerHTML = "";
+        emptyState.classList.add("hidden");
+
+        try {
+            const orders = await apiRequest("/api/orders/", "GET", null, true);
+
+            if (!orders || orders.length === 0) {
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            orders.forEach(order => {
+                const row = document.createElement("tr");
+                row.className = "group hover:bg-background-light dark:hover:bg-slate-800/50 transition-colors";
+                const itemCount = Array.isArray(order.items) ? order.items.reduce((sum, item) => sum + (item.quantity || 0), 0) : 0;
+                const totalAmount = Number(order.total_amount || 0).toFixed(2);
+                row.innerHTML = `
+                    <td class="py-4 text-sm font-medium">#${order.order_id || "—"}</td>
+                    <td class="py-4 text-sm text-slate-500">${formatDate(order.created_at)}</td>
+                    <td class="py-4 text-sm">${itemCount} item${itemCount === 1 ? "" : "s"}</td>
+                    <td class="py-4">
+                        <span class="${badgeClass(order.status)}">${order.status || "PENDING"}</span>
+                    </td>
+                    <td class="py-4 text-right text-sm font-semibold">$${totalAmount}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (err) {
+            console.error("Failed to load orders", err);
+            emptyState.classList.remove("hidden");
+        }
+    }
+</script>
 </body></html>
