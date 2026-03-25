@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.routers import auth_router, product_router, cart_router, order_router
 
-# Optionally create database tables (Alembic is preferred, but this creates them if they don't exist)
-Base.metadata.create_all(bind=engine)
+# Create database tables (now managed by Alembic)
+# Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Sansevieria Backend API",

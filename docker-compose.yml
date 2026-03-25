@@ -10,6 +10,21 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-sansevieria}
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sansevieria-net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@sansevieria.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
     networks:
       - sansevieria-net
 
@@ -102,3 +117,6 @@ services:
 networks:
   sansevieria-net:
     driver: bridge
+
+volumes:
+  postgres_data:
