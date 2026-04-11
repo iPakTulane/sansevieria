@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sansevieria - Sales Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <header class="w-full border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+        <div class="flex items-center gap-3">
+            <div class="size-6 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined">eco</span>
+            </div>
+            <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+        </div>
+
+        <div class="flex flex-1 justify-end gap-6 items-center">
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="admin.html">Admin</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                </a>
+                <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                    <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 py-8">
+        <div class="mb-6">
+            <h1 class="text-3xl font-black tracking-tight">Sales Dashboard</h1>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Live analytics powered by backend reporting views.</p>
+        </div>
+
+        <div id="dashboardLoading" class="mb-6 rounded-xl border border-primary/20 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+            Loading sales analytics...
+        </div>
+
+        <div id="dashboardError" class="hidden mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"></div>
+
+        <section id="kpiSection" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-8 hidden">
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Total Revenue</p>
+                <p id="kpiTotalRevenue" class="mt-2 text-2xl font-black">$0.00</p>
+            </article>
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Completed Orders</p>
+                <p id="kpiCompletedOrders" class="mt-2 text-2xl font-black">0</p>
+            </article>
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Pending Orders</p>
+                <p id="kpiPendingOrders" class="mt-2 text-2xl font-black">0</p>
+            </article>
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Failed Orders</p>
+                <p id="kpiFailedOrders" class="mt-2 text-2xl font-black">0</p>
+            </article>
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Average Order Value</p>
+                <p id="kpiAvgOrderValue" class="mt-2 text-2xl font-black">$0.00</p>
+            </article>
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Total Units Sold</p>
+                <p id="kpiTotalUnitsSold" class="mt-2 text-2xl font-black">0</p>
+            </article>
+        </section>
+
+        <section id="trendSection" class="hidden rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm">
+            <div class="mb-4">
+                <h2 class="text-lg font-bold">Sales Trend</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Revenue and order count by day.</p>
+            </div>
+            <div id="trendEmptyState" class="hidden rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-500">
+                No sales trend data available.
+            </div>
+            <div id="trendChartWrap" class="h-[360px]">
+                <canvas id="salesTrendChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/sales_dashboard.js"></script>
+</body>
+
+</html>
