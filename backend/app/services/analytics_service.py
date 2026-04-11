@@ -19,6 +19,14 @@ def _to_int(value) -> int:
     return int(value)
 
 
+def _to_non_negative_float(value) -> float:
+    return max(0.0, _to_float(value))
+
+
+def _to_non_negative_int(value) -> int:
+    return max(0, _to_int(value))
+
+
 def get_sales_summary(db: Session) -> SalesSummaryResponse:
     row = db.execute(
         text(
@@ -46,12 +54,12 @@ def get_sales_summary(db: Session) -> SalesSummaryResponse:
         )
 
     return SalesSummaryResponse(
-        total_revenue=_to_float(row["total_revenue"]),
-        completed_orders=_to_int(row["completed_orders"]),
-        pending_orders=_to_int(row["pending_orders"]),
-        failed_orders=_to_int(row["failed_orders"]),
-        avg_order_value=_to_float(row["avg_order_value"]),
-        total_units_sold=_to_int(row["total_units_sold"]),
+        total_revenue=_to_non_negative_float(row["total_revenue"]),
+        completed_orders=_to_non_negative_int(row["completed_orders"]),
+        pending_orders=_to_non_negative_int(row["pending_orders"]),
+        failed_orders=_to_non_negative_int(row["failed_orders"]),
+        avg_order_value=_to_non_negative_float(row["avg_order_value"]),
+        total_units_sold=_to_non_negative_int(row["total_units_sold"]),
     )
 
 
@@ -73,9 +81,9 @@ def get_sales_trend(db: Session) -> list[SalesTrendItem]:
     return [
         SalesTrendItem(
             order_date=row["order_date"],
-            orders_count=_to_int(row["orders_count"]),
-            units_sold=_to_int(row["units_sold"]),
-            revenue=_to_float(row["revenue"]),
+            orders_count=_to_non_negative_int(row["orders_count"]),
+            units_sold=_to_non_negative_int(row["units_sold"]),
+            revenue=_to_non_negative_float(row["revenue"]),
         )
         for row in rows
     ]
@@ -100,12 +108,12 @@ def get_product_performance(db: Session) -> list[ProductPerformanceItem]:
 
     return [
         ProductPerformanceItem(
-            product_id=_to_int(row["product_id"]),
-            product_title=row["product_title"],
+            product_id=_to_non_negative_int(row["product_id"]),
+            product_title=(row["product_title"] or "Unknown Product"),
             product_category=row["product_category"],
-            units_sold=_to_int(row["units_sold"]),
-            revenue=_to_float(row["revenue"]),
-            orders_count=_to_int(row["orders_count"]),
+            units_sold=_to_non_negative_int(row["units_sold"]),
+            revenue=_to_non_negative_float(row["revenue"]),
+            orders_count=_to_non_negative_int(row["orders_count"]),
         )
         for row in rows
     ]

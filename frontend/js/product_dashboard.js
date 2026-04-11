@@ -1,6 +1,14 @@
 let topProductsChart = null;
 let isRefreshing = false;
 
+function requireAuthToken() {
+    if (typeof getToken !== "function") return true;
+    const token = getToken();
+    if (token) return true;
+    window.location.href = "auth.html";
+    return false;
+}
+
 function formatCurrency(value) {
     const number = Number(value || 0);
     return new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(number);
@@ -44,6 +52,26 @@ function setLastUpdatedNow() {
     if (!text) return;
     const now = new Date();
     text.textContent = `Last updated: ${now.toLocaleString()}`;
+}
+
+function normalizeProductItems(items) {
+    const source = Array.isArray(items) ? items : [];
+    return source
+        .filter((item) =>
+            item &&
+            Number.isFinite(Number(item.product_id)) &&
+            Number.isFinite(Number(item.units_sold)) &&
+            Number.isFinite(Number(item.revenue)) &&
+            Number.isFinite(Number(item.orders_count))
+        )
+        .map((item) => ({
+            product_id: Number(item.product_id),
+            product_title: item.product_title || "Unknown Product",
+            product_category: item.product_category || "Uncategorized",
+            units_sold: Math.max(0, Number(item.units_sold)),
+            revenue: Math.max(0, Number(item.revenue)),
+            orders_count: Math.max(0, Number(item.orders_count)),
+        }));
 }
 
 function renderRankList(targetId, items) {
@@ -192,7 +220,7 @@ async function loadProductDashboard() {
         const response = await apiRequest("/api/analytics/products/performance", "GET", null, true);
         if (!response) return;
 
-        const items = Array.isArray(response.items) ? response.items.slice() : [];
+        const items = normalizeProductItems(response.items);
         items.sort((a, b) => Number(b.revenue || 0) - Number(a.revenue || 0));
 
         const section = document.getElementById("topBottomSection");
@@ -215,6 +243,7 @@ async function loadProductDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    if (!requireAuthToken()) return;
     const refreshBtn = document.getElementById("refreshAnalyticsBtn");
     if (refreshBtn) {
         refreshBtn.addEventListener("click", () => {

@@ -30,6 +30,16 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise credentials_exception
     return user
 
+
+def require_analytics_user(current_user: User = Depends(get_current_user)):
+    allowed_emails = settings.analytics_admin_emails_set
+    if allowed_emails and current_user.email.lower() not in allowed_emails:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have permission to access analytics dashboards",
+        )
+    return current_user
+
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, email=user.email)

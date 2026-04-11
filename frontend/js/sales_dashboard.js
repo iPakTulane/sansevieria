@@ -1,6 +1,14 @@
 let salesTrendChart = null;
 let isRefreshing = false;
 
+function requireAuthToken() {
+    if (typeof getToken !== "function") return true;
+    const token = getToken();
+    if (token) return true;
+    window.location.href = "auth.html";
+    return false;
+}
+
 function formatCurrency(value) {
     const number = Number(value || 0);
     return new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(number);
@@ -53,6 +61,37 @@ function setLastUpdatedNow() {
     if (!text) return;
     const now = new Date();
     text.textContent = `Last updated: ${now.toLocaleString()}`;
+}
+
+function validateSalesSummary(summary) {
+    if (!summary || typeof summary !== "object") return false;
+    const required = [
+        "total_revenue",
+        "completed_orders",
+        "pending_orders",
+        "failed_orders",
+        "avg_order_value",
+        "total_units_sold",
+    ];
+    return required.every((key) => Number.isFinite(Number(summary[key])));
+}
+
+function normalizeTrendItems(items) {
+    const source = Array.isArray(items) ? items : [];
+    return source
+        .filter((row) =>
+            row &&
+            row.order_date &&
+            Number.isFinite(Number(row.orders_count)) &&
+            Number.isFinite(Number(row.units_sold)) &&
+            Number.isFinite(Number(row.revenue))
+        )
+        .map((row) => ({
+            order_date: row.order_date,
+            orders_count: Math.max(0, Number(row.orders_count)),
+            units_sold: Math.max(0, Number(row.units_sold)),
+            revenue: Math.max(0, Number(row.revenue)),
+        }));
 }
 
 function renderSummary(summary) {
@@ -180,9 +219,13 @@ async function loadSalesDashboard() {
         ]);
 
         if (!summary || !trend) return;
+        if (!validateSalesSummary(summary)) {
+            throw new Error("Invalid sales summary response");
+        }
+        const trendItems = normalizeTrendItems(trend.items);
 
         renderSummary(summary);
-        renderTrend(trend.items);
+        renderTrend(trendItems);
         setLastUpdatedNow();
     } catch (error) {
         showError(error?.message || "Analytics service is unavailable.");
@@ -193,6 +236,7 @@ async function loadSalesDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    if (!requireAuthToken()) return;
     const refreshBtn = document.getElementById("refreshAnalyticsBtn");
     if (refreshBtn) {
         refreshBtn.addEventListener("click", () => {
