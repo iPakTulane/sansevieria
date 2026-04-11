@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sansevieria - Product Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a3cb2a",
+                        "background-light": "#f7f8f6",
+                        "background-dark": "#1c2012",
+                    },
+                    fontFamily: {
+                        "display": ["Arial", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <header class="w-full border-b border-solid border-primary/10 px-6 lg:px-10 py-3 md:h-16 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+        <div class="flex items-center gap-3">
+            <div class="size-6 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined">eco</span>
+            </div>
+            <a href="index.html" class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">Sansevieria</a>
+        </div>
+
+        <div class="flex flex-1 justify-end gap-6 items-center">
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+                <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="admin.html">Admin</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="auth.html" class="flex items-center justify-center p-2 rounded-full hover:bg-primary/10 transition-colors" title="Auth/Login">
+                    <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">login</span>
+                </a>
+                <div id="healthBadge" class="flex items-center justify-center p-2 rounded-full transition-colors cursor-help bg-slate-100 dark:bg-slate-800" title="Checking Backend Connection...">
+                    <span id="healthIcon" class="material-symbols-outlined text-slate-400">cloud_sync</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 py-8">
+        <div class="mb-6">
+            <h1 class="text-3xl font-black tracking-tight">Product Dashboard</h1>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Live product performance analytics from the backend reporting layer.</p>
+        </div>
+
+        <div id="dashboardLoading" class="mb-6 rounded-xl border border-primary/20 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
+            Loading product analytics...
+        </div>
+
+        <div id="dashboardError" class="hidden mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"></div>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 hidden" id="topBottomSection">
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                <h2 class="text-lg font-bold mb-1">Top Performers</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Products with highest revenue.</p>
+                <div id="topProductsList" class="space-y-3"></div>
+            </article>
+
+            <article class="rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                <h2 class="text-lg font-bold mb-1">Bottom Performers</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Lowest or zero-selling products by revenue.</p>
+                <div id="bottomProductsList" class="space-y-3"></div>
+            </article>
+        </section>
+
+        <section id="chartSection" class="hidden rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm mb-8">
+            <div class="mb-4">
+                <h2 class="text-lg font-bold">Top Products by Revenue</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Quick comparison of best-performing products.</p>
+            </div>
+            <div id="chartEmptyState" class="hidden rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-500">
+                No product chart data available.
+            </div>
+            <div id="chartWrap" class="h-[360px]">
+                <canvas id="topProductsChart"></canvas>
+            </div>
+        </section>
+
+        <section id="tableSection" class="hidden rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm">
+            <div class="mb-4">
+                <h2 class="text-lg font-bold">All Product Performance</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Sorted by revenue (descending).</p>
+            </div>
+            <div id="tableEmptyState" class="hidden rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-500">
+                No product analytics data available.
+            </div>
+            <div id="tableWrap" class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="border-b border-slate-100 text-xs font-bold uppercase tracking-wider text-slate-400 dark:border-slate-800">
+                        <tr>
+                            <th class="pb-4 font-semibold">Product</th>
+                            <th class="pb-4 font-semibold">Category</th>
+                            <th class="pb-4 font-semibold text-right">Units Sold</th>
+                            <th class="pb-4 font-semibold text-right">Orders</th>
+                            <th class="pb-4 font-semibold text-right">Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="performanceTableBody" class="divide-y divide-slate-50 dark:divide-slate-800"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/product_dashboard.js"></script>
+</body>
+
+</html>
