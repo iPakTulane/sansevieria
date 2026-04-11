@@ -52,6 +52,8 @@
         <nav class="hidden lg:flex items-center gap-6">
             <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
             <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="catalog.html">Catalog</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="sales_dashboard.html">Sales Dashboard</a>
+            <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="product_dashboard.html">Product Dashboard</a>
             <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
             <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="team.html">Team</a>
             <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="contact.html">Contact</a>
@@ -145,6 +147,21 @@
 
         <!-- Right Pane: The Form Panel -->
         <aside class="w-full lg:w-[450px] bg-slate-50 dark:bg-slate-800 overflow-y-auto custom-scrollbar flex flex-col border-l border-slate-200 dark:border-slate-700">
+            <div class="px-8 pt-8 pb-2">
+                <div class="rounded-xl border border-primary/15 bg-white dark:bg-slate-900 p-4">
+                    <p class="text-xs font-bold uppercase tracking-wider text-primary mb-3">Analytics</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <a href="sales_dashboard.html" class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 text-xs font-bold transition-colors">
+                            <span class="material-symbols-outlined text-[16px]">query_stats</span>
+                            <span>Sales Dashboard</span>
+                        </a>
+                        <a href="product_dashboard.html" class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 text-xs font-bold transition-colors">
+                            <span class="material-symbols-outlined text-[16px]">leaderboard</span>
+                            <span>Product Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="p-8 pb-4 flex items-center gap-3">
                 <div class="flex-shrink-0 size-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center">
                     <span id="formIcon" class="material-symbols-outlined text-[18px]">build</span>
