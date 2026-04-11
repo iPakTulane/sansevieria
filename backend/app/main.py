@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
 from app.database import engine, Base
 from app.config import settings
 from app.routers import auth_router, product_router, cart_router, order_router, analytics_router
+from app.utils.logger import get_logger
 
 # Create database tables (now managed by Alembic)
 # Base.metadata.create_all(bind=engine)
@@ -12,6 +14,7 @@ app = FastAPI(
     description="Foundational backend for Sansevieria Web Application",
     version="1.0.0"
 )
+logger = get_logger("API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,8 +35,22 @@ from app.messaging.rabbitmq import setup_queues
 
 @app.on_event("startup")
 def startup_event():
+    logger.info(
+        "system",
+        "startup",
+        "Application startup initiated",
+        allowed_origins=",".join(settings.allowed_origins_list),
+    )
     setup_queues()
+    logger.info("system", "startup", "Application startup completed")
 
 @app.get("/health")
-def health_check():
+def health_check(request: Request):
+    logger.info(
+        "health",
+        "health",
+        "Health check called",
+        path=str(request.url.path),
+        client_host=(request.client.host if request.client else "unknown"),
+    )
     return {"status": "ok"}

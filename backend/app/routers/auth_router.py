@@ -9,9 +9,11 @@ from app.config import settings
 from datetime import timedelta
 from jose import JWTError, jwt
 from app.models.user import User
+from app.utils.logger import get_logger
 
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+logger = get_logger("AUTH")
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
@@ -34,6 +36,13 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 def require_analytics_user(current_user: User = Depends(get_current_user)):
     allowed_emails = settings.analytics_admin_emails_set
     if allowed_emails and current_user.email.lower() not in allowed_emails:
+        logger.warning(
+            "auth",
+            "analytics_access_denied",
+            "Analytics access denied",
+            user_id=current_user.id,
+            user_email=current_user.email,
+        )
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have permission to access analytics dashboards",

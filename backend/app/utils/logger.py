@@ -14,7 +14,13 @@ class StructuredLogger:
 
     def _log(self, level, correlation_id, order_id, message, **kwargs):
         extras = " ".join([f"{k}={v}" for k, v in kwargs.items()])
-        formatted = f"[{level}] service={self.service_name} correlation_id={correlation_id} order_id={order_id} message=\"{message}\" {extras}"
+        timestamp = datetime.utcnow().isoformat()
+        formatted = (
+            f"[{level}] service={self.service_name} timestamp={timestamp} "
+            f"correlation_id={correlation_id} order_id={order_id} message=\"{message}\""
+        )
+        if extras:
+            formatted = f"{formatted} {extras}"
         if level == "ERROR":
             self.logger.error(formatted)
         elif level == "WARNING":
@@ -27,6 +33,9 @@ class StructuredLogger:
 
     def error(self, correlation_id, order_id, message, **kwargs):
         self._log("ERROR", correlation_id, order_id, message, **kwargs)
+
+    def warning(self, correlation_id, order_id, message, **kwargs):
+        self._log("WARNING", correlation_id, order_id, message, **kwargs)
 
 def get_logger(service_name: str):
     return StructuredLogger(service_name)
