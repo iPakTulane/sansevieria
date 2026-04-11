@@ -1,4 +1,5 @@
 let salesTrendChart = null;
+let isRefreshing = false;
 
 function formatCurrency(value) {
     const number = Number(value || 0);
@@ -33,12 +34,25 @@ function hideError() {
 
 function setLoading(isLoading) {
     const loading = document.getElementById("dashboardLoading");
+    const refreshBtn = document.getElementById("refreshAnalyticsBtn");
     if (!loading) return;
     if (isLoading) {
         loading.classList.remove("hidden");
     } else {
         loading.classList.add("hidden");
     }
+    if (refreshBtn) {
+        refreshBtn.disabled = isLoading;
+        refreshBtn.classList.toggle("opacity-60", isLoading);
+        refreshBtn.classList.toggle("cursor-not-allowed", isLoading);
+    }
+}
+
+function setLastUpdatedNow() {
+    const text = document.getElementById("lastUpdatedText");
+    if (!text) return;
+    const now = new Date();
+    text.textContent = `Last updated: ${now.toLocaleString()}`;
 }
 
 function renderSummary(summary) {
@@ -154,6 +168,8 @@ async function updateHealthBadge() {
 }
 
 async function loadSalesDashboard() {
+    if (isRefreshing) return;
+    isRefreshing = true;
     setLoading(true);
     hideError();
 
@@ -167,14 +183,22 @@ async function loadSalesDashboard() {
 
         renderSummary(summary);
         renderTrend(trend.items);
+        setLastUpdatedNow();
     } catch (error) {
         showError(error?.message || "Analytics service is unavailable.");
     } finally {
         setLoading(false);
+        isRefreshing = false;
     }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const refreshBtn = document.getElementById("refreshAnalyticsBtn");
+    if (refreshBtn) {
+        refreshBtn.addEventListener("click", () => {
+            loadSalesDashboard();
+        });
+    }
     await updateHealthBadge();
     await loadSalesDashboard();
 });

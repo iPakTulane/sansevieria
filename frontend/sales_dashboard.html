@@ -57,9 +57,19 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 lg:px-10 py-8">
-        <div class="mb-6">
-            <h1 class="text-3xl font-black tracking-tight">Sales Dashboard</h1>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Live analytics powered by backend reporting views.</p>
+        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+                <h1 class="text-3xl font-black tracking-tight">Sales Dashboard</h1>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Live analytics powered by backend reporting views.</p>
+                <p class="mt-1 text-xs text-slate-400 dark:text-slate-500">Demo flow: create an order, then click refresh to load latest metrics.</p>
+            </div>
+            <div class="flex flex-col items-start sm:items-end gap-2">
+                <button id="refreshAnalyticsBtn" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:opacity-90 transition-opacity">
+                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                    <span>Refresh Analytics</span>
+                </button>
+                <p id="lastUpdatedText" class="text-xs text-slate-500 dark:text-slate-400">Last updated: --</p>
+            </div>
         </div>
 
         <div id="dashboardLoading" class="mb-6 rounded-xl border border-primary/20 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
