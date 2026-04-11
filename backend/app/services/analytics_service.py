@@ -28,6 +28,7 @@ def _to_non_negative_int(value) -> int:
 
 
 def get_sales_summary(db: Session) -> SalesSummaryResponse:
+    # Read from reporting view (not transactional tables) to keep API logic lightweight.
     row = db.execute(
         text(
             """
@@ -64,6 +65,7 @@ def get_sales_summary(db: Session) -> SalesSummaryResponse:
 
 
 def get_sales_trend(db: Session) -> list[SalesTrendItem]:
+    # Time-series data is pre-aggregated in SQL view for dashboard charting.
     rows = db.execute(
         text(
             """
@@ -90,6 +92,7 @@ def get_sales_trend(db: Session) -> list[SalesTrendItem]:
 
 
 def get_product_performance(db: Session) -> list[ProductPerformanceItem]:
+    # Product KPI rows come directly from reporting view ordered for top-performer display.
     rows = db.execute(
         text(
             """

@@ -221,6 +221,7 @@ def generate_mock_historical_orders(db: Session):
             popularity_weights.append(2.0)
 
     now_utc = datetime.now(timezone.utc)
+    # Keep status mix realistic for reporting: mostly completed, some pending/failed.
     status_choices = ["COMPLETED", "PENDING", "FAILED"]
     status_weights = [0.84, 0.10, 0.06]
 
@@ -233,6 +234,7 @@ def generate_mock_historical_orders(db: Session):
         created_at = now_utc - timedelta(days=days_ago, seconds=seconds_in_day)
 
         status = random.choices(status_choices, weights=status_weights, k=1)[0]
+        # Typical order sizes are small; this creates a realistic distribution.
         line_count = random.choices([1, 2, 3, 4], weights=[0.45, 0.30, 0.18, 0.07], k=1)[0]
 
         chosen_products = _weighted_sample_unique(products, popularity_weights, line_count)
@@ -241,6 +243,7 @@ def generate_mock_historical_orders(db: Session):
 
         for product in chosen_products:
             quantity = random.choices([1, 2, 3, 4], weights=[0.58, 0.27, 0.11, 0.04], k=1)[0]
+            # Slight variation simulates price-at-purchase differences over time.
             price_variation = random.uniform(0.92, 1.08)
             unit_price = round(float(product.price) * price_variation, 2)
             line_total = round(unit_price * quantity, 2)

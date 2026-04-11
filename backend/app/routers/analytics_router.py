@@ -26,6 +26,7 @@ def read_sales_summary(
     current_user: User = Depends(require_analytics_user),
     db: Session = Depends(get_db),
 ):
+    # Router stays thin: auth, logging, and safe error mapping around read-only service call.
     try:
         logger.info(
             "analytics",

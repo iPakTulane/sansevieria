@@ -213,6 +213,7 @@ async function loadSalesDashboard() {
     hideError();
 
     try {
+        // Dashboard data is always sourced from analytics API endpoints.
         const [summary, trend] = await Promise.all([
             apiRequest("/api/analytics/sales/summary", "GET", null, true),
             apiRequest("/api/analytics/sales/trend", "GET", null, true),
@@ -222,6 +223,7 @@ async function loadSalesDashboard() {
         if (!validateSalesSummary(summary)) {
             throw new Error("Invalid sales summary response");
         }
+        // Normalize/guard API payload before rendering charts.
         const trendItems = normalizeTrendItems(trend.items);
 
         renderSummary(summary);
@@ -240,6 +242,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const refreshBtn = document.getElementById("refreshAnalyticsBtn");
     if (refreshBtn) {
         refreshBtn.addEventListener("click", () => {
+            // Manual refresh keeps demo flow explicit and easy to explain.
             loadSalesDashboard();
         });
     }
