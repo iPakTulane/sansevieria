@@ -15,6 +15,8 @@
 
     const initialGreetingHTML = greetingEl ? greetingEl.outerHTML : "";
     const chatLog = [];
+    const conversationHistory = [];
+    const MEMORY_LIMIT = 8; // Last 8 role messages (~4 user/assistant exchanges).
     let isSending = false;
 
     function scrollToBottom() {
@@ -110,6 +112,14 @@
         }
     }
 
+    function trimConversationHistory() {
+        if (conversationHistory.length > MEMORY_LIMIT) {
+            const trimmed = conversationHistory.slice(-MEMORY_LIMIT);
+            conversationHistory.length = 0;
+            conversationHistory.push(...trimmed);
+        }
+    }
+
     async function sendMessage() {
         if (isSending) return;
 
@@ -125,18 +135,27 @@
             content: message,
             timestamp: new Date().toISOString(),
         });
+        conversationHistory.push({
+            role: "user",
+            content: message,
+        });
+        trimConversationHistory();
 
         inputEl.value = "";
         setSendingState(true);
         addThinkingBubble();
 
         try {
+            const requestMessages = [
+                ...conversationHistory.slice(-MEMORY_LIMIT),
+            ];
+
             const response = await fetch(chatEndpoint, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ messages: requestMessages }),
             });
 
             let payload = null;
@@ -168,6 +187,11 @@
                 model: model || null,
                 timestamp: new Date().toISOString(),
             });
+            conversationHistory.push({
+                role: "assistant",
+                content: assistantText,
+            });
+            trimConversationHistory();
         } catch (err) {
             const safeMessage = err instanceof Error ? err.message : "Failed to get a response from the assistant.";
             appendMessage("assistant", `I couldn't answer right now. ${safeMessage}`, "error");
@@ -198,6 +222,7 @@
             }
         }
         chatLog.length = 0;
+        conversationHistory.length = 0;
         inputEl.value = "";
         inputEl.focus();
         scrollToBottom();

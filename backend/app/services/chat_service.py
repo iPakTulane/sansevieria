@@ -25,6 +25,10 @@ class LMStudioBadResponseError(ChatServiceError):
     pass
 
 
+class ChatValidationError(ChatServiceError):
+    pass
+
+
 @dataclass
 class ChatResult:
     response: str
@@ -60,13 +64,47 @@ def _extract_assistant_content(payload: dict) -> tuple[str, str | None]:
     return content.strip(), (model if isinstance(model, str) else None)
 
 
-def generate_chat_response(user_message: str) -> ChatResult:
+def _normalize_messages(messages: list[dict[str, str]]) -> list[dict[str, str]]:
+    if not isinstance(messages, list):
+        raise ChatValidationError("messages must be a list", status_code=400)
+
+    normalized: list[dict[str, str]] = []
+
+    for item in messages:
+        if not isinstance(item, dict):
+            continue
+        role = item.get("role")
+        content = item.get("content")
+        if role not in {"system", "user", "assistant"}:
+            continue
+        if not isinstance(content, str):
+            continue
+
+        cleaned = content.strip()
+        if not cleaned:
+            continue
+
+        normalized.append({"role": role, "content": cleaned})
+
+    if not normalized:
+        raise ChatValidationError("No valid messages were provided", status_code=400)
+    if not any(item["role"] == "user" for item in normalized):
+        raise ChatValidationError("At least one user message is required", status_code=400)
+
+    client_system_message = next((item for item in normalized if item["role"] == "system"), None)
+    system_message = client_system_message or {"role": "system", "content": settings.CHATBOT_SYSTEM_PROMPT}
+    conversation = [item for item in normalized if item["role"] != "system"]
+    conversation = conversation[-8:]  # Keep only the most recent lightweight context window.
+
+    return [system_message, *conversation]
+
+
+def generate_chat_response(messages: list[dict[str, str]]) -> ChatResult:
+    prepared_messages = _normalize_messages(messages)
+
     body = {
         "model": settings.LM_STUDIO_MODEL,
-        "messages": [
-            {"role": "system", "content": settings.CHATBOT_SYSTEM_PROMPT},
-            {"role": "user", "content": user_message},
-        ],
+        "messages": prepared_messages,
         "temperature": 0.4,
     }
     url = settings.lm_studio_chat_url

@@ -15,7 +15,7 @@ logger = get_logger("CHAT_API")
 @router.post("/", response_model=ChatResponse)
 def chat(payload: ChatRequest):
     try:
-        result = generate_chat_response(payload.message)
+        result = generate_chat_response(payload.to_message_dicts())
         return ChatResponse(
             response=result.response,
             provider=result.provider,
