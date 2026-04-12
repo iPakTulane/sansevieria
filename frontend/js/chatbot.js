@@ -18,6 +18,12 @@
     const conversationHistory = [];
     const MEMORY_LIMIT = 8; // Last 8 role messages (~4 user/assistant exchanges).
     let isSending = false;
+    let activeRequestController = null;
+    let renderGeneration = 0;
+
+    function getAccessToken() {
+        return localStorage.getItem("access_token");
+    }
 
     function scrollToBottom() {
         messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -56,7 +62,7 @@
                 </div>
                 <div class="flex flex-col gap-1.5 max-w-[80%]">
                     <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sansevieria AI</p>
-                    <div class="bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10 break-words whitespace-pre-wrap">
+                    <div class="chat-message-content bg-primary/10 dark:bg-primary/5 text-slate-800 dark:text-slate-200 p-4 rounded-xl rounded-tl-none border border-primary/10 break-words whitespace-pre-wrap">
                         ${escapeHtml(text)}
                     </div>
                     ${metaText ? `<p class="text-[10px] text-slate-400">${escapeHtml(metaText)}</p>` : ""}
@@ -112,6 +118,56 @@
         }
     }
 
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    function createAssistantMessageNode(initialText, metaText) {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = buildAssistantMessageHtml(initialText, metaText);
+        return wrapper.firstElementChild;
+    }
+
+    async function renderAssistantProgressively(fullText, metaText, generationAtStart) {
+        const node = createAssistantMessageNode("", metaText);
+        if (!node) return false;
+
+        const contentEl = node.querySelector(".chat-message-content");
+        if (!contentEl) return false;
+
+        messagesEl.appendChild(node);
+        scrollToBottom();
+
+        const text = String(fullText || "");
+        const total = text.length;
+        if (!total) {
+            contentEl.textContent = "";
+            return true;
+        }
+
+        const chunkSize = total > 500 ? 6 : total > 220 ? 4 : 2;
+        const delayMs = 12;
+        let index = 0;
+
+        while (index < total) {
+            if (generationAtStart !== renderGeneration) {
+                return false;
+            }
+            index = Math.min(total, index + chunkSize);
+            contentEl.textContent = `${text.slice(0, index)}▍`;
+            scrollToBottom();
+            await sleep(delayMs);
+        }
+
+        if (generationAtStart !== renderGeneration) {
+            return false;
+        }
+
+        contentEl.textContent = text;
+        scrollToBottom();
+        return true;
+    }
+
     function trimConversationHistory() {
         if (conversationHistory.length > MEMORY_LIMIT) {
             const trimmed = conversationHistory.slice(-MEMORY_LIMIT);
@@ -122,6 +178,7 @@
 
     async function sendMessage() {
         if (isSending) return;
+        const generationAtStart = renderGeneration;
 
         const message = inputEl.value.trim();
         if (!message) return;
@@ -144,19 +201,32 @@
         inputEl.value = "";
         setSendingState(true);
         addThinkingBubble();
+        const requestController = new AbortController();
+        activeRequestController = requestController;
 
         try {
             const requestMessages = [
                 ...conversationHistory.slice(-MEMORY_LIMIT),
             ];
+            const token = getAccessToken();
+            if (!token) {
+                throw new Error("Please sign in to use the plant assistant.");
+            }
 
             const response = await fetch(chatEndpoint, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
                 },
                 body: JSON.stringify({ messages: requestMessages }),
+                signal: requestController.signal,
             });
+
+            if (response.status === 401) {
+                localStorage.removeItem("access_token");
+                throw new Error("Your session expired. Please sign in again.");
+            }
 
             let payload = null;
             try {
@@ -179,7 +249,11 @@
             const model = payload && payload.model ? String(payload.model) : "";
             const meta = model ? `${provider} • ${model}` : provider;
 
-            appendMessage("assistant", assistantText, meta);
+            removeThinkingBubble();
+            const renderCompleted = await renderAssistantProgressively(assistantText, meta, generationAtStart);
+            if (!renderCompleted) {
+                return;
+            }
             chatLog.push({
                 role: "assistant",
                 content: assistantText,
@@ -193,6 +267,9 @@
             });
             trimConversationHistory();
         } catch (err) {
+            if (err && err.name === "AbortError") {
+                return;
+            }
             const safeMessage = err instanceof Error ? err.message : "Failed to get a response from the assistant.";
             appendMessage("assistant", `I couldn't answer right now. ${safeMessage}`, "error");
             chatLog.push({
@@ -203,14 +280,24 @@
                 timestamp: new Date().toISOString(),
             });
         } finally {
+            if (activeRequestController === requestController) {
+                activeRequestController = null;
+            }
             removeThinkingBubble();
-            setSendingState(false);
-            inputEl.focus();
-            scrollToBottom();
+            if (generationAtStart === renderGeneration) {
+                setSendingState(false);
+                inputEl.focus();
+                scrollToBottom();
+            }
         }
     }
 
     function clearChat() {
+        renderGeneration += 1;
+        if (activeRequestController) {
+            activeRequestController.abort();
+            activeRequestController = null;
+        }
         messagesEl.querySelectorAll(".chat-dynamic-message").forEach((el) => el.remove());
         removeThinkingBubble();
         if (!messagesEl.querySelector("#chatGreeting") && initialGreetingHTML) {
@@ -223,6 +310,7 @@
         }
         chatLog.length = 0;
         conversationHistory.length = 0;
+        setSendingState(false);
         inputEl.value = "";
         inputEl.focus();
         scrollToBottom();

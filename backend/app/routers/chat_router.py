@@ -1,10 +1,12 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 
 from app.schemas.chat_schema import ChatRequest, ChatResponse
 from app.services.chat_service import (
     generate_chat_response,
     ChatServiceError,
 )
+from app.routers.auth_router import get_current_user
+from app.models.user import User
 from app.utils.logger import get_logger
 
 
@@ -13,7 +15,7 @@ logger = get_logger("CHAT_API")
 
 
 @router.post("/", response_model=ChatResponse)
-def chat(payload: ChatRequest):
+def chat(payload: ChatRequest, current_user: User = Depends(get_current_user)):
     try:
         result = generate_chat_response(payload.to_message_dicts())
         return ChatResponse(
@@ -26,6 +28,8 @@ def chat(payload: ChatRequest):
             "chat",
             "chat_endpoint",
             "Chat request failed",
+            user_id=current_user.id,
+            user_email=current_user.email,
             status_code=e.status_code,
             detail=e.detail,
         )
@@ -38,6 +42,8 @@ def chat(payload: ChatRequest):
             "chat",
             "chat_endpoint",
             "Unexpected chat endpoint error",
+            user_id=current_user.id,
+            user_email=current_user.email,
             error_type=type(e).__name__,
         )
         raise HTTPException(

@@ -3,8 +3,9 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class ChatMessage(BaseModel):
-    role: Literal["system", "user", "assistant"]
-    content: str = Field(..., min_length=1, max_length=4000)
+    # Client-provided history should only contain user/assistant turns.
+    role: Literal["user", "assistant"]
+    content: str = Field(..., min_length=1, max_length=2000)
 
     @field_validator("content")
     @classmethod
@@ -16,7 +17,7 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    message: str | None = Field(default=None, min_length=1, max_length=4000)
+    message: str | None = Field(default=None, min_length=1, max_length=2000)
     messages: list[ChatMessage] | None = None
 
     @field_validator("message")
@@ -33,6 +34,10 @@ class ChatRequest(BaseModel):
     def ensure_input_present(self):
         if not self.message and not self.messages:
             raise ValueError("Either 'message' or 'messages' must be provided")
+        if self.message and self.messages:
+            raise ValueError("Provide either 'message' or 'messages', not both")
+        if self.messages and len(self.messages) > 12:
+            raise ValueError("Too many messages in a single request (max 12)")
         return self
 
     def to_message_dicts(self) -> list[dict[str, str]]:

@@ -75,7 +75,7 @@ def _normalize_messages(messages: list[dict[str, str]]) -> list[dict[str, str]]:
             continue
         role = item.get("role")
         content = item.get("content")
-        if role not in {"system", "user", "assistant"}:
+        if role not in {"user", "assistant"}:
             continue
         if not isinstance(content, str):
             continue
@@ -91,9 +91,8 @@ def _normalize_messages(messages: list[dict[str, str]]) -> list[dict[str, str]]:
     if not any(item["role"] == "user" for item in normalized):
         raise ChatValidationError("At least one user message is required", status_code=400)
 
-    client_system_message = next((item for item in normalized if item["role"] == "system"), None)
-    system_message = client_system_message or {"role": "system", "content": settings.CHATBOT_SYSTEM_PROMPT}
-    conversation = [item for item in normalized if item["role"] != "system"]
+    system_message = {"role": "system", "content": settings.CHATBOT_SYSTEM_PROMPT}
+    conversation = normalized
     conversation = conversation[-8:]  # Keep only the most recent lightweight context window.
 
     return [system_message, *conversation]
