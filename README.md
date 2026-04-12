@@ -86,6 +86,11 @@ POSTGRES_DB=sansevieria
 SIMULATE_PAYMENT_FAILURE=false
 ```
 
+### LM Studio in Docker
+- When backend runs in Docker and LM Studio runs on the host machine, backend must use:
+  - `LM_STUDIO_BASE_URL=http://host.docker.internal:1234`
+- `127.0.0.1` from inside the container points to the container itself, not the host.
+
 ### Analytics access control
 - `ANALYTICS_ADMIN_EMAILS` (comma-separated)
 - Default: `test@example.com`

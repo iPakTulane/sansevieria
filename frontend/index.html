@@ -61,6 +61,32 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .chat-message-content p {
+            margin: 0 0 6px 0;
+        }
+
+        .chat-message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-message-content ul,
+        .chat-message-content ol {
+            padding-left: 18px;
+            margin: 6px 0;
+        }
+
+        .chat-message-content strong {
+            font-weight: 600;
+        }
+
+        .chat-message-content em {
+            font-style: italic;
+        }
+
+        .chat-message-content li {
+            margin-bottom: 4px;
+        }
     </style>
 </head>
 
@@ -138,11 +164,23 @@
     </script>
 </header>
     <!-- Main Chat Viewport -->
-    <main class="chat-container-height flex flex-col items-center justify-center p-4 md:p-8">
+    <main class="chat-container-height p-4 md:p-8">
         <div
-            class="w-full max-w-4xl h-full flex flex-col bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+            class="w-full max-w-6xl h-full mx-auto flex flex-col md:flex-row bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+            <!-- Sessions Sidebar -->
+            <aside class="w-full md:w-72 border-b md:border-b-0 md:border-r border-primary/10 bg-slate-50/70 dark:bg-slate-900/40 flex flex-col">
+                <div class="p-4 border-b border-primary/10">
+                    <button id="newChatBtn" type="button" class="w-full rounded-lg bg-primary px-3 py-2 text-xs font-bold text-slate-900 hover:opacity-90 transition-opacity">
+                        Start New Chat
+                    </button>
+                </div>
+                <div id="chatSessionsList" class="flex-1 overflow-y-auto no-scrollbar p-2 space-y-2"></div>
+            </aside>
+
+            <!-- Chat Panel -->
+            <section class="flex-1 flex flex-col min-h-0">
             <!-- Message Area -->
-            <div id="chatMessages" class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-4 md:p-5 space-y-4 no-scrollbar">
                 <div id="chatReadinessBanner" class="hidden rounded-lg border px-4 py-2 text-xs font-medium"></div>
                 <!-- Empty State Greeting / Introduction -->
                 <div id="chatGreeting" class="flex flex-col items-center justify-center py-12 text-center space-y-4">
@@ -196,7 +234,7 @@
                 </div>
             </div>
             <!-- Integrated Input Bar -->
-            <div class="p-4 md:p-6 border-t border-primary/10 bg-white/50 dark:bg-background-dark/30 backdrop-blur-sm">
+            <div class="p-4 border-t border-primary/10 bg-white/50 dark:bg-background-dark/30 backdrop-blur-sm">
                 <div
                     class="flex items-center gap-3 bg-background-light dark:bg-background-dark border border-primary/20 rounded-xl px-4 py-2 focus-within:ring-2 focus-within:ring-primary/30 transition-all">
                     <span class="material-symbols-outlined text-slate-400">eco</span>
@@ -225,11 +263,14 @@
                         Logs</button>
                 </div>
             </div>
+            </section>
         </div>
     </main>
     <!-- Background Decoration (Subtle Soft Green Accents) -->
     <div class="fixed top-1/4 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
     <div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
     <script src="js/chatbot.js"></script>
 </body>
 

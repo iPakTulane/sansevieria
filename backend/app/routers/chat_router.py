@@ -6,6 +6,7 @@ from app.services.chat_service import (
     ChatServiceError,
     get_chat_readiness,
 )
+from app.config import settings
 from app.routers.auth_router import get_current_user
 from app.models.user import User
 from app.utils.logger import get_logger
@@ -24,6 +25,7 @@ def chat_health(current_user: User = Depends(get_current_user)):
         "Chat readiness check called",
         user_id=current_user.id,
         user_email=current_user.email,
+        lm_studio_target=settings.lm_studio_models_url,
         status=result.status,
         reachable=result.reachable,
         model_ready=result.model_ready,

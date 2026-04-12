@@ -72,6 +72,7 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_DB=0
+      - LM_STUDIO_BASE_URL=http://host.docker.internal:1234
       - CAMUNDA_REST_URL=http://camunda:8080/engine-rest
       - SIMULATE_PAYMENT_FAILURE=${SIMULATE_PAYMENT_FAILURE:-false}
     depends_on:
@@ -98,6 +99,7 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_DB=0
+      - LM_STUDIO_BASE_URL=http://host.docker.internal:1234
       - CAMUNDA_REST_URL=http://camunda:8080/engine-rest
       - SIMULATE_PAYMENT_FAILURE=${SIMULATE_PAYMENT_FAILURE:-false}
     depends_on:
