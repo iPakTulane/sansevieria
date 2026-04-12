@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Request
 from app.database import engine, Base
 from app.config import settings
-from app.routers import auth_router, product_router, cart_router, order_router, analytics_router
+from app.routers import auth_router, product_router, cart_router, order_router, analytics_router, chat_router
 from app.utils.logger import get_logger
 
 # Create database tables (now managed by Alembic)
@@ -30,6 +30,7 @@ app.include_router(cart_router.router, prefix="/api/cart", tags=["cart"])
 app.include_router(order_router.checkout_router, prefix="/api/checkout", tags=["checkout"])
 app.include_router(order_router.order_router, prefix="/api/orders", tags=["orders"])
 app.include_router(analytics_router.router, prefix="/api/analytics", tags=["analytics"])
+app.include_router(chat_router.router, prefix="/api/chat", tags=["chat"])
 
 from app.messaging.rabbitmq import setup_queues
 
