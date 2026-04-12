@@ -36,6 +36,15 @@ class ChatResult:
     model: str | None = None
 
 
+@dataclass
+class ChatHealthResult:
+    status: str
+    provider: str
+    reachable: bool
+    model_ready: bool
+    message: str
+
+
 def _extract_error_detail(payload: dict | None) -> str:
     if not isinstance(payload, dict):
         return "LM Studio returned an unexpected error payload"
@@ -96,6 +105,98 @@ def _normalize_messages(messages: list[dict[str, str]]) -> list[dict[str, str]]:
     conversation = conversation[-8:]  # Keep only the most recent lightweight context window.
 
     return [system_message, *conversation]
+
+
+def get_chat_readiness() -> ChatHealthResult:
+    url = settings.lm_studio_models_url
+    timeout = max(1, min(settings.LM_STUDIO_HEALTH_TIMEOUT, settings.LM_STUDIO_TIMEOUT))
+
+    try:
+        response = requests.get(url, timeout=timeout)
+    except requests.exceptions.Timeout:
+        return ChatHealthResult(
+            status="unavailable",
+            provider="lm_studio",
+            reachable=False,
+            model_ready=False,
+            message="LM Studio readiness check timed out",
+        )
+    except requests.exceptions.ConnectionError:
+        return ChatHealthResult(
+            status="unavailable",
+            provider="lm_studio",
+            reachable=False,
+            model_ready=False,
+            message="LM Studio is unreachable. Start LM Studio local server.",
+        )
+    except requests.RequestException as e:
+        return ChatHealthResult(
+            status="unavailable",
+            provider="lm_studio",
+            reachable=False,
+            model_ready=False,
+            message=f"LM Studio readiness check failed: {str(e)}",
+        )
+
+    if not response.ok:
+        if response.status_code == 404:
+            return ChatHealthResult(
+                status="degraded",
+                provider="lm_studio",
+                reachable=True,
+                model_ready=False,
+                message="LM Studio is reachable, but models endpoint is not available on this server version.",
+            )
+        return ChatHealthResult(
+            status="degraded",
+            provider="lm_studio",
+            reachable=True,
+            model_ready=False,
+            message=f"LM Studio responded with status {response.status_code}.",
+        )
+
+    try:
+        payload = response.json()
+    except ValueError:
+        return ChatHealthResult(
+            status="degraded",
+            provider="lm_studio",
+            reachable=True,
+            model_ready=False,
+            message="LM Studio is reachable, but models response was not valid JSON.",
+        )
+
+    data = payload.get("data") if isinstance(payload, dict) else None
+    if not isinstance(data, list):
+        return ChatHealthResult(
+            status="degraded",
+            provider="lm_studio",
+            reachable=True,
+            model_ready=False,
+            message="LM Studio is reachable, but models payload format was unexpected.",
+        )
+
+    model_ids = [
+        item.get("id")
+        for item in data
+        if isinstance(item, dict) and isinstance(item.get("id"), str) and item.get("id").strip()
+    ]
+    if not model_ids:
+        return ChatHealthResult(
+            status="degraded",
+            provider="lm_studio",
+            reachable=True,
+            model_ready=False,
+            message="LM Studio is reachable, but no models are available. Load a model in LM Studio.",
+        )
+
+    return ChatHealthResult(
+        status="ok",
+        provider="lm_studio",
+        reachable=True,
+        model_ready=True,
+        message=f"LM Studio is ready ({len(model_ids)} model(s) available).",
+    )
 
 
 def generate_chat_response(messages: list[dict[str, str]]) -> ChatResult:

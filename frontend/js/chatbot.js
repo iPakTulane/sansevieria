@@ -8,6 +8,7 @@
     const clearBtn = document.getElementById("clearChatBtn");
     const exportBtn = document.getElementById("exportLogsBtn");
     const greetingEl = document.getElementById("chatGreeting");
+    const readinessBannerEl = document.getElementById("chatReadinessBanner");
 
     if (!messagesEl || !inputEl || !sendBtn || !clearBtn || !exportBtn) {
         return;
@@ -23,6 +24,61 @@
 
     function getAccessToken() {
         return localStorage.getItem("access_token");
+    }
+
+    function showReadinessBanner(level, text) {
+        if (!readinessBannerEl) return;
+        readinessBannerEl.classList.remove("hidden");
+        readinessBannerEl.className = "rounded-lg border px-4 py-2 text-xs font-medium";
+        if (level === "ok") {
+            readinessBannerEl.classList.add("border-green-200", "bg-green-50", "text-green-700");
+        } else if (level === "degraded") {
+            readinessBannerEl.classList.add("border-amber-200", "bg-amber-50", "text-amber-700");
+        } else {
+            readinessBannerEl.classList.add("border-red-200", "bg-red-50", "text-red-700");
+        }
+        readinessBannerEl.textContent = text;
+    }
+
+    async function loadChatReadiness() {
+        const token = getAccessToken();
+        if (!token) {
+            showReadinessBanner("degraded", "Sign in to use the AI plant assistant.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${chatEndpoint}health`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (response.status === 401) {
+                localStorage.removeItem("access_token");
+                showReadinessBanner("degraded", "Session expired. Please sign in to use the AI assistant.");
+                return;
+            }
+
+            let payload = null;
+            try {
+                payload = await response.json();
+            } catch (_err) {
+                payload = null;
+            }
+
+            if (!response.ok || !payload) {
+                showReadinessBanner("unavailable", "AI assistant status is unavailable right now.");
+                return;
+            }
+
+            const status = payload.status === "ok" ? "ok" : payload.status === "degraded" ? "degraded" : "unavailable";
+            const message = payload.message || "AI assistant status is currently unknown.";
+            showReadinessBanner(status, message);
+        } catch (_err) {
+            showReadinessBanner("unavailable", "AI assistant is currently unavailable. Make sure LM Studio is running and a model is loaded.");
+        }
     }
 
     function scrollToBottom() {
@@ -356,5 +412,6 @@
     exportBtn.addEventListener("click", exportLogs);
 
     removeStaticSamples();
+    loadChatReadiness();
     scrollToBottom();
 })();

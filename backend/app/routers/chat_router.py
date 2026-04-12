@@ -1,9 +1,10 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 
-from app.schemas.chat_schema import ChatRequest, ChatResponse
+from app.schemas.chat_schema import ChatRequest, ChatResponse, ChatHealthResponse
 from app.services.chat_service import (
     generate_chat_response,
     ChatServiceError,
+    get_chat_readiness,
 )
 from app.routers.auth_router import get_current_user
 from app.models.user import User
@@ -12,6 +13,28 @@ from app.utils.logger import get_logger
 
 router = APIRouter()
 logger = get_logger("CHAT_API")
+
+
+@router.get("/health", response_model=ChatHealthResponse)
+def chat_health(current_user: User = Depends(get_current_user)):
+    result = get_chat_readiness()
+    logger.info(
+        "chat",
+        "chat_health",
+        "Chat readiness check called",
+        user_id=current_user.id,
+        user_email=current_user.email,
+        status=result.status,
+        reachable=result.reachable,
+        model_ready=result.model_ready,
+    )
+    return ChatHealthResponse(
+        status=result.status,
+        provider=result.provider,
+        reachable=result.reachable,
+        model_ready=result.model_ready,
+        message=result.message,
+    )
 
 
 @router.post("/", response_model=ChatResponse)

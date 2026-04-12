@@ -9,4 +9,4 @@ from .analytics_schema import (
     ProductPerformanceItem,
     ProductPerformanceResponse,
 )
-from .chat_schema import ChatRequest, ChatResponse
+from .chat_schema import ChatRequest, ChatResponse, ChatHealthResponse

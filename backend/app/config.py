@@ -30,7 +30,9 @@ class Settings(BaseSettings):
 
     LM_STUDIO_BASE_URL: str = os.getenv("LM_STUDIO_BASE_URL", "http://127.0.0.1:1234")
     LM_STUDIO_CHAT_ENDPOINT: str = os.getenv("LM_STUDIO_CHAT_ENDPOINT", "/v1/chat/completions")
+    LM_STUDIO_MODELS_ENDPOINT: str = os.getenv("LM_STUDIO_MODELS_ENDPOINT", "/v1/models")
     LM_STUDIO_TIMEOUT: int = int(os.getenv("LM_STUDIO_TIMEOUT", 30))
+    LM_STUDIO_HEALTH_TIMEOUT: int = int(os.getenv("LM_STUDIO_HEALTH_TIMEOUT", 3))
     LM_STUDIO_MODEL: str = os.getenv("LM_STUDIO_MODEL", "local-model")
     CHATBOT_SYSTEM_PROMPT: str = os.getenv(
         "CHATBOT_SYSTEM_PROMPT",
@@ -58,6 +60,10 @@ class Settings(BaseSettings):
     @property
     def lm_studio_chat_url(self) -> str:
         return f"{self.LM_STUDIO_BASE_URL.rstrip('/')}/{self.LM_STUDIO_CHAT_ENDPOINT.lstrip('/')}"
+
+    @property
+    def lm_studio_models_url(self) -> str:
+        return f"{self.LM_STUDIO_BASE_URL.rstrip('/')}/{self.LM_STUDIO_MODELS_ENDPOINT.lstrip('/')}"
 
     class Config:
         case_sensitive = True

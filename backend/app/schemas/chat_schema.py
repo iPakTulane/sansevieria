@@ -52,3 +52,11 @@ class ChatResponse(BaseModel):
     response: str
     provider: str
     model: str | None = None
+
+
+class ChatHealthResponse(BaseModel):
+    status: Literal["ok", "degraded", "unavailable"]
+    provider: str
+    reachable: bool
+    model_ready: bool
+    message: str
