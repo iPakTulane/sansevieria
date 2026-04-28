@@ -129,3 +129,140 @@ docker compose logs -f backend
 - Analytics dashboards are in-app (no Power BI integration).
 - Access control is lightweight allowlist-based, not full RBAC.
 - Monitoring is console-log based (no Prometheus/ELK stack).
+
+## Assignment 5: AI/ML + Semantic Ontology Extension
+
+This project is extended with an assignment-focused **Product Performance Classification** pipeline and a lightweight **semantic ontology layer**.
+
+- ML classes:
+  - `Top Performer`
+  - `Average Performer`
+  - `Low Performer`
+- Semantic layer:
+  - JSON-LD ontology + RDF-style triples
+  - ML prediction is represented semantically and returned by API
+- UI integration:
+  - Product Dashboard now displays class badge, confidence, semantic explanation, and triples preview.
+
+### Assignment 5 Flow
+
+`historical orders`  
+→ `product_performance_view`  
+→ preprocessing  
+→ `DecisionTreeClassifier`  
+→ `performance_class` prediction  
+→ JSON-LD ontology / RDF-style triples  
+→ semantic API endpoint  
+→ Product Dashboard UI
+
+### Dataset Source and Features
+
+- Dataset source: `product_performance_view`
+- Main features:
+  - `units_sold`
+  - `revenue`
+  - `orders_count`
+  - `price` (joined from `products` in ML service)
+- Label strategy:
+  - Labels are **simulated** from historical performance ranking (top/middle/bottom thirds).
+  - This is intentional for assignment context with seeded/mock historical data.
+
+### Assignment 5 Endpoints
+
+- `GET /api/analytics/products/performance-ml`  
+  Purpose: returns ML-enhanced product performance classification.
+
+- `GET /api/analytics/products/performance-semantic`  
+  Purpose: returns ML classification + semantic triples + semantic explanation.  
+  Optional query: `class_name=Top Performer`
+
+- `GET /api/analytics/products/performance-ontology`  
+  Purpose: returns ontology metadata (JSON-LD) and sample triples.
+
+All three endpoints use the same analytics access control as existing analytics endpoints (`require_analytics_user`).
+
+### Ontology File
+
+- `backend/app/ontology/sansevieria_product_performance.jsonld`
+
+Defined classes/entities:
+- `Product`
+- `ProductCategory`
+- `PerformanceClass`
+- `MetricSnapshot`
+- `ProductPerformancePrediction`
+
+Defined relationships/properties:
+- `hasPerformanceClass`
+- `belongsToCategory`
+- `hasMetricSnapshot`
+- `hasUnitsSold`
+- `hasRevenue`
+- `hasOrdersCount`
+- `hasConfidence`
+- `hasExplanation`
+- `generatedByModel`
+
+### Sample RDF-Style Triples
+
+- `Product_1` → `hasPerformanceClass` → `Top Performer`
+- `Product_1` → `belongsToCategory` → `Classic`
+- `MetricSnapshot_Product_1` → `hasUnitsSold` → `120`
+- `MetricSnapshot_Product_1` → `hasRevenue` → `3120.50`
+- `Prediction_Product_1` → `generatedByModel` → `ProductPerformanceClassifier`
+
+### Demo / Testing Steps
+
+1. Start stack:
+```bash
+docker compose up --build -d
+```
+2. Login:
+   - URL: `http://localhost:8081/auth.html`
+   - Credentials: `test@example.com` / `password123`
+3. Open Product Dashboard:
+   - `http://localhost:8081/product_dashboard.html`
+4. Click **Refresh Analytics**
+5. Verify on Product Dashboard:
+   - Performance Class badges are visible
+   - Confidence values are visible
+   - Semantic Explanation is visible
+   - **View Triples** expands RDF-style triples
+   - Class filter works (`All`, `Top Performer`, `Average Performer`, `Low Performer`)
+6. Optional API checks (Swagger):
+   - `http://localhost:8000/docs`
+   - `GET /api/analytics/products/performance-ml`
+   - `GET /api/analytics/products/performance-semantic`
+   - `GET /api/analytics/products/performance-ontology`
+
+### Assignment Requirement Mapping
+
+- AI/ML component → `DecisionTreeClassifier`
+- Dataset → `product_performance_view`
+- Preprocessing → numeric feature preparation (`units_sold`, `revenue`, `orders_count`, `price`)
+- Training → in-memory classifier training
+- Prediction → `performance_class`
+- Intelligent decision-making → dashboard highlights product performance classes
+- Ontology → JSON-LD file (`sansevieria_product_performance.jsonld`)
+- RDF triples → `semantic_triples`
+- Semantic reasoning/querying → `class_name` API filter + dashboard class filter
+- AI + ontology integration → ML prediction becomes `hasPerformanceClass` triple
+- UI display → Product Dashboard (`product_dashboard.html`)
+
+### Limitations (Intentional for Assignment Scope)
+
+- Assignment-level ML implementation (not production-grade).
+- Labels are simulated from historical sales ranking.
+- Model is trained in memory per request for demo simplicity.
+- Semantic reasoning is lightweight and does not use an external RDF store.
+- Architecture is intentionally minimal to satisfy assignment requirements cleanly.
+
+### Final Verification Checklist
+
+- [ ] Existing analytics endpoints still work.
+- [ ] ML endpoint works (`/performance-ml`).
+- [ ] Semantic endpoint works (`/performance-semantic`).
+- [ ] Ontology endpoint works (`/performance-ontology`).
+- [ ] Product Dashboard displays class/confidence/semantic fields.
+- [ ] Chatbot remains unchanged.
+- [ ] Checkout/order processing flow remains unchanged.
