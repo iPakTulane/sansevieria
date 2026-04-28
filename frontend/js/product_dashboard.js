@@ -1,5 +1,6 @@
 let topProductsChart = null;
 let isRefreshing = false;
+let allSemanticItems = [];
 
 function requireAuthToken() {
     if (typeof getToken !== "function") return true;
@@ -72,7 +73,29 @@ function normalizeProductItems(items) {
             units_sold: Math.max(0, Number(item.units_sold)),
             revenue: Math.max(0, Number(item.revenue)),
             orders_count: Math.max(0, Number(item.orders_count)),
+            performance_class: (item.performance_class || "N/A").trim(),
+            confidence: Number.isFinite(Number(item.confidence)) ? Number(item.confidence) : null,
+            semantic_explanation: item.semantic_explanation || item.explanation || "No semantic explanation available.",
+            semantic_triples: Array.isArray(item.semantic_triples) ? item.semantic_triples : [],
         }));
+}
+
+function getPerformanceBadgeClass(performanceClass) {
+    if (performanceClass === "Top Performer") {
+        return "bg-green-100 text-green-700 border border-green-200";
+    }
+    if (performanceClass === "Average Performer") {
+        return "bg-slate-100 text-slate-700 border border-slate-200";
+    }
+    if (performanceClass === "Low Performer") {
+        return "bg-amber-100 text-amber-700 border border-amber-200";
+    }
+    return "bg-slate-100 text-slate-600 border border-slate-200";
+}
+
+function formatConfidence(value) {
+    if (!Number.isFinite(Number(value))) return "N/A";
+    return `${Math.round(Number(value) * 100)}%`;
 }
 
 function renderRankList(targetId, items) {
@@ -90,6 +113,11 @@ function renderRankList(targetId, items) {
                 <p class="text-xs text-slate-500">${item.product_category || "Uncategorized"}</p>
             </div>
             <div class="text-right">
+                <p class="text-xs mb-1">
+                    <span class="inline-flex items-center rounded-full px-2 py-0.5 font-semibold ${getPerformanceBadgeClass(item.performance_class)}">
+                        ${item.performance_class || "N/A"}
+                    </span>
+                </p>
                 <p class="text-sm font-bold">${formatCurrency(item.revenue)}</p>
                 <p class="text-xs text-slate-500">${formatNumber(item.units_sold)} units</p>
             </div>
@@ -120,15 +148,42 @@ function renderTable(items) {
     items.forEach((item) => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-background-light dark:hover:bg-slate-800/50 transition-colors";
+        const triplesText = item.semantic_triples
+            .slice(0, 6)
+            .map((t) => `${t.subject} -> ${t.predicate} -> ${t.object}`)
+            .join("\n");
         tr.innerHTML = `
             <td class="py-3 text-sm font-medium">${item.product_title || "—"}</td>
             <td class="py-3 text-sm text-slate-500">${item.product_category || "Uncategorized"}</td>
             <td class="py-3 text-sm text-right">${formatNumber(item.units_sold)}</td>
             <td class="py-3 text-sm text-right">${formatNumber(item.orders_count)}</td>
             <td class="py-3 text-sm text-right font-semibold">${formatCurrency(item.revenue)}</td>
+            <td class="py-3 text-sm">
+                <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold ${getPerformanceBadgeClass(item.performance_class)}">
+                    ${item.performance_class || "N/A"}
+                </span>
+            </td>
+            <td class="py-3 text-sm text-right">${formatConfidence(item.confidence)}</td>
+            <td class="py-3 text-xs text-slate-600 dark:text-slate-300 max-w-[380px]">
+                <p>${item.semantic_explanation || "No semantic explanation available."}</p>
+                ${triplesText ? `
+                <details class="mt-2">
+                    <summary class="cursor-pointer text-primary font-semibold">View Triples</summary>
+                    <pre class="mt-1 whitespace-pre-wrap text-[11px] leading-5 text-slate-500 dark:text-slate-400">${triplesText}</pre>
+                </details>` : ""}
+            </td>
         `;
         tbody.appendChild(tr);
     });
+}
+
+function applyClassFilterAndRender() {
+    const filterEl = document.getElementById("performanceClassFilter");
+    const selected = filterEl ? filterEl.value : "All";
+    const items = selected === "All"
+        ? [...allSemanticItems]
+        : allSemanticItems.filter((item) => item.performance_class === selected);
+    renderTable(items);
 }
 
 function renderTopChart(items) {
@@ -218,12 +273,13 @@ async function loadProductDashboard() {
     hideError();
 
     try {
-        // Product dashboard is backed by the analytics API (not client-side aggregation).
-        const response = await apiRequest("/api/analytics/products/performance", "GET", null, true);
+        // Product dashboard uses ML + semantic endpoint for Assignment 5 integration.
+        const response = await apiRequest("/api/analytics/products/performance-semantic", "GET", null, true);
         if (!response) return;
 
         const items = normalizeProductItems(response.items);
         items.sort((a, b) => Number(b.revenue || 0) - Number(a.revenue || 0));
+        allSemanticItems = items;
 
         const section = document.getElementById("topBottomSection");
         if (section) section.classList.remove("hidden");
@@ -234,10 +290,10 @@ async function loadProductDashboard() {
         renderRankList("topProductsList", top);
         renderRankList("bottomProductsList", bottom);
         renderTopChart(items);
-        renderTable(items);
+        applyClassFilterAndRender();
         setLastUpdatedNow();
     } catch (error) {
-        showError(error?.message || "Product analytics service is unavailable.");
+        showError(error?.message || "Product semantic analytics service is unavailable.");
     } finally {
         setLoading(false);
         isRefreshing = false;
@@ -252,6 +308,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Explicit refresh makes live-demo behavior predictable for reviewers.
             loadProductDashboard();
         });
+    }
+    const classFilter = document.getElementById("performanceClassFilter");
+    if (classFilter) {
+        classFilter.addEventListener("change", applyClassFilterAndRender);
     }
     await updateHealthBadge();
     await loadProductDashboard();

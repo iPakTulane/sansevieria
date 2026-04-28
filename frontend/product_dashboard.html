@@ -62,6 +62,8 @@
                 <h1 class="text-3xl font-black tracking-tight">Product Dashboard</h1>
                 <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Live product performance analytics from the backend reporting layer.</p>
                 <p class="mt-1 text-xs text-slate-400 dark:text-slate-500">Demo flow: place an order, then refresh to reload ranking and table data.</p>
+                <p class="mt-2 text-xs text-primary font-semibold">Assignment 5: ML + Semantic Product Insights</p>
+                <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">This section classifies products using a lightweight ML model and enriches predictions with semantic ontology relationships.</p>
             </div>
             <div class="flex flex-col items-start sm:items-end gap-2">
                 <button id="refreshAnalyticsBtn" class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:opacity-90 transition-opacity">
@@ -106,10 +108,19 @@
         </section>
 
         <section id="tableSection" class="hidden rounded-xl border border-primary/10 bg-white dark:bg-slate-900 p-6 shadow-sm">
-            <div class="mb-4">
+            <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <h2 class="text-lg font-bold">All Product Performance</h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Sorted by revenue (descending).</p>
+                <div class="flex items-center gap-2">
+                    <label for="performanceClassFilter" class="text-xs text-slate-500 dark:text-slate-400">Class filter:</label>
+                    <select id="performanceClassFilter" class="rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1 text-xs">
+                        <option value="All">All</option>
+                        <option value="Top Performer">Top Performer</option>
+                        <option value="Average Performer">Average Performer</option>
+                        <option value="Low Performer">Low Performer</option>
+                    </select>
+                </div>
             </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Sorted by revenue (descending).</p>
             <div id="tableEmptyState" class="hidden rounded-lg border border-dashed border-slate-300 p-6 text-sm text-slate-500">
                 No product analytics data available.
             </div>
@@ -122,6 +133,9 @@
                             <th class="pb-4 font-semibold text-right">Units Sold</th>
                             <th class="pb-4 font-semibold text-right">Orders</th>
                             <th class="pb-4 font-semibold text-right">Revenue</th>
+                            <th class="pb-4 font-semibold">Performance Class</th>
+                            <th class="pb-4 font-semibold text-right">Confidence</th>
+                            <th class="pb-4 font-semibold">Semantic Explanation</th>
                         </tr>
                     </thead>
                     <tbody id="performanceTableBody" class="divide-y divide-slate-50 dark:divide-slate-800"></tbody>
