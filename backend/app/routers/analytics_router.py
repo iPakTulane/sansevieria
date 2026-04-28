@@ -9,11 +9,13 @@ from app.schemas.analytics_schema import (
     SalesTrendResponse,
     ProductPerformanceResponse,
 )
+from app.schemas.ml_product_performance_schema import MLProductPerformanceResponse
 from app.services.analytics_service import (
     get_sales_summary,
     get_sales_trend,
     get_product_performance,
 )
+from app.services.ml_product_performance_service import get_ml_product_performance
 from app.utils.logger import get_logger
 
 
@@ -146,6 +148,51 @@ def read_product_performance(
             "products_performance",
             "Unhandled analytics endpoint error",
             endpoint="/api/analytics/products/performance",
+            user_id=current_user.id,
+            error_type=type(e).__name__,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Unexpected analytics error",
+        )
+
+
+@router.get("/products/performance-ml", response_model=MLProductPerformanceResponse)
+def read_product_performance_ml(
+    current_user: User = Depends(require_analytics_user),
+    db: Session = Depends(get_db),
+):
+    try:
+        items = get_ml_product_performance(db)
+        logger.info(
+            "analytics",
+            "products_performance_ml",
+            "ML analytics endpoint called",
+            endpoint="/api/analytics/products/performance-ml",
+            user_id=current_user.id,
+            user_email=current_user.email,
+            result_count=len(items),
+        )
+        return MLProductPerformanceResponse(items=items)
+    except SQLAlchemyError as e:
+        logger.error(
+            "analytics",
+            "products_performance_ml",
+            "ML analytics endpoint failed",
+            endpoint="/api/analytics/products/performance-ml",
+            user_id=current_user.id,
+            error_type=type(e).__name__,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Analytics data is temporarily unavailable",
+        )
+    except Exception as e:
+        logger.error(
+            "analytics",
+            "products_performance_ml",
+            "Unhandled ML analytics endpoint error",
+            endpoint="/api/analytics/products/performance-ml",
             user_id=current_user.id,
             error_type=type(e).__name__,
         )
