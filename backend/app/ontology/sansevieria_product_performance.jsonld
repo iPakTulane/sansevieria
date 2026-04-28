@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "sp": "https://sansevieria.local/ontology#",
+    "type": "@type",
+    "id": "@id",
+    "Product": "sp:Product",
+    "ProductCategory": "sp:ProductCategory",
+    "PerformanceClass": "sp:PerformanceClass",
+    "MetricSnapshot": "sp:MetricSnapshot",
+    "ProductPerformancePrediction": "sp:ProductPerformancePrediction",
+    "hasPerformanceClass": "sp:hasPerformanceClass",
+    "belongsToCategory": "sp:belongsToCategory",
+    "hasMetricSnapshot": "sp:hasMetricSnapshot",
+    "hasUnitsSold": "sp:hasUnitsSold",
+    "hasRevenue": "sp:hasRevenue",
+    "hasOrdersCount": "sp:hasOrdersCount",
+    "hasConfidence": "sp:hasConfidence",
+    "hasExplanation": "sp:hasExplanation",
+    "generatedByModel": "sp:generatedByModel"
+  },
+  "ontology_name": "Sansevieria Product Performance Ontology",
+  "classes": [
+    "Product",
+    "ProductCategory",
+    "PerformanceClass",
+    "MetricSnapshot",
+    "ProductPerformancePrediction"
+  ],
+  "properties": [
+    "hasPerformanceClass",
+    "belongsToCategory",
+    "hasMetricSnapshot",
+    "hasUnitsSold",
+    "hasRevenue",
+    "hasOrdersCount",
+    "hasConfidence",
+    "hasExplanation",
+    "generatedByModel"
+  ],
+  "example_graph": [
+    {
+      "id": "Product_1",
+      "type": "Product",
+      "belongsToCategory": "Classic",
+      "hasPerformanceClass": "Top Performer",
+      "generatedByModel": "ProductPerformanceClassifier"
+    },
+    {
+      "id": "MetricSnapshot_Product_1",
+      "type": "MetricSnapshot",
+      "hasUnitsSold": 120,
+      "hasRevenue": 3120.5,
+      "hasOrdersCount": 48
+    },
+    {
+      "id": "Prediction_Product_1",
+      "type": "ProductPerformancePrediction",
+      "hasConfidence": 0.92,
+      "hasExplanation": "This product is classified as Top Performer because it has relatively high revenue, units sold, and order count compared with other products."
+    }
+  ]
+}
